@@ -7,9 +7,9 @@ body {
 	font-family: "Montserrat", sans-serif;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
-	background: #ffffff;
 	margin: 0;
-	color: #696969;
+	color: #f6f9ff;
+letter-spacing: 0.25px;
 }
 
 code {
