@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@testing-library/jest-dom": "^6.1.4",
+    "axios": "^1.5.1",
     "eslint-import-resolver-alias": "^1.1.2",
     "modern-normalize": "^2.0.0",
     "react": "^18.2.0",

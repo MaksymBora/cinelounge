@@ -36,5 +36,3 @@ export function Header() {
     </nav>
   );
 }
-
-// className = 'container xl mx-auto w-full';
