@@ -10,6 +10,7 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
     'plugin:react/recommended',
     'plugin:prettier/recommended',
+    'prettier',
   ],
   overrides: [
     {
@@ -24,9 +25,17 @@ module.exports = {
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
+    ecmaFeatures: {
+      jsx: true,
+    },
     ecmaVersion: 'latest',
     sourceType: 'module',
     project: './tsconfig.json',
+  },
+  settings: {
+    react: {
+      version: 'detect',
+    },
   },
   plugins: ['@typescript-eslint', 'react', 'prettier'],
   rules: {
@@ -42,6 +51,23 @@ module.exports = {
       {
         namedComponents: ['arrow-function', 'function-declaration'],
         unnamedComponents: 'arrow-function',
+      },
+    ],
+    'react/prop-types': 'off',
+    'jsx-a11y/label-has-associated-control': [
+      'error',
+      {
+        required: {
+          some: ['nesting', 'id'],
+        },
+      },
+    ],
+    'jsx-a11y/label-has-for': [
+      'error',
+      {
+        required: {
+          some: ['nesting', 'id'],
+        },
       },
     ],
   },
