@@ -61,3 +61,21 @@ export const getAllShows = async (): Promise<DataObj | undefined> => {
     return undefined;
   }
 };
+
+// Cast
+
+interface ApiCastTypes {
+  language: string;
+  page: string;
+}
+
+export const getPopularCast = async () => {
+  const endPoint = `/person/popular${API_KEY}`;
+  const params: ApiCastTypes = { language: 'en-US', page: '1' };
+  try {
+    return await themoviedb.get(endPoint, { params });
+  } catch (error) {
+    console.log(error);
+    return undefined;
+  }
+};

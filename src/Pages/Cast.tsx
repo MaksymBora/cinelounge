@@ -1,10 +1,9 @@
+import { CastList } from '@/components/Cast/CastList';
+
 function Cast() {
   return (
-    <div>
-      <ul>
-        <li>Cast list</li>
-        <li>Cast list</li>
-      </ul>
+    <div className="max-w-xxl mx-auto flex my-12 justify-center items-start gap-8">
+      <CastList />
     </div>
   );
 }
