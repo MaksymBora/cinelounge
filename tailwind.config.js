@@ -43,6 +43,9 @@ export default {
         13: ['13px', '20px'],
         8: ['8px', '16px'],
       },
+      maxWidth: {
+        xxl: 'clamp(1px, 1440px, 92vw)',
+      },
     },
   },
   plugins: [],

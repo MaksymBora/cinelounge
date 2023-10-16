@@ -1,32 +1,10 @@
-import { useLoaderData } from 'react-router-dom';
-import { MovieCard } from '@/components/Movies/MovieCard';
-
-export interface MoviesProps {
-  poster_path: string;
-  title: string;
-  release_date: string;
-  id: number;
-  vote_average: number;
-}
-
-interface ApiResponse {
-  data: {
-    results: MoviesProps[];
-  };
-}
+import { MovieList } from '@/components/Movies/MovieList';
 
 const Movies = () => {
-  const response = useLoaderData() as ApiResponse;
-
-  const data = response.data.results;
-
   return (
-    <section className="grid grid-cols-filmList gap-8 bg-inherit text-mainTextColo w-full">
-      {data.map(
-        (movie: MoviesProps) =>
-          movie.poster_path && <MovieCard movieData={movie} key={movie.id} />
-      )}
-    </section>
+    <div className="max-w-xxl mx-auto flex my-12 justify-center items-start gap-8">
+      <MovieList />
+    </div>
   );
 };
 

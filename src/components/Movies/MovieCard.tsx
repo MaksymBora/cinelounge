@@ -1,12 +1,17 @@
 import { FC } from 'react';
 import { Link } from 'react-router-dom';
 import { FiPercent } from 'react-icons/fi';
-import { MoviesProps } from '@/Pages/Movies';
 import { imageBase } from '@/service/imagePath';
 import { colorPercentage, formatDate } from '@/utilities/utilities';
 
 interface MovieCardProps {
-  movieData: MoviesProps;
+  movieData: {
+    poster_path: string;
+    title: string;
+    release_date: string;
+    id: number;
+    vote_average: number;
+  };
 }
 
 export const MovieCard: FC<MovieCardProps> = ({
