@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
-import { getAllMovies } from '@/service/serviceMovies';
+import { useLoaderData } from 'react-router-dom';
+import { MovieCard } from '@/components/Movies/MovieCard';
 
-interface MoviesCardProps {
+export interface MoviesProps {
   poster_path: string;
   title: string;
   release_date: string;
@@ -9,39 +9,27 @@ interface MoviesCardProps {
   vote_average: number;
 }
 
-function Movies() {
-  const [movieList, setMovieList] = useState([]);
+interface ApiResponse {
+  data: {
+    results: MoviesProps[];
+  };
+}
 
-  useEffect(() => {
-    const result = async () => {
-      try {
-        const movies = await getAllMovies();
-        if (movies) {
-          setMovieList(movies.data.results);
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    };
+const Movies = () => {
+  const response = useLoaderData() as ApiResponse;
 
-    result();
-  }, []);
+  const data = response.data.results;
 
   return (
     <div>
       <section>
-        <ul>
-          {movieList.map((movie: MoviesCardProps) => {
-            return (
-              <li key={movie.id}>
-                <p>{movie.title}</p>
-              </li>
-            );
-          })}
-        </ul>
+        {data.map(
+          (movie: MoviesProps) =>
+            movie.poster_path && <MovieCard movieData={movie} key={movie.id} />
+        )}
       </section>
     </div>
   );
-}
+};
 
 export default Movies;

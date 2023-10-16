@@ -22,7 +22,6 @@ module.exports = {
       },
     },
   ],
-
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaVersion: 'latest',
@@ -38,5 +37,12 @@ module.exports = {
     'import/prefer-default-export': 0,
     'import/extensions': 0,
     'no-console': 'off',
+    'react/function-component-definition': [
+      2,
+      {
+        namedComponents: ['arrow-function', 'function-declaration'],
+        unnamedComponents: 'arrow-function',
+      },
+    ],
   },
 };
