@@ -21,14 +21,12 @@ const Movies = () => {
   const data = response.data.results;
 
   return (
-    <div>
-      <section>
-        {data.map(
-          (movie: MoviesProps) =>
-            movie.poster_path && <MovieCard movieData={movie} key={movie.id} />
-        )}
-      </section>
-    </div>
+    <section className="grid grid-cols-filmList gap-8 bg-inherit text-mainTextColo w-full">
+      {data.map(
+        (movie: MoviesProps) =>
+          movie.poster_path && <MovieCard movieData={movie} key={movie.id} />
+      )}
+    </section>
   );
 };
 
