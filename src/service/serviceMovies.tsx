@@ -22,3 +22,28 @@ export const getAllMovies = async (): Promise<DataObj | undefined> => {
     return undefined;
   }
 };
+
+interface ApiShowsTypes {
+  include_adult: string;
+  include_null_first_air_dates: string;
+  language: string;
+  page: string;
+  sort_by: string;
+}
+
+export const getAllShows = async (): Promise<DataObj | undefined> => {
+  const endPoint = `/discover/tv${API_KEY}`;
+  const params: ApiShowsTypes = {
+    include_adult: 'true',
+    include_null_first_air_dates: 'false',
+    language: 'en-US',
+    page: '1',
+    sort_by: 'popularity.desc',
+  };
+  try {
+    return await axios.get(endPoint, { params });
+  } catch (error) {
+    console.log(error);
+    return undefined;
+  }
+};

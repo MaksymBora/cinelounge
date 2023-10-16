@@ -1,10 +1,9 @@
+import { ShowsList } from '@/components/Shows/ShowsList';
+
 function Shows() {
   return (
-    <div>
-      <ul>
-        <li>Shows list</li>
-        <li>Shows list</li>
-      </ul>
+    <div className="max-w-xxl mx-auto flex my-12 justify-center items-start gap-8">
+      <ShowsList />
     </div>
   );
 }
