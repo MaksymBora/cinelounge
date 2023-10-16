@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { FiPercent } from 'react-icons/fi';
 import { MoviesProps } from '@/Pages/Movies';
 import { imageBase } from '@/service/imagePath';
-import { formatDate } from '@/utilities/utilities';
+import { colorPercentage, formatDate } from '@/utilities/utilities';
 
 interface MovieCardProps {
   movieData: MoviesProps;
@@ -28,7 +28,14 @@ export const MovieCard: FC<MovieCardProps> = ({
           ? formatDate(release_date.replace(/-/g, '/'), 'short')
           : ''}
       </p>
-      <div className="absolute top-rateT left-rateL flex justify-center items-center bg-rateBg w-10 h-10 rounded-rating text-xs text-white">
+      <div
+        style={{
+          border: `3px solid ${
+            vote_average ? colorPercentage(vote_average / 10) : '#777'
+          }`,
+        }}
+        className="absolute top-rateT left-rateL flex justify-center items-center bg-rateBg w-10 h-10 rounded-rating text-xs text-white"
+      >
         <p>{vote_average ? +vote_average.toFixed(1) * 10 : 'NR'}</p>
         {vote_average ? (
           <FiPercent className="text-8 translate-x-[1px] translate-y-[-3px]" />
