@@ -1,7 +1,12 @@
 import axios from 'axios';
 
-axios.defaults.baseURL = 'https://api.themoviedb.org/3';
 const API_KEY = '?api_key=7f6cfc769c2057b00f9c41481e14f95f';
+
+const themoviedb = axios.create({
+  baseURL: 'https://api.themoviedb.org/3',
+  // timeout: 1000,
+  headers: { accept: 'application/json' },
+});
 
 interface DataObj {
   data: {
@@ -14,9 +19,18 @@ interface DataObj {
 }
 
 export const getAllMovies = async (): Promise<DataObj | undefined> => {
-  const endPoint = `/discover/movie${API_KEY}&include_adult=true&include_video=false&language=en-US&page=1&primary_release_date.gte=2000-01-01&primary_release_date.lte=2023-10-01&sort_by=popularity.desc`;
+  const endPoint = `/discover/movie${API_KEY}`;
+  const params = {
+    include_adult: 'true',
+    include_video: 'true',
+    language: 'en-US',
+    page: '1',
+    'primary_release_date.gte': '2000-02-12',
+    'primary_release_date.lte': '2023-12-31',
+    sort_by: 'popularity.desc',
+  };
   try {
-    return await axios.get(endPoint);
+    return await themoviedb.get(endPoint, { params });
   } catch (error) {
     console.log(error);
     return undefined;
@@ -41,7 +55,7 @@ export const getAllShows = async (): Promise<DataObj | undefined> => {
     sort_by: 'popularity.desc',
   };
   try {
-    return await axios.get(endPoint, { params });
+    return await themoviedb.get(endPoint, { params });
   } catch (error) {
     console.log(error);
     return undefined;
