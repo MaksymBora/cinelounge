@@ -29,7 +29,7 @@ export function App() {
       </Route>
     ),
     {
-      basename: '/cinelounge/movies',
+      basename: '/cinelounge',
     }
   );
   return <RouterProvider router={browserRouter} />;
