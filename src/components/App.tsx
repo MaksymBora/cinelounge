@@ -13,12 +13,17 @@ import {
   getAllShows,
   getPopularCast,
 } from '@/service/serviceMovies';
+import MovieInfo from '@/Pages/MovieInfo';
 
 export function App() {
   const browserRouter = createBrowserRouter(
     createRoutesFromElements(
-      <Route path="/" element={<Layout />}>
-        <Route index element={<Movies />} loader={getAllMovies} />
+      <Route path="movies" element={<Layout />}>
+        <Route path="/movies">
+          <Route index element={<Movies />} loader={getAllMovies} />
+          <Route path=":id" element={<MovieInfo />} />
+        </Route>
+
         <Route path="shows" element={<Shows />} loader={getAllShows} />
         <Route path="cast" element={<Cast />} loader={getPopularCast} />
       </Route>

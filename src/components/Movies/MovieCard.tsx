@@ -15,10 +15,10 @@ interface MovieCardProps {
 }
 
 export const MovieCard: FC<MovieCardProps> = ({
-  movieData: { poster_path, title, release_date, vote_average },
-}: MovieCardProps) => (
+  movieData: { poster_path, title, release_date, vote_average, id },
+}) => (
   <div className="bg-bgCard flex flex-col rounded-cardBr shadow-cardShadow">
-    <Link to="/" className="relative pt-150">
+    <Link to={`/movies/${id}`} className="relative pt-150">
       <img
         src={`${imageBase}w500${poster_path}`}
         alt={title}

@@ -7,7 +7,7 @@ export function Header() {
       <div className="flex items-center grow justify-between grow-1 container xl mx-auto">
         <ul className="flex basis-0 grow gap-8 items-center">
           <li>
-            <Link to="/" className="text-lg py-3 hover:opacity-75">
+            <Link to="/movies" className="text-lg py-3 hover:opacity-75">
               Movies
             </Link>
           </li>

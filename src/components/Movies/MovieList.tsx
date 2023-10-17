@@ -15,7 +15,7 @@ interface ApiResponse {
   };
 }
 
-export const MovieList = () => {
+export const MovieList = (): JSX.Element => {
   const response = useLoaderData() as ApiResponse;
 
   const data = response.data.results;

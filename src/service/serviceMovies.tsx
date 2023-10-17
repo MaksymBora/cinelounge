@@ -79,3 +79,22 @@ export const getPopularCast = async () => {
     return undefined;
   }
 };
+
+// get Movie by ID
+
+interface ApiOneMovie {
+  language: string;
+}
+
+export const getMovieByID = async (id: string | undefined) => {
+  const endPoint = `movie/${id}${API_KEY}`;
+  const params: ApiOneMovie = {
+    language: 'en-US',
+  };
+  try {
+    return await themoviedb.get(endPoint, { params });
+  } catch (error) {
+    console.log(error);
+    return undefined;
+  }
+};
