@@ -17,7 +17,7 @@ export default defineConfig({
       },
     ],
   },
-  base: '/cinelounge/movies', // * <REPO> * //
+  base: '/cinelounge', // * <REPO> * //
   test: {
     globals: true,
     environment: 'jsdom',
