@@ -19,7 +19,7 @@ export function App() {
   const browserRouter = createBrowserRouter(
     createRoutesFromElements(
       <Route element={<Layout />}>
-        <Route path="/movies">
+        <Route path="movies">
           <Route index element={<Movies />} loader={getAllMovies} />
           <Route path=":id" element={<MovieInfo />} />
         </Route>
