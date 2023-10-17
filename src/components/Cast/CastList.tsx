@@ -24,7 +24,7 @@ export const CastList = () => {
   const data = response.data.results;
 
   return (
-    <section>
+    <section className="container grid grid-cols-filmList gap-8 bg-inherit text-mainTextColo w-full">
       {data.map(person => (
         <CastCard castData={person} key={person.id} />
       ))}
