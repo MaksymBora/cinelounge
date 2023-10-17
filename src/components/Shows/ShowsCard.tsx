@@ -15,7 +15,7 @@ interface ShowsCardProps {
 
 export const ShowsCard: FC<ShowsCardProps> = ({
   showsData: { poster_path, name, first_air_date, vote_average },
-}: ShowsCardProps) => (
+}) => (
   <div className="bg-bgCard flex flex-col rounded-cardBr shadow-cardShadow">
     <Link to="/shows" className="relative pt-150">
       <img

@@ -17,7 +17,7 @@ interface CastCardProps {
 
 export const CastCard: FC<CastCardProps> = ({
   castData: { profile_path, name, known_for },
-}: CastCardProps) => {
+}) => {
   return (
     <div className="flex flex-col bg-bgCard rounded-cardBr shadow-cardShadow min-w-0">
       <Link to="/cast" className="relative pt-150">
