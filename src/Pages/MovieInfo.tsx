@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getMovieByID } from '@/service/serviceMovies';
+import { MovieAbout } from '@/components/MovieInfo/MovieAbout';
 
 interface Genre {
   id: number;
@@ -16,6 +17,7 @@ interface MovieInfoTypes {
   runtime: number;
   genres: Genre[];
   overview: string;
+  backdrop_path: string;
 }
 
 const MovieInfo = (): JSX.Element => {
@@ -38,6 +40,7 @@ const MovieInfo = (): JSX.Element => {
 
   return (
     <>
+      <MovieAbout movieData={movie} />
       <section>
         <h2>{movie?.title}</h2>
         <p>Movie sidebar</p>

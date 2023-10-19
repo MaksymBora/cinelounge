@@ -12,6 +12,7 @@ export default {
         secondaryText: '#ddd',
         rateBg: '#081c22',
         navFooter: '#1e2125',
+        movieAboutBg: 'rgba(0, 0, 0, 0.77)',
       },
       spacing: {
         rateT: '-20px',
