@@ -8,9 +8,14 @@ export const MovieAbout = ({ movieData }): JSX.Element | null => {
     return null;
   }
 
+  interface Genre {
+    id: number;
+    name: string;
+  }
+
   // eslint-disable-next-line @typescript-eslint/naming-convention
-  const { vote_average } = movieData;
-  console.log(vote_average);
+  const { vote_average, genres }: { vote_average: number; genres: Genre[] } =
+    movieData;
 
   return (
     <section className="my-12 mx-0 relative">
@@ -87,7 +92,29 @@ export const MovieAbout = ({ movieData }): JSX.Element | null => {
                   ''
                 )}
               </div>
+              {/* Genres */}
+              {movieData?.genres && movieData.genres.length > 0 && (
+                <span className="mx-4 w-[2px] rounded-[10px] text-mainTextColo opacity-60 h-[30px]" />
+              )}
+              <ul className="genres">
+                {genres?.map(
+                  (genre, idx) =>
+                    idx < 3 && (
+                      <li key={genre.id}>
+                        {genre.name}{' '}
+                        {idx === genres.length - 1 || idx === 2 ? null : ','}
+                      </li>
+                    )
+                )}
+              </ul>
             </div>
+            {/* Overview */}
+            {movieData?.overview && (
+              <div className="overview">
+                <h3>Overview</h3>
+                <p>{movieData?.overview}</p>
+              </div>
+            )}
           </div>
         </div>
       </div>
