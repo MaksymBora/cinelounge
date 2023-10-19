@@ -4,6 +4,9 @@ export default {
   darkMode: 'class',
   theme: {
     extend: {
+      fontFamily: {
+        main: ['"Montserrat", sans-serif'],
+      },
       colors: {
         mainBgColor: '#212529',
         mainTextColo: '#f6f9ff',

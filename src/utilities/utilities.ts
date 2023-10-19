@@ -37,3 +37,16 @@ export function colorPercentage(pct: number) {
   };
   return `rgb(${[color.r, color.g, color.b].join(',')})`;
 }
+
+export function formatRuntime(runtime: number) {
+  const hours = Math.floor(runtime / 60);
+  const remainder = runtime - hours * 60;
+
+  if (hours === 0) {
+    return `${remainder}m`;
+  }
+  if (remainder === 0) {
+    return `${runtime / 60}h`;
+  }
+  return `${hours}h ${remainder}m`;
+}
