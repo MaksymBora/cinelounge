@@ -14,7 +14,10 @@ export const MovieCastCard = ({
   character,
 }: MovieCastCardProps) => {
   return (
-    <li className="w-[138px] bg-bgCard rounded-cardBr shadow-castShadow border border-black [&>img]:w-full [&>img]:flex [&>img]:rounded-s-sm">
+    <li
+      className="w-[138px] bg-bgCard rounded-cardBr shadow-castShadow border
+	 border-black [&>img]:w-full [&>img]:flex [&>img]:rounded-s-sm"
+    >
       <Link to="/">
         {' '}
         {/* Person ID */}
