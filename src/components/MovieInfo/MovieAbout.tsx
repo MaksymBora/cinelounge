@@ -1,12 +1,16 @@
 import { useState } from 'react';
 import { HiOutlineArrowsExpand } from 'react-icons/hi';
 import { FiPercent } from 'react-icons/fi';
+import { BsPlay, BsBookmark } from 'react-icons/bs';
+import { ClickAwayListener, Tooltip } from '@mui/material';
 import { imageBase } from '@/service/imagePath';
 import { colorPercentage, formatRuntime } from '@/utilities/utilities';
 import { MovieGallery } from './MovieGallery';
 
 export const MovieAbout = ({ movieData }): JSX.Element | null => {
   const [viewGallery, setViewGallery] = useState(false);
+  const [showTooltip, setShowTooltip] = useState(false);
+  const [viewTrailer, setViewTrailer] = useState(false);
   if (!movieData) {
     return null;
   }
@@ -22,6 +26,13 @@ export const MovieAbout = ({ movieData }): JSX.Element | null => {
 
   const hasImages =
     movieData?.images.backdrops && movieData.images.backdrops.length > 0;
+
+  const trailer = movieData?.videos?.results?.find(entry => {
+    return (
+      entry.type.toLowerCase() === 'trailer' &&
+      entry.site.toLowerCase() === 'youtube'
+    );
+  });
 
   const handleViewGallery = () => hasImages && setViewGallery(true);
 
@@ -132,6 +143,51 @@ export const MovieAbout = ({ movieData }): JSX.Element | null => {
                 <p>{movieData?.overview}</p>
               </div>
             )}
+            {/* Buttons */}
+            <div className="flex items-center gap-x-8 mt-8">
+              {trailer && (
+                <button
+                  type="button"
+                  onClick={() => setViewTrailer(true)}
+                  className="flex justify-center items-center 
+                  text-base cursor-pointer bg-transparent border-none text-white 
+                  transition-all tracking-[0.5px] min-h-[35px] [&>svg]:w-[35px] 
+                  [&>svg]:h-[35px] [&>svg]:mr-[8px] hover:opacity-60 font-semibold"
+                >
+                  <BsPlay />
+                  <span>Play Trailer</span>
+                </button>
+              )}
+              <ClickAwayListener onClickAway={() => setShowTooltip(false)}>
+                <Tooltip
+                  title={
+                    <span style={{ fontSize: '12px', letterSpacing: '0.5px' }}>
+                      Please login to add to Watchlist
+                    </span>
+                  }
+                  arrow
+                  PopperProps={{
+                    disablePortal: true,
+                  }}
+                  onClose={() => setShowTooltip(false)}
+                  open={showTooltip}
+                  disableFocusListener
+                  disableHoverListener
+                  disableTouchListener
+                >
+                  <button
+                    type="button"
+                    className="[&>svg]:w-[20px] [&>svg]:h-[20px] [&>svg]:mr-[14px] 
+                    flex justify-center items-center 
+                    text-base cursor-pointer bg-transparent border-none text-white 
+                    transition-all tracking-[0.5px] min-h-[35px] hover:opacity-60 font-semibold"
+                  >
+                    <BsBookmark />
+                    <span>Add To Watchlist</span>
+                  </button>
+                </Tooltip>
+              </ClickAwayListener>
+            </div>
           </div>
         </div>
       </div>
