@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { FC, useState } from 'react';
 import { HiOutlineArrowsExpand } from 'react-icons/hi';
 import { FiPercent } from 'react-icons/fi';
 import { BsPlay, BsBookmark } from 'react-icons/bs';
@@ -7,8 +7,15 @@ import { imageBase } from '@/service/imagePath';
 import { colorPercentage, formatRuntime } from '@/utilities/utilities';
 import { MovieGallery } from './MovieGallery';
 import { MovieTrailer } from './MovieTrailer';
+import { MovieInfoTypes } from '@/Pages/MovieInfo';
 
-export const MovieAbout = ({ movieData }): JSX.Element | null => {
+interface MovieAboutProps {
+  movieData: MovieInfoTypes | null;
+}
+
+export const MovieAbout: FC<MovieAboutProps> = ({
+  movieData,
+}): JSX.Element | null => {
   const [viewGallery, setViewGallery] = useState(false);
   const [showTooltip, setShowTooltip] = useState(false);
   const [viewTrailer, setViewTrailer] = useState(false);

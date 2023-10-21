@@ -41,5 +41,9 @@
 	max-width: calc(1.7778 * 92vh);
   }
 
+  .cast {
+	width: calc(100% - 260px);
+  }
+
 @tailwind utilities;
 

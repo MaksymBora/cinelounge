@@ -31,6 +31,7 @@ export default {
           '0 0 20px -10px hsla(0,0%,59%,.2), 0 0 1px 1px hsla(0,0%,49%,.2)',
         cardShadow:
           'rgba(0, 0, 0, 0.07) 0px 1px 3px 0px rgba(27, 31, 35, 0.12) 0px 0px 0px 1px;',
+        castShadow: '0 1px 12px -3px rgba(0, 0, 0, 0.1);',
       },
       gridTemplateColumns: {
         filmList: 'repeat(auto-fit, minmax(215px, 1fr))',
