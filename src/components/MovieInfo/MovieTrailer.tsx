@@ -85,7 +85,7 @@ export const MovieTrailer = ({
       onClick={() => setViewTrailer(false)}
     >
       <iframe
-        src={`https://www.youtube.com/embed/${trailer?.key}?autoplay=0`}
+        src={`https://www.youtube-nocookie.com/embed/${trailer?.key}?autoplay=0`}
         className="trailer fixed top-[50%] left-[50%] -translate-y-1/2 -translate-x-1/2 
 		max-h-[92vh] bg-black border border-[#ccc] shadow-[0_0_10px_1-px_rgba(0,0,0,0)] w-iframeW h-iframeH"
         allowFullScreen
