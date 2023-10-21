@@ -1,9 +1,12 @@
+import { useState } from 'react';
 import { HiOutlineArrowsExpand } from 'react-icons/hi';
 import { FiPercent } from 'react-icons/fi';
 import { imageBase } from '@/service/imagePath';
 import { colorPercentage, formatRuntime } from '@/utilities/utilities';
+import { MovieGallery } from './MovieGallery';
 
 export const MovieAbout = ({ movieData }): JSX.Element | null => {
+  const [viewGallery, setViewGallery] = useState(false);
   if (!movieData) {
     return null;
   }
@@ -17,6 +20,11 @@ export const MovieAbout = ({ movieData }): JSX.Element | null => {
   const { vote_average, genres }: { vote_average: number; genres: Genre[] } =
     movieData;
 
+  const hasImages =
+    movieData?.images.backdrops && movieData.images.backdrops.length > 0;
+
+  const handleViewGallery = () => hasImages && setViewGallery(true);
+
   return (
     <section className="my-12 mx-0 relative">
       <div className="h-[600px] bg-movieAboutBg">
@@ -27,22 +35,31 @@ export const MovieAbout = ({ movieData }): JSX.Element | null => {
           className="absolute w-full h-full -z-[1]"
         />
         <div className="grid grid-cols-[1fr,4fr] items-center gap-x-16 z-[1] max-w-xxl mx-auto my-0 text-white relative h-full">
-          <button
-            type="button"
-            className="w-[300px] flex items-start rounded-cardBr relative text-xl border-none overflow-hidden bg-black cursor-pointer transition duration-250 ease-in group"
-          >
+          {hasImages ? (
+            <button
+              type="button"
+              className="w-[300px] flex items-start rounded-cardBr relative text-xl border-none overflow-hidden bg-black cursor-pointer transition duration-250 ease-in group"
+              onClick={handleViewGallery}
+            >
+              <img
+                src={`${imageBase}w780${movieData?.poster_path}`}
+                alt=""
+                className="transition-all group-hover:opacity-25"
+              />
+              <p className="opacity-0 w-full h-full absolute top-0 left-0 transition-all flex justify-center items-center text-white group-hover:opacity-100 ">
+                <i>
+                  <HiOutlineArrowsExpand className="text-2xl flex hover:opacity-60" />
+                </i>
+                <span className="ml-1.5">View Gallery</span>
+              </p>
+            </button>
+          ) : (
             <img
+              className="transition-all group-hover:opacity-25"
               src={`${imageBase}w780${movieData?.poster_path}`}
               alt=""
-              className="transition-all group-hover:opacity-25"
             />
-            <p className="opacity-0 w-full h-full absolute top-0 left-0 transition-all flex justify-center items-center text-white group-hover:opacity-100 ">
-              <i>
-                <HiOutlineArrowsExpand className="text-2xl flex hover:opacity-60" />
-              </i>
-              <span className="ml-1.5">View Gallery</span>
-            </p>
-          </button>
+          )}
 
           {/* Title */}
           <div>
@@ -118,6 +135,9 @@ export const MovieAbout = ({ movieData }): JSX.Element | null => {
           </div>
         </div>
       </div>
+      {viewGallery && (
+        <MovieGallery setViewGallery={setViewGallery} movie={movieData} />
+      )}
     </section>
   );
 };

@@ -8,7 +8,7 @@ interface Genre {
   name: string;
 }
 
-interface MovieInfoTypes {
+export interface MovieInfoTypes {
   poster_path: string;
   title: string;
   release_date: string;
@@ -18,6 +18,16 @@ interface MovieInfoTypes {
   genres: Genre[];
   overview: string;
   backdrop_path: string;
+  images: {
+    backdrops: [
+      {
+        file_path: string;
+        width: number;
+      },
+    ];
+    logos: [];
+    posters: [];
+  };
 }
 
 const MovieInfo = (): JSX.Element => {

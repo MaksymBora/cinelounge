@@ -16,6 +16,7 @@ export default {
         rateBg: '#081c22',
         navFooter: '#1e2125',
         movieAboutBg: 'rgba(0, 0, 0, 0.77)',
+        imageGallery: 'rgba(0, 0, 0, 0.88)',
       },
       spacing: {
         rateT: '-20px',
@@ -50,6 +51,13 @@ export default {
       },
       maxWidth: {
         xxl: 'clamp(1px, 1440px, 92vw)',
+      },
+      keyframes: {
+        fadeIn: {
+          from: {
+            opacity: 'opacity: 0',
+          },
+        },
       },
     },
   },

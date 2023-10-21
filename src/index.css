@@ -1,3 +1,41 @@
 @tailwind base;
 @tailwind components;
+
+.image-gallery-slides {
+	margin: 0 auto;
+	width: 85vw;
+  }
+  
+  .image-gallery-slide {
+	margin: 0 auto;
+	width: 100%;
+  }
+
+
+  .center {
+	z-index: 1;
+  }
+
+  .right {
+	opacity: 0;
+  }
+
+  .image-gallery-image {
+	width: 100%;
+	height: auto;
+  }
+
+.image-gallery {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 100vw;
+  }
+
+  .image-gallery-thumbnail-image {
+	cursor: pointer;
+  }
+
 @tailwind utilities;
+

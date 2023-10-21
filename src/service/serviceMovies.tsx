@@ -82,17 +82,10 @@ export const getPopularCast = async () => {
 
 // get Movie by ID
 
-interface ApiOneMovie {
-  language: string;
-}
-
-export const getMovieByID = async (id: string | undefined) => {
-  const endPoint = `movie/${id}${API_KEY}`;
-  const params: ApiOneMovie = {
-    language: 'en-US',
-  };
+export const getMovieByID = async (id: string | number) => {
+  const endPoint = `movie/${id}${API_KEY}&append_to_response=recommendations,credits,external_ids,images,videos`;
   try {
-    return await themoviedb.get(endPoint, { params });
+    return await themoviedb.get(endPoint);
   } catch (error) {
     console.log(error);
     return undefined;
