@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { getMovieByID } from '@/service/serviceMovies';
 import { MovieAbout } from '@/components/MovieInfo/MovieAbout';
 import { MovieCast } from '@/components/MovieInfo/MovieCast';
+import { MovieSidebar } from '@/components/MovieInfo/MovieSidebar';
 
 interface Genre {
   id: number;
@@ -19,6 +20,10 @@ export interface MovieInfoTypes {
   genres: Genre[];
   overview: string;
   backdrop_path: string;
+  homepage: string;
+  budget: number;
+  revenue: number;
+  status: string;
   images: {
     backdrops: {
       file_path: string;
@@ -52,6 +57,11 @@ export interface MovieInfoTypes {
       job: string;
     }[];
   };
+  external_ids: {
+    facebook_id: string;
+    instagram_id: string;
+    twitter_id: string;
+  };
 }
 
 const MovieInfo = (): JSX.Element => {
@@ -77,7 +87,7 @@ const MovieInfo = (): JSX.Element => {
       <MovieAbout movieData={movie} />
       <section className="flex justify-between items-start gap-x-12 max-w-xxl mt-0 mx-auto mb-12">
         <MovieCast movieData={movie} />
-        <p>Movie sidebar</p>
+        <MovieSidebar movieData={movie} />
       </section>
       <p>Movie recommendations</p>
     </>

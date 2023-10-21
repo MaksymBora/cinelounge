@@ -12,28 +12,6 @@ export interface SingleMovie {
   status: string;
   budget: number;
   revenue: number;
-  external_ids: {
-    facebook_id: string;
-    instagram_id: string;
-    twitter_id: string;
-  };
-  credits: {
-    cast: {
-      id: number;
-      name: string;
-      credit_id: string;
-      profile_path: string;
-      popularity: number;
-      character: string;
-    }[];
-    crew: {
-      id: number;
-      name: string;
-      credit_id: string;
-      profile_path: string;
-      job: string;
-    }[];
-  };
   images: {
     backdrops: {
       width: number;
