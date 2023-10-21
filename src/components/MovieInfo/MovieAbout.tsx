@@ -6,6 +6,7 @@ import { ClickAwayListener, Tooltip } from '@mui/material';
 import { imageBase } from '@/service/imagePath';
 import { colorPercentage, formatRuntime } from '@/utilities/utilities';
 import { MovieGallery } from './MovieGallery';
+import { MovieTrailer } from './MovieTrailer';
 
 export const MovieAbout = ({ movieData }): JSX.Element | null => {
   const [viewGallery, setViewGallery] = useState(false);
@@ -191,7 +192,13 @@ export const MovieAbout = ({ movieData }): JSX.Element | null => {
           </div>
         </div>
       </div>
-      {viewTrailer && <div>trailer</div>}
+      {viewTrailer && (
+        <MovieTrailer
+          trailer={trailer}
+          setViewTrailer={setViewTrailer}
+          movie={movieData}
+        />
+      )}
       {viewGallery && (
         <MovieGallery setViewGallery={setViewGallery} movie={movieData} />
       )}

@@ -70,5 +70,6 @@ module.exports = {
         },
       },
     ],
+    'react/self-closing-comp': 0,
   },
 };
