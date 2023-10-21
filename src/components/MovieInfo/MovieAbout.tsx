@@ -191,6 +191,7 @@ export const MovieAbout = ({ movieData }): JSX.Element | null => {
           </div>
         </div>
       </div>
+      {viewTrailer && <div>trailer</div>}
       {viewGallery && (
         <MovieGallery setViewGallery={setViewGallery} movie={movieData} />
       )}
