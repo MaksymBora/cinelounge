@@ -44,17 +44,21 @@ export const MovieSidebar: FC<MovieCastProps> = ({
   ];
 
   return (
-    <div className="sidebar">
-      <ul className="socials">
+    <div className="w-[260px] flex flex-col flex-1">
+      <ul className="flex justify-start text-2xl w-[150px] translate-x-[-10px] mb-4">
         {socials.map(
           social =>
             social.id && (
-              <li key={`${social.id}-${social.keyID}`}>
+              <li
+                key={`${social.id}-${social.keyID}`}
+                className="[&:not(:first-child)]:ml-[1.2rem]"
+              >
                 <a
                   href={`${social.base}${social.id}`}
                   target="_blank"
                   rel="noreferrer"
                   aria-label={`${movieData?.title} ${social.name}`}
+                  className="flex justify-center items-center py-[5px] px-[10px] transition-all text-mainTextColo hover:opacity-60"
                 >
                   <social.icon />
                 </a>
@@ -62,12 +66,13 @@ export const MovieSidebar: FC<MovieCastProps> = ({
             )
         )}
       </ul>
-
-      {socials.some(s => s.id) && <div className="line"></div>}
-      <div className="info">
-        <div className="status">
+      {socials.some(s => s.id) && (
+        <div className="w-full bg-[#ccc] h-[2px] mb-4 rounded-[50px]"></div>
+      )}
+      <div className="flex flex-col gap-y-4">
+        <div>
           <h3>Status</h3>
-          <p>
+          <p className="text-sm mt-[2px]">
             {movieData?.status}
             {movieData?.status === 'Released' &&
               ` (${formatDate(
@@ -77,15 +82,19 @@ export const MovieSidebar: FC<MovieCastProps> = ({
           </p>
         </div>
         {movieData?.budget! > 0 && (
-          <div className="budget">
+          <div>
             <h3>Budget</h3>
-            <p>${Number(movieData?.budget).toLocaleString()}</p>
+            <p className="tracking-[0.5px]">
+              ${Number(movieData?.budget).toLocaleString()}
+            </p>
           </div>
         )}
         {movieData?.revenue! > 0 && (
-          <div className="revenue">
+          <div>
             <h3>Revenue</h3>
-            <p>${Number(movieData?.revenue).toLocaleString()}</p>
+            <p className="tracking-[0.5px]">
+              ${Number(movieData?.revenue).toLocaleString()}
+            </p>
           </div>
         )}
       </div>
