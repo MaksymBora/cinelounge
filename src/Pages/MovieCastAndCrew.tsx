@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { MovieInfoTypes } from './MovieInfo';
 import { getMovieByID } from '@/service/serviceMovies';
 import { Banner } from '@/components/MovieCastAndCrew/Banner';
+import { CreditsList } from '@/components/MovieCastAndCrew/CreditsList';
 
 const MovieCastAndCrew = () => {
   const [movie, setMovie] = useState<MovieInfoTypes | null>(null);
@@ -27,8 +28,8 @@ const MovieCastAndCrew = () => {
       <Banner movieData={movie} />
       <div className="max-w-xxl flex flex-col my-0 mx-auto">
         <div className="flex justify-between items-start">
-          {/* <CreditsList credits={movie?.credits.cast} kind="Cast" />
-          <CreditsList credits={movie?.credits.crew} kind="Crew" /> */}
+          <CreditsList credits={movie?.credits.cast} kind="Cast" />
+          <CreditsList credits={movie?.credits.crew} kind="Crew" />
         </div>
       </div>
     </div>
