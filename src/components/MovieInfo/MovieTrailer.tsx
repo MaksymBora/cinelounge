@@ -29,14 +29,6 @@ export interface SingleMovie {
       key: string;
     }[];
   };
-  recommendations: {
-    results: {
-      id: number;
-      title: string;
-      backdrop_path: string;
-      popularity: number;
-    }[];
-  };
 }
 
 interface MovieTrailerProps {

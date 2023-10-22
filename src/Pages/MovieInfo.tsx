@@ -4,6 +4,7 @@ import { getMovieByID } from '@/service/serviceMovies';
 import { MovieAbout } from '@/components/MovieInfo/MovieAbout';
 import { MovieCast } from '@/components/MovieInfo/MovieCast';
 import { MovieSidebar } from '@/components/MovieInfo/MovieSidebar';
+import { Recommendations } from '@/components/MovieInfo/Recommendations';
 
 interface Genre {
   id: number;
@@ -62,6 +63,14 @@ export interface MovieInfoTypes {
     instagram_id: string;
     twitter_id: string;
   };
+  recommendations: {
+    results: {
+      id: number;
+      title: string;
+      backdrop_path: string;
+      popularity: number;
+    }[];
+  };
 }
 
 const MovieInfo = (): JSX.Element => {
@@ -89,7 +98,7 @@ const MovieInfo = (): JSX.Element => {
         <MovieCast movieData={movie} />
         <MovieSidebar movieData={movie} />
       </section>
-      <p>Movie recommendations</p>
+      <Recommendations movieData={movie} />
     </>
   );
 };
