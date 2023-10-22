@@ -1,14 +1,8 @@
 import { Link, useParams } from 'react-router-dom';
-import { FC } from 'react';
 import { BsArrowLeftShort } from 'react-icons/bs';
 import { imageBase } from '@/service/imagePath';
-import { MovieInfoTypes } from '@/Pages/MovieInfo';
 
-interface BannerProps {
-  movieData: MovieInfoTypes | null;
-}
-
-export const Banner: FC<BannerProps> = ({ movieData }): JSX.Element => {
+export const Banner = ({ movieData }): JSX.Element => {
   const { id } = useParams();
 
   return (
@@ -21,13 +15,13 @@ export const Banner: FC<BannerProps> = ({ movieData }): JSX.Element => {
         />
         <div className="flex flex-col gap-y-1.5 h-full ml-8">
           <h1 className="text-[26px]">
-            {movieData?.title}
+            {movieData?.name}
             <span className="font-normal tracking-[2px]">
-              ({movieData?.release_date.slice(0, 4)})
+              ({movieData?.first_air_date.slice(0, 4)})
             </span>
           </h1>
           <Link
-            to={`/${id}`}
+            to={`/shows/${id}`}
             className="flex items-center text-sl text-secondaryText [&>svg]:text-3xl [&>svg]:mr-[5px]"
           >
             <BsArrowLeftShort /> Back to main

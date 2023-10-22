@@ -1,11 +1,50 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getTVByID } from '@/service/serviceMovies';
-import { ShowAbout } from '@/components/ShowInfo/ShowAbout';
-import { ShowCast } from '@/components/ShowInfo/ShowCast';
-import { ShowSidebar } from '@/components/ShowInfo/ShowSidebar';
+import { Banner } from '@/components/ShowCastAndCrew/Banner';
+import { CreditsList } from '@/components/ShowCastAndCrew/CreditsList';
 
-export interface ShowInfoTypes {
+interface CastCredit {
+  cast: {
+    adult: boolean;
+    gender: number;
+    id: number;
+    known_for_department: string;
+    name: string;
+    order: number;
+    original_name: string;
+    popularity: number;
+    profile_path: string;
+    roles: {
+      character: string;
+      credit_id: string;
+      episode_count: number;
+    }[];
+    total_episode_count: number;
+  };
+}
+
+interface CrewCredit {
+  crew: {
+    adult: boolean;
+    department: string;
+    gender: number;
+    id: number;
+    jobs: {
+      credit_id: string;
+      episode_count: number;
+      job: string;
+    }[];
+    known_for_department: string;
+    name: string;
+    original_name: string;
+    popularity: number;
+    profile_path: string | number;
+    total_episode_count: number;
+  };
+}
+
+export interface ShowPropTypes {
   poster_path: string;
   name: string;
   title: string;
@@ -80,45 +119,13 @@ export interface ShowInfoTypes {
     origin_country: string;
   }[];
   aggregate_credits: {
-    cast: {
-      adult: boolean;
-      gender: number;
-      id: number;
-      known_for_department: string;
-      name: string;
-      order: number;
-      original_name: string;
-      popularity: number;
-      profile_path: string;
-      roles: {
-        character: string;
-        credit_id: string;
-        episode_count: number;
-      }[];
-      total_episode_count: number;
-    }[];
-    crew: {
-      adult: boolean;
-      department: string;
-      gender: number;
-      id: number;
-      jobs: {
-        credit_id: string;
-        episode_count: number;
-        job: string;
-      }[];
-      known_for_department: string;
-      name: string;
-      original_name: string;
-      popularity: number;
-      profile_path: string | number;
-      total_episode_count: number;
-    }[];
+    cast: CastCredit[];
+    crew: CrewCredit[];
   };
 }
 
-const ShowInfo = () => {
-  const [movie, setMovie] = useState<ShowInfoTypes | null>(null);
+const ShowCastAndCrew = (): JSX.Element => {
+  const [show, setShow] = useState<ShowPropTypes | null>(null);
   const { id } = useParams();
 
   useEffect(() => {
@@ -127,7 +134,7 @@ const ShowInfo = () => {
     const result = async () => {
       try {
         const response = await getTVByID(id);
-        setMovie(response?.data);
+        setShow(response?.data);
       } catch (error) {
         console.log(error);
       }
@@ -136,15 +143,22 @@ const ShowInfo = () => {
   }, [id]);
 
   return (
-    <>
-      <ShowAbout movieData={movie} />
-      <section className="flex justify-between items-start gap-x-12 max-w-xxl mt-0 mx-auto mb-12">
-        <ShowCast movieData={movie} />
-        <ShowSidebar movieData={movie} />
-      </section>
-      {/* <Recommendations movieData={movie} /> */}
-    </>
+    <div className="my-12">
+      {show && <Banner movieData={show} />}
+      <div className="max-w-xxl flex flex-col my-0 mx-auto">
+        <div className="flex justify-between items-start">
+          <CreditsList
+            credits={show?.aggregate_credits.cast}
+            creditType="Cast"
+          />
+          <CreditsList
+            credits={show?.aggregate_credits.crew}
+            creditType="Crew"
+          />
+        </div>
+      </div>
+    </div>
   );
 };
 
-export default ShowInfo;
+export default ShowCastAndCrew;
