@@ -5,12 +5,12 @@ import { BsPlay, BsBookmark } from 'react-icons/bs';
 import { ClickAwayListener, Tooltip } from '@mui/material';
 import { imageBase } from '@/service/imagePath';
 import { colorPercentage, formatRuntime } from '@/utilities/utilities';
-import { MovieInfoTypes } from '@/Pages/MovieInfo';
 import { ShowTrailer } from './ShowTrailer';
 import { ShowGallery } from './ShowGallery';
+import { ShowInfoTypes } from '@/Pages/ShowInfo';
 
 interface MovieAboutProps {
-  movieData: MovieInfoTypes | null;
+  movieData: ShowInfoTypes | null;
 }
 
 export const ShowAbout: FC<MovieAboutProps> = ({
