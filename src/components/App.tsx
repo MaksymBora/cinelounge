@@ -14,6 +14,7 @@ import {
   getPopularCast,
 } from '@/service/serviceMovies';
 import MovieInfo from '@/Pages/MovieInfo';
+import MovieCastAndCrew from '@/Pages/MovieCastAndCrew';
 
 export function App() {
   const browserRouter = createBrowserRouter(
@@ -22,6 +23,7 @@ export function App() {
         <Route path="/">
           <Route index element={<Movies />} loader={getAllMovies} />
           <Route path=":id" element={<MovieInfo />} />
+          <Route path=":id/casts" element={<MovieCastAndCrew />} />
         </Route>
 
         <Route path="shows" element={<Shows />} loader={getAllShows} />

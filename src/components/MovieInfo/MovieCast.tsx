@@ -37,7 +37,7 @@ export const MovieCast: FC<MovieCastProps> = ({ movieData }): JSX.Element => {
           );
         })}
         <li className="flex justify-center items-center flex-nowrap font-bold text-sm w-[144px]">
-          <Link to="allCast" className="flex items-center text-base">
+          <Link to="casts" className="flex items-center text-base">
             View More <TiArrowRight size={50} />
           </Link>
         </li>
