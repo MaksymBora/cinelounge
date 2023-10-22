@@ -10,14 +10,15 @@ interface ShowsCardProps {
     name: string;
     first_air_date: string;
     vote_average: number;
+    id: number;
   };
 }
 
 export const ShowsCard: FC<ShowsCardProps> = ({
-  showsData: { poster_path, name, first_air_date, vote_average },
+  showsData: { poster_path, name, first_air_date, vote_average, id },
 }) => (
   <div className="bg-bgCard flex flex-col rounded-cardBr shadow-cardShadow">
-    <Link to="/shows" className="relative pt-150">
+    <Link to={`/shows/${id}`} className="relative pt-150">
       <img
         src={`${imageBase}w500${poster_path}`}
         alt={name}
