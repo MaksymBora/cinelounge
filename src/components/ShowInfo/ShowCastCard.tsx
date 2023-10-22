@@ -1,18 +1,21 @@
 import { Link } from 'react-router-dom';
 import { imageBase } from '@/service/imagePath';
 
-interface MovieCastCardProps {
+//   id: number;
+
+interface ShowCastCardPropTypes {
   name: string;
   profile_path: string;
-  character: string;
+  roles: {
+    character: string;
+  }[];
 }
-//   id: number;
 
 export const ShowCastCard = ({
   name,
   profile_path,
-  character,
-}: MovieCastCardProps) => {
+  roles,
+}: ShowCastCardPropTypes): JSX.Element => {
   return (
     <li
       className="w-[138px] bg-bgCard rounded-cardBr shadow-castShadow border
@@ -28,7 +31,9 @@ export const ShowCastCard = ({
       </Link>
       <div className="py-[13px] px-[11px]">
         <h3 className="text-sm">{name}</h3>
-        <p className="text-xs mt-[5px] text-secondaryText">{character}</p>
+        <p className="text-xs mt-[5px] text-secondaryText">
+          {roles[0].character}
+        </p>
       </div>
     </li>
   );

@@ -95,7 +95,7 @@ export const getMovieByID = async (id: string | number) => {
 // get TV by ID
 
 export const getTVByID = async (id: string | number) => {
-  const endPoint = `tv/${id}${API_KEY}&append_to_response=recommendations,credits,external_ids,images,videos`;
+  const endPoint = `tv/${id}${API_KEY}&append_to_response=recommendations,external_ids,images,videos,aggregate_credits`;
   try {
     return await themoviedb.get(endPoint);
   } catch (error) {

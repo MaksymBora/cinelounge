@@ -77,6 +77,25 @@ export interface ShowInfoTypes {
     name: string;
     origin_country: string;
   }[];
+  aggregate_credits: {
+    cast: {
+      adult: boolean;
+      gender: number;
+      id: number;
+      known_for_department: string;
+      name: string;
+      order: number;
+      original_name: string;
+      popularity: number;
+      profile_path: string;
+      roles: {
+        character: string;
+        credit_id: string;
+        episode_count: number;
+      }[];
+      total_episode_count: number;
+    }[];
+  };
 }
 
 const ShowInfo = () => {
