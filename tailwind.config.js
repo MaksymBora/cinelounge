@@ -17,6 +17,7 @@ export default {
         navFooter: '#1e2125',
         movieAboutBg: 'rgba(0, 0, 0, 0.77)',
         imageGallery: 'rgba(0, 0, 0, 0.88)',
+        line: 'rgba(150, 150, 150, 0.5)',
       },
       spacing: {
         rateT: '-20px',

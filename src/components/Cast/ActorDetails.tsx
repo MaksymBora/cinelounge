@@ -102,6 +102,8 @@ export const ActorDetails = ({ person, hasMultipleImages }): JSX.Element => {
         >
           <h1 className="hidden">{person?.name}</h1>
         </Link>
+
+        {/* -------- Socials -------------- */}
         <div className="flex flex-col mt-8">
           <ul className="flex justify-start items-center text-2xl w-[150px] translate-x-[-10px]">
             {socials.map(
@@ -109,14 +111,14 @@ export const ActorDetails = ({ person, hasMultipleImages }): JSX.Element => {
                 social.id && (
                   <li
                     key={`${social.id}-${social.keyID}`}
-                    className="hover:transition-all mb-6 hover:opacity-60 [&:not(:last-child)]:ml-4"
+                    className="hover:transition-all mb-6 hover:opacity-60 [&:not(:first-child)]:ml-4"
                   >
                     <a
                       href={`${social.base}${social.id}`}
                       target="_blank"
                       rel="noreferrer"
                       aria-label={`${person?.name} ${social.name}`}
-                      className="py-[5px] px-[10px] text-mainTextColo"
+                      className="py-[5px] px-[10px] text-mainTextColo flex justify-center items-center"
                     >
                       <social.icon />
                     </a>
@@ -125,13 +127,12 @@ export const ActorDetails = ({ person, hasMultipleImages }): JSX.Element => {
             )}
           </ul>
 
-          {/* -------- Socials -------------- */}
           {socials.some(social => social.id) && (
-            <div className="w-full bg-[rgba(150, 150, 150, 0.5) h-[1px] mb-4 rounded-[50px]]"></div>
+            <div className="w-full bg-line h-[1px] mb-4 rounded-[50px]"></div>
           )}
-          <div className="mt-[8px] flex flex-col [&:not(:last-of-type)]:mb-6">
+          <div className="mt-[8px] flex flex-col">
             {person?.known_for_department && (
-              <div>
+              <div className="mb-6">
                 <h2 className="text-[17px] font-semibold mb-[3px]">
                   Known For
                 </h2>
@@ -139,27 +140,29 @@ export const ActorDetails = ({ person, hasMultipleImages }): JSX.Element => {
               </div>
             )}
             {person?.birthday && (
-              <div>
+              <div className="mb-6">
                 <h2 className="text-[17px] font-semibold mb-[3px]">Birthday</h2>
                 <p>
                   {formatDate(person?.birthday.replace(/-/g, '/'))}
                   {!person.deathday && (
                     <span>
-                      ({getAge(person.birthday, person.deathday)} years old)
+                      &nbsp;({getAge(person.birthday, person.deathday)} years
+                      old)
                     </span>
                   )}
                 </p>
               </div>
             )}
             {person?.deathday && (
-              <div>
+              <div className="mb-6">
                 <h2 className="text-[17px] font-semibold mb-[3px]">
                   Day of Death
                 </h2>
                 <p>
                   {formatDate(person?.deathday.replace(/-/g, '/'))}
                   <span>
-                    ({getAge(person?.birthday, person?.deathday)} years old)
+                    ({getAge(person?.birthday, person?.deathday)}
+                    years old)
                   </span>
                 </p>
               </div>
