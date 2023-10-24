@@ -103,3 +103,15 @@ export const getTVByID = async (id: string | number) => {
     return undefined;
   }
 };
+
+// get Actor by ID
+
+export const getActorByID = async (id: string | number) => {
+  const endPoint = `person/${id}${API_KEY}&append_to_response=combined_credits,external_ids,images`;
+  try {
+    return await themoviedb.get(endPoint);
+  } catch (error) {
+    console.log(error);
+    return undefined;
+  }
+};

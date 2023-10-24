@@ -47,7 +47,7 @@ export const CreditsItem = ({
 
   return (
     <li className="flex items-center">
-      <Link to={`/person/${id}`} tabIndex={-1}>
+      <Link to={`/cast/${id}`} tabIndex={-1}>
         <img
           loading="lazy"
           src={`${imageBaseFace}${profile_path}`}

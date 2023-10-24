@@ -5,20 +5,21 @@ interface MovieCastCardProps {
   name: string;
   profile_path: string;
   character: string;
+  id: number;
 }
-//   id: number;
 
 export const MovieCastCard = ({
   name,
   profile_path,
   character,
+  id,
 }: MovieCastCardProps) => {
   return (
     <li
       className="w-[138px] bg-bgCard rounded-cardBr shadow-castShadow border
 	 border-black"
     >
-      <Link to="/">
+      <Link to={`/cast/${id}`}>
         {/* Person ID */}
         <img
           src={`${imageBase}w342${profile_path}`}

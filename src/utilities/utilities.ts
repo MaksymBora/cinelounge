@@ -50,3 +50,19 @@ export function formatRuntime(runtime: number) {
   }
   return `${hours}h ${remainder}m`;
 }
+
+export const getAge = (birthString: string, deathString: string) => {
+  const birthDate = new Date(birthString);
+
+  let todayOrDeathDate = new Date();
+  if (deathString) todayOrDeathDate = new Date(deathString);
+
+  let age = todayOrDeathDate.getFullYear() - birthDate.getFullYear();
+  const m = todayOrDeathDate.getMonth() - birthDate.getMonth();
+  if (m < 0 || (m === 0 && todayOrDeathDate.getDate() < birthDate.getDate())) {
+    // eslint-disable-next-line no-plusplus
+    age--;
+  }
+
+  return age;
+};

@@ -20,7 +20,7 @@ export const CreditsItem = ({
 }: CreditsItemProps) => {
   return (
     <li className="flex items-center">
-      <Link to={`/person/${id}`}>
+      <Link to={`/cast/${id}`}>
         <img
           loading="lazy"
           src={`${imageBaseFace}${profile_path}`}

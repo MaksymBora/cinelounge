@@ -32,6 +32,7 @@ export default {
         cardShadow:
           'rgba(0, 0, 0, 0.07) 0px 1px 3px 0px rgba(27, 31, 35, 0.12) 0px 0px 0px 1px;',
         castShadow: '0 1px 12px -3px rgba(0, 0, 0, 0.1);',
+        actorShadow: '1px 0 10px rgba(0, 0, 0, 0.2);',
       },
       gridTemplateColumns: {
         filmList: 'repeat(auto-fit, minmax(215px, 1fr))',
@@ -43,6 +44,7 @@ export default {
       padding: {
         150: '150%',
         details: '28px 20px 20px',
+        actor: '14px 11px 12px',
       },
       minHeight: {
         100: '100px',
@@ -63,6 +65,9 @@ export default {
       },
       width: {
         iframeW: 'clamp(1px, 1760px, 88vw)',
+      },
+      gap: {
+        actorDetails: 'clamp(1px, 5vw, 3.5rem)',
       },
     },
   },
