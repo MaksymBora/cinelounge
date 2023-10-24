@@ -23,7 +23,7 @@ interface ActorBaseTypes {
   };
 }
 
-interface CastTypes {
+export interface CastTypes {
   cast: {
     adult: boolean;
     backdrop_path: string;

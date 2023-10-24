@@ -2,11 +2,24 @@ import { Link } from 'react-router-dom';
 import { Carousel } from 'react-responsive-carousel';
 import { HiChevronRight, HiChevronLeft } from 'react-icons/hi';
 import { BsInstagram, BsFacebook, BsTwitter, BsTiktok } from 'react-icons/bs';
+import { useEffect, useState } from 'react';
 import { imageBase } from '@/service/imagePath';
 import { formatDate, getAge } from '@/utilities/utilities';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 
+type Media = {
+  media_type: 'movie';
+  title?: string;
+  name?: string;
+  id: number;
+  credit_id: string;
+  release_date?: string;
+  poster_path: string;
+  first_air_date?: string;
+};
+
 export const ActorDetails = ({ person, hasMultipleImages }): JSX.Element => {
+  const [filteredKnownFor, setFilteredKnownFor] = useState([]);
   const socials = [
     {
       base: 'https://instagram.com/',
@@ -38,8 +51,18 @@ export const ActorDetails = ({ person, hasMultipleImages }): JSX.Element => {
     },
   ];
 
-  // const hasMultipleImages = person?.images.profiles.length > 1;
-  // console.log(hasMultipleImages);
+  useEffect(() => {
+    // Top Rated 15 Known for movies
+    const filteredMoviePosters = person?.combined_credits.cast
+      .filter(movie => movie.poster_path !== null)
+      .filter((val, idx, arr) => arr.findIndex(t => t.id === val.id) === idx)
+      .sort((a, b) => b.vote_count - a.vote_count)
+      .slice(0, 15);
+
+    if (person) {
+      setFilteredKnownFor(filteredMoviePosters);
+    }
+  }, [person]);
 
   return (
     <section className="flex gap-x-actorDetails max-w-xxl my-12 mx-auto actor-section">
@@ -188,7 +211,9 @@ export const ActorDetails = ({ person, hasMultipleImages }): JSX.Element => {
             aria-label={`Get search results for ${person?.name}`}
             title={`Get search results for ${person?.name}`}
           >
-            <h1 className="font-bold text-[30px]">{person?.name}</h1>
+            <h1 className="font-bold text-[30px] hover:opacity-60">
+              {person?.name}
+            </h1>
           </Link>
           <div className="w-full bg-[rgba(150, 150, 150, 0.5) h-[1px] mb-4 rounded-[50px]]"></div>
           <h2 className="text-[17px] font-semibold mb-[10px]">Biography</h2>
@@ -203,16 +228,16 @@ export const ActorDetails = ({ person, hasMultipleImages }): JSX.Element => {
         <div className="translate-y-4">
           <h2 className="text-[17px] mb-4 font-semibold">Known For</h2>
           <ul className="relative grid grid-flow-col justify-start gap-4 overflow-x-auto pt-[2px] pb-4 translate-y-[-2px] scroll">
-            {person?.combined_credits.cast.map(media => {
+            {filteredKnownFor.map((media: Media) => {
               const isMovie = media.media_type === 'movie';
               return (
                 <li
-                  className="flex flex-col bg-bgCard w-[145px] rounded-cardBr shadow-castShadow border border-[#17b28e]"
+                  className="flex flex-col bg-bgCard w-[145px] rounded-cardBr shadow-castShadow border border-black"
                   key={`${media.id}-${media.credit_id}`}
                 >
                   <Link
                     to={`${isMovie ? `/${media.id}` : `/shows/${media.id}`}`}
-                    className="relative pt-[150px]"
+                    className="relative pt-[150%]"
                   >
                     <img
                       src={`${imageBase}w500${media.poster_path}`}
@@ -222,10 +247,10 @@ export const ActorDetails = ({ person, hasMultipleImages }): JSX.Element => {
                     />
                   </Link>
                   <div className="p-actor min-h-[65px] text-mainTextColo overflow-hidden">
-                    <h3 className="text-sm font-semibold mb-[5px] overflow-hidden display-custom">
+                    <h3 className="text-sm font-semibold mb-[5px] overflow-hidden line-clamp-3">
                       {isMovie ? media.title : media.name}
                     </h3>
-                    <p className="text-[3px] text-secondaryText">
+                    <p className="text-[13px] text-secondaryText">
                       {isMovie
                         ? media.release_date?.slice(0, 4)
                         : media.first_air_date?.slice(0, 4)}

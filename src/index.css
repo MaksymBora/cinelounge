@@ -69,12 +69,6 @@
   min-height: calc(100vh - 140px - 6rem);
 }
 
-.display-custom {
-  -webkit-line-clamp: 3;
-  line-clamp: 3;
-  -webkit-box-orient: vertical;
-}
-
 ul.control-dots {
   z-index: 2 !important;
 }
