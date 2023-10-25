@@ -36,7 +36,11 @@ export function App() {
           <Route path=":id/casts" element={<MovieCastAndCrew />} />
         </Route>
         <Route path="shows">
-          <Route index element={<Shows />} loader={getAllShows} />
+          <Route
+            index
+            element={<Shows setPage={setPage} currentPage={page} />}
+            loader={() => getAllShows(page)}
+          />
           <Route path=":id" element={<ShowInfo />} />
           <Route path=":id/casts" element={<ShowCastAndCrew />} />
         </Route>

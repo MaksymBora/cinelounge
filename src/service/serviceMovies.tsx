@@ -43,17 +43,19 @@ interface ApiShowsTypes {
   include_adult: string;
   include_null_first_air_dates: string;
   language: string;
-  page: string;
+  page: number;
   sort_by: string;
 }
 
-export const getAllShows = async (): Promise<DataObj | undefined> => {
+export const getAllShows = async (
+  pageNumber = 1
+): Promise<DataObj | undefined> => {
   const endPoint = `/discover/tv${API_KEY}`;
   const params: ApiShowsTypes = {
     include_adult: 'true',
     include_null_first_air_dates: 'false',
     language: 'en-US',
-    page: '1',
+    page: pageNumber,
     sort_by: 'popularity.desc',
   };
   try {
