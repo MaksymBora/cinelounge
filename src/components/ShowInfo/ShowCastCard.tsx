@@ -9,19 +9,21 @@ interface ShowCastCardPropTypes {
   roles: {
     character: string;
   }[];
+  id: number;
 }
 
 export const ShowCastCard = ({
   name,
   profile_path,
   roles,
+  id,
 }: ShowCastCardPropTypes): JSX.Element => {
   return (
     <li
       className="w-[138px] bg-bgCard rounded-cardBr shadow-castShadow border
 	 border-black"
     >
-      <Link to="/">
+      <Link to={`/cast/${id}`}>
         {/* Person ID */}
         <img
           src={`${imageBase}w342${profile_path}`}

@@ -16,11 +16,11 @@ interface CastCardProps {
 }
 
 export const CastCard: FC<CastCardProps> = ({
-  castData: { profile_path, name, known_for },
+  castData: { profile_path, name, known_for, id },
 }) => {
   return (
     <div className="flex flex-col bg-bgCard rounded-cardBr shadow-cardShadow min-w-0">
-      <Link to="/cast" className="relative pt-150">
+      <Link to={`/cast/${id}`} className="relative pt-150">
         <img
           src={`${imageBase}w500${profile_path}`}
           alt={name}
