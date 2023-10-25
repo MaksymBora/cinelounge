@@ -1,40 +1,8 @@
-import { ThemeProvider, createTheme, PaletteMode } from '@mui/material';
-import { amber, deepOrange, grey } from '@mui/material/colors';
+import { ThemeProvider, createTheme } from '@mui/material';
 import Pagination from '@mui/material/Pagination';
 import { useLoaderData } from 'react-router-dom';
 import { ShowsList } from '@/components/Shows/ShowsList';
-
-const getDesignTokens = (mode: PaletteMode) => ({
-  palette: {
-    mode,
-    primary: {
-      ...amber,
-      ...(mode === 'dark' && {
-        main: amber[300],
-      }),
-    },
-    ...(mode === 'dark' && {
-      background: {
-        default: deepOrange[900],
-        paper: deepOrange[900],
-      },
-    }),
-    text: {
-      ...(mode === 'light'
-        ? {
-            primary: grey[900],
-            secondary: grey[800],
-          }
-        : {
-            primary: '#fff',
-            secondary: grey[500],
-          }),
-    },
-  },
-  typography: {
-    fontSize: 16,
-  },
-});
+import { getDesignTokens } from '@/styleTheme/MuiPallete';
 
 const darkModeTheme = createTheme(getDesignTokens('dark'));
 
