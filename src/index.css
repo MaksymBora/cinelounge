@@ -74,3 +74,10 @@ ul.control-dots {
 }
 
 @tailwind utilities;
+
+@layer components {
+  .pagination {
+    color: aqua;
+  }
+  /* ... */
+}

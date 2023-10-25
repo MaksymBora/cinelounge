@@ -37,7 +37,6 @@ export function App() {
           <Route index element={<Cast />} loader={getPopularCast} />
           <Route path=":id" element={<Actor />} />
         </Route>
-        {/* <Route path="cast" element={<Cast />} loader={getPopularCast} /> */}
       </Route>
     ),
     {
