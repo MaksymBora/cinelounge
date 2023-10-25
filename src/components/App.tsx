@@ -45,7 +45,11 @@ export function App() {
           <Route path=":id/casts" element={<ShowCastAndCrew />} />
         </Route>
         <Route path="cast">
-          <Route index element={<Cast />} loader={getPopularCast} />
+          <Route
+            index
+            element={<Cast setPage={setPage} currentPage={page} />}
+            loader={() => getPopularCast(page)}
+          />
           <Route path=":id" element={<Actor />} />
         </Route>
       </Route>

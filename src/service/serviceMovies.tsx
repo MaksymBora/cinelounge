@@ -70,12 +70,12 @@ export const getAllShows = async (
 
 interface ApiCastTypes {
   language: string;
-  page: string;
+  page: number;
 }
 
-export const getPopularCast = async () => {
+export const getPopularCast = async (pageNumber = 1) => {
   const endPoint = `/person/popular${API_KEY}`;
-  const params: ApiCastTypes = { language: 'en-US', page: '1' };
+  const params: ApiCastTypes = { language: 'en-US', page: pageNumber };
   try {
     return await themoviedb.get(endPoint, { params });
   } catch (error) {
