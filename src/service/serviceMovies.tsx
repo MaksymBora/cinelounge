@@ -18,13 +18,15 @@ interface DataObj {
   status: string;
 }
 
-export const getAllMovies = async (): Promise<DataObj | undefined> => {
+export const getAllMovies = async (
+  pageNumber = 1
+): Promise<DataObj | undefined> => {
   const endPoint = `/discover/movie${API_KEY}`;
   const params = {
     include_adult: 'true',
     include_video: 'true',
     language: 'en-US',
-    page: '1',
+    page: pageNumber,
     'primary_release_date.gte': '2000-02-12',
     'primary_release_date.lte': '2023-12-31',
     sort_by: 'popularity.desc',
