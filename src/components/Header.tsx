@@ -1,7 +1,32 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { IoMoon, IoSunny } from 'react-icons/io5';
+import { useState } from 'react';
 
 export function Header() {
+  const [searchParams] = useSearchParams();
+  const [query, setQuery] = useState<string | undefined>(
+    searchParams.get('searchQuery') ?? ''
+  );
+  const navigate = useNavigate();
+
+  const handleQuery = e => {
+    setQuery(e.target.value);
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (query?.trim() === '') {
+      return;
+    }
+    const newSearchParams = new URLSearchParams();
+    newSearchParams.set('query', query || '');
+    navigate({
+      pathname: '/search',
+      search: `?${newSearchParams.toString()}`,
+    });
+  };
+
   return (
     <nav className="flex h-navHeight bg-headerColor shadow-headerShadow">
       <div className="flex items-center grow justify-between grow-1 container xl mx-auto">
@@ -25,7 +50,7 @@ export function Header() {
           </li>
         </ul>
 
-        <form className="w-96">
+        <form className="w-96" onSubmit={handleSubmit}>
           <label
             htmlFor="search"
             className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
@@ -56,10 +81,13 @@ export function Header() {
               className="block w-full h-10 p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder="Search Movie"
               required
+              onChange={handleQuery}
             />
             <button
               type="submit"
-              className="text-white absolute right-[5px] bottom-[6px] pt-[4px] pb-[4px] bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              className="text-white absolute right-[5px] bottom-[6px] pt-[4px] pb-[4px] bg-blue-700 
+              hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium 
+              rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
             >
               Search
             </button>

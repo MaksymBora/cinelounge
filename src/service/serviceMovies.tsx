@@ -119,3 +119,17 @@ export const getActorByID = async (id: string | number) => {
     return undefined;
   }
 };
+
+// get Movie by Search
+
+export const getSearchResult = async (query: string) => {
+  const endPoint = `search/multi${API_KEY}&query=${query}`;
+
+  try {
+    const { data } = await themoviedb.get(endPoint);
+    return data;
+  } catch (error) {
+    console.log(error);
+    return undefined;
+  }
+};

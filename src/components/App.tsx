@@ -19,6 +19,7 @@ import MovieCastAndCrew from '@/Pages/MovieCastAndCrew';
 import ShowInfo from '@/Pages/ShowInfo';
 import ShowCastAndCrew from '@/Pages/ShowCastAndCrew';
 import Actor from '@/Pages/Actor';
+import { Search } from '@/Pages/Search';
 
 export function App() {
   const [page, setPage] = useState(1);
@@ -52,6 +53,7 @@ export function App() {
           />
           <Route path=":id" element={<Actor />} />
         </Route>
+        <Route path="search" element={<Search />} />
       </Route>
     ),
     {

@@ -22,6 +22,7 @@ export default {
       spacing: {
         rateT: '-20px',
         rateL: '11px',
+        sectionSearch: '2rem auto 3rem',
       },
       height: {
         navHeight: '70px',
@@ -37,6 +38,7 @@ export default {
       },
       gridTemplateColumns: {
         filmList: 'repeat(auto-fit, minmax(215px, 1fr))',
+        search: 'repeat(auto-fit, minmax(215px, 1fr))',
       },
       borderRadius: {
         cardBr: '3px',
