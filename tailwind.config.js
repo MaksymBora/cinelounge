@@ -28,7 +28,7 @@ export default {
       height: {
         navHeight: '70px',
         iframeH: 'clamp(1px, 990px, calc(88vw * 0.5625))',
-        auth: 'calc(100vh - 140px)',
+        auth: 'calc(100vh - 80px)',
       },
       boxShadow: {
         navShadow:
