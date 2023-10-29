@@ -18,6 +18,7 @@ export default {
         movieAboutBg: 'rgba(0, 0, 0, 0.77)',
         imageGallery: 'rgba(0, 0, 0, 0.88)',
         line: 'rgba(150, 150, 150, 0.5)',
+        authBtn: '#17b28e',
       },
       spacing: {
         rateT: '-20px',
@@ -27,6 +28,7 @@ export default {
       height: {
         navHeight: '70px',
         iframeH: 'clamp(1px, 990px, calc(88vw * 0.5625))',
+        auth: 'calc(100vh - 140px)',
       },
       boxShadow: {
         navShadow:
@@ -35,6 +37,7 @@ export default {
           'rgba(0, 0, 0, 0.07) 0px 1px 3px 0px rgba(27, 31, 35, 0.12) 0px 0px 0px 1px;',
         castShadow: '0 1px 12px -3px rgba(0, 0, 0, 0.1);',
         actorShadow: '1px 0 10px rgba(0, 0, 0, 0.2);',
+        btnAuth: '0 0 20px -1px rgba(13, 13, 13, 0.2)',
       },
       gridTemplateColumns: {
         filmList: 'repeat(auto-fit, minmax(215px, 1fr))',

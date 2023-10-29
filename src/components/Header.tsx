@@ -8,6 +8,7 @@ export function Header() {
     searchParams.get('searchQuery') ?? ''
   );
   const navigate = useNavigate();
+  const isLogged = false;
 
   const handleQuery = e => {
     setQuery(e.target.value);
@@ -97,7 +98,22 @@ export function Header() {
           <IoMoon />
           <IoSunny />
           <button type="button">Watchlist</button>
-          <button type="button">Login</button>
+          {isLogged ? (
+            <button
+              type="button"
+              onClick={() => console.log('logout')}
+              className="py-[8px] px-[15px] cursor-pointer bg-authBtn border border-transparent rounded text-[15px] transition-opacity tracking-normal hover:opacity-80"
+            >
+              Logout
+            </button>
+          ) : (
+            <Link
+              to="/login"
+              className="py-[8px] px-[15px] cursor-pointer bg-authBtn border border-transparent rounded text-[15px] transition-opacity tracking-normal hover:opacity-80"
+            >
+              Login
+            </Link>
+          )}
         </div>
       </div>
     </nav>
