@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const swagger = axios.create({
-  baseURL: 'https://goit-task-manager.herokuapp.com',
+  baseURL: 'https://connections-api.herokuapp.com',
   // timeout: 1000,
   headers: { accept: 'application/json' },
 });
@@ -24,6 +24,16 @@ export const register = async credentials => {
     return res.data;
   } catch (error) {
     return console.log(error);
+  }
+};
+
+export const login = async credentials => {
+  try {
+    const res = await swagger.post('/users/login', credentials);
+    setAuthHeader(res.data.token);
+    return res.data;
+  } catch (error) {
+    throw Error(`${error}`);
   }
 };
 

@@ -1,25 +1,26 @@
-import { register } from '@/service/serviceAuth';
+import { useState } from 'react';
+import { login } from '@/service/serviceAuth';
 
 // const token =
 //   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTNlYmVjZjZhMGRlNjAwMTRmODM4ZGQiLCJpYXQiOjE2OTg2MTA4OTV9.nyUCq3xDhBjp9ZkzXOfcQZTm_YmJZ2SkUGk-XQYnTo8';
 
 export const Auth = () => {
-  const isLoginForm = true;
+  const [isLoginForm, setIsLoginForm] = useState(false);
+  // const isLoginForm = false;
 
   const dataUser = {
-    name: 'maks',
-    email: 'maxborassd7@ukr.net',
+    email: 'maxbora777@ukr.net',
     password: '12345678',
   };
 
   const handleSubmitForm = e => {
     e.preventDefault();
     const form = e.currentTarget;
-    console.log(form.elements.name.value);
-    console.log(form.elements.email.value);
-    console.log(form.elements.password.value);
+    // console.log(form.elements.name.value);
+    // console.log(form.elements.email.value);
+    // console.log(form.elements.password.value);
     form.reset();
-    register(dataUser);
+    login(dataUser);
   };
 
   return (
@@ -69,7 +70,7 @@ export const Auth = () => {
         <button
           className="mt-12 py-[15px] px-0 text-base cursor-pointer bg-authBtn shadow-btnAuth font-bold 
 		  uppercase tracking-[0.5px] active:transform scale-97 rounded"
-          type="submit"
+          type="button"
         >
           {isLoginForm ? 'Login' : 'Register'}
         </button>
@@ -77,6 +78,10 @@ export const Auth = () => {
       <a
         href="#0"
         className="text-[13px] mt-6 text-mainTextColo hover:underline"
+        onClick={() => {
+          console.log(isLoginForm);
+          setIsLoginForm(prevState => prevState === false);
+        }}
       >
         {isLoginForm ? 'Create an account' : 'Login'}
       </a>
