@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { login, register } from '@/service/serviceAuth';
 
 // const token =
-//   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTNlYmVjZjZhMGRlNjAwMTRmODM4ZGQiLCJpYXQiOjE2OTg2MTA4OTV9.nyUCq3xDhBjp9ZkzXOfcQZTm_YmJZ2SkUGk-XQYnTo8';
+//   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTEyYjFmOWZkN2M0NzAwMTRmY2ViNDEiLCJpYXQiOjE3MDAzMzc2NTR9.K9umLwkn3vLaDsVyizdqAWPKhSo1p-qMEtR--_MmE0o';
 
 export const Auth = () => {
   const [isLoginForm, setIsLoginForm] = useState(false);
@@ -18,14 +18,9 @@ export const Auth = () => {
       password: form.elements.password.value,
     };
 
-    console.log('IsLoginForm:', isLoginForm);
-    console.log('FormData:', formData);
-
     if (isLoginForm) {
-      console.log('Attempting login...');
       login(formData);
     } else {
-      console.log('Attempting registration...');
       register(formData);
     }
 
@@ -88,6 +83,22 @@ export const Auth = () => {
           {isLoginForm ? 'Login' : 'Register'}
         </button>
       </form>
+
+      {/* Test request for getCurrent User */}
+      {/* <form
+        onSubmit={e => {
+          e.preventDefault();
+          getCurrentUser(token);
+        }}
+      >
+        <button
+          className="mt-12 py-[15px] px-0 text-base cursor-pointer bg-authBtn shadow-btnAuth font-bold 
+  		  uppercase tracking-[0.5px] active:transform scale-97 rounded"
+          type="submit"
+        >
+          Current
+        </button>
+      </form> */}
       <a
         href="#0"
         className="text-[13px] mt-6 text-mainTextColo hover:underline"

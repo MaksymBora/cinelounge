@@ -21,6 +21,7 @@ export const register = async credentials => {
     const res = await swagger.post('/users/signup', credentials);
     // After successful registration, add the token to the HTTP header
     setAuthHeader(res.data.token);
+
     return res.data;
   } catch (error) {
     return console.log(error);
@@ -37,16 +38,18 @@ export const login = async credentials => {
   }
 };
 
-// export const register = createAsyncThunk(
-//   'auth/register',
-//   async (credentials, thunkAPI) => {
-//     try {
-//       const res = await axios.post('/users/signup', credentials);
-//       // After successful registration, add the token to the HTTP header
-//       setAuthHeader(res.data.token);
-//       return res.data;
-//     } catch (error) {
-//       return thunkAPI.rejectWithValue(error.message);
-//     }
-//   }
-// );
+export const getCurrentUser = async token => {
+  try {
+    // setAuthHeader(token);
+    const res = await swagger.get('/users/current', {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    console.log(res.statusText);
+    return res;
+  } catch (error) {
+    throw Error(`${error}`);
+  }
+};
