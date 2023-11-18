@@ -7,34 +7,28 @@ import { login, register } from '@/service/serviceAuth';
 export const Auth = () => {
   const [isLoginForm, setIsLoginForm] = useState(false);
 
-  // const dataUserRegister = {
-  //   name: 'Maksbora',
-  //   email: 'maxbora999@ukr.net',
-  //   password: '12345678',
-  // };
-
-  // const dataUserLogIn = {
-  //   email: 'maxbora999@ukr.net',
-  //   password: '12345678',
-  // };
-
   const handleSubmitForm = e => {
     e.preventDefault();
     const form = e.currentTarget;
-    // console.log(form.elements.name.value);
-    // console.log(form.elements.email.value);
-    // console.log(form.elements.password.value);
 
     const formData = {
-      name: form.elements.name.value,
+      ...(form.elements.name &&
+        form.elements.name.value && { name: form.elements.name.value }),
       email: form.elements.email.value,
       password: form.elements.password.value,
     };
 
+    console.log('IsLoginForm:', isLoginForm);
+    console.log('FormData:', formData);
+
     if (isLoginForm) {
+      console.log('Attempting login...');
       login(formData);
+    } else {
+      console.log('Attempting registration...');
+      register(formData);
     }
-    register(formData);
+
     form.reset();
   };
 
