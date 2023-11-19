@@ -47,7 +47,6 @@ export const getCurrentUser = async token => {
       },
     });
 
-    console.log(res.statusText);
     return res;
   } catch (error) {
     throw Error(`${error}`);
