@@ -4,7 +4,7 @@ import {
   createBrowserRouter,
   createRoutesFromElements,
 } from 'react-router-dom';
-import { useCallback, useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Layout } from './Layout';
 import Movies from '@/Pages/Movies';
 import Shows from '@/Pages/Shows';
@@ -24,43 +24,52 @@ import { Auth } from './Auth/Auth';
 import { getCurrentUser } from '@/service/serviceAuth';
 import { AppContext } from '@/context/app-context';
 
-// const token =
-//   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTJlZmNjNTgyYTE0OTAwMTQ2Y2YxYjIiLCJpYXQiOjE3MDA0MjI0ODh9.34Q6fp_YVXLDkhbQEfRckg2xidQHOwm365Oiv6QEYrg';
-const token = localStorage.getItem('token');
-
 export function App() {
   const [page, setPage] = useState(1);
+  const [token] = useState(() => {
+    const savedToken = localStorage.getItem('token');
+
+    if (savedToken !== null) return savedToken;
+
+    return null;
+  });
   const { isRefreshing, setIsRefreshing } = useContext(AppContext);
   const { isLoggedIn, setIsLoggedIn } = useContext(AppContext);
   const { userName, setUserName } = useContext(AppContext);
 
-  const fetchData = useCallback(async () => {
-    setIsRefreshing(true);
-
-    try {
-      const currentUser = await getCurrentUser(token);
-
-      if (!currentUser) {
-        setIsRefreshing(false);
-        setIsLoggedIn(false);
-        setUserName('');
-
-        throw new Error('User is not logged in');
-      } else {
-        setIsLoggedIn(true);
-        setUserName(currentUser.data.name);
-        setIsRefreshing(false);
-
-        console.log(isLoggedIn, userName, 'user logged in');
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  }, [setIsRefreshing, setIsLoggedIn, isLoggedIn, userName, setUserName]);
-
   useEffect(() => {
-    fetchData();
-  }, [fetchData]);
+    if (token === null) return;
+
+    const result = async () => {
+      try {
+        setIsRefreshing(true);
+        const currentUser = await getCurrentUser(token);
+
+        if (!currentUser) {
+          setIsRefreshing(false);
+          setIsLoggedIn(false);
+          setUserName('');
+
+          throw new Error('User is not logged in');
+        } else {
+          setIsLoggedIn(true);
+          setIsRefreshing(false);
+          setUserName(currentUser.data.name);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    result();
+  }, [
+    isLoggedIn,
+    setIsLoggedIn,
+    setIsRefreshing,
+    setUserName,
+    token,
+    userName,
+  ]);
 
   const browserRouter = createBrowserRouter(
     createRoutesFromElements(

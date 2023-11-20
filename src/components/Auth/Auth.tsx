@@ -7,7 +7,8 @@ import { AppContext } from '@/context/app-context';
 
 export const Auth = () => {
   const [isLoginForm, setIsLoginForm] = useState(false);
-  const { userName, setUserName } = useContext(AppContext);
+  const { setUserName } = useContext(AppContext);
+  const { setIsLoggedIn } = useContext(AppContext);
 
   const handleSubmitForm = e => {
     e.preventDefault();
@@ -24,26 +25,23 @@ export const Auth = () => {
       login(formData);
 
       const fetchLogin = async () => {
-        const savedToken = localStorage.getItem('token');
         try {
           const res = await login(formData);
 
-          if (savedToken !== null) {
-            setUserName(res.user.name);
-          }
-          setUserName('');
-          console.log(res);
+          setIsLoggedIn(true);
+
+          setUserName(res.user.name);
         } catch (error) {
           console.log('Login or Password incorrect');
         }
       };
+
       fetchLogin();
     } else {
       register(formData);
     }
 
     form.reset();
-    console.log(userName);
   };
 
   return (

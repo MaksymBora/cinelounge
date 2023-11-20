@@ -1,6 +1,7 @@
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { IoMoon, IoSunny } from 'react-icons/io5';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import { AppContext } from '@/context/app-context';
 
 export function Header() {
   const [searchParams] = useSearchParams();
@@ -8,7 +9,8 @@ export function Header() {
     searchParams.get('searchQuery') ?? ''
   );
   const navigate = useNavigate();
-  const isLogged = false;
+  const { isLoggedIn } = useContext(AppContext);
+  // const isLogged = false;
 
   const handleQuery = e => {
     setQuery(e.target.value);
@@ -98,7 +100,7 @@ export function Header() {
           <IoMoon />
           <IoSunny />
           <button type="button">Watchlist</button>
-          {isLogged ? (
+          {isLoggedIn ? (
             <button
               type="button"
               onClick={() => console.log('logout')}
