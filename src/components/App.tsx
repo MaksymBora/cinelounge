@@ -4,7 +4,7 @@ import {
   createBrowserRouter,
   createRoutesFromElements,
 } from 'react-router-dom';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useContext, useEffect, useState } from 'react';
 import { Layout } from './Layout';
 import Movies from '@/Pages/Movies';
 import Shows from '@/Pages/Shows';
@@ -21,72 +21,41 @@ import ShowCastAndCrew from '@/Pages/ShowCastAndCrew';
 import Actor from '@/Pages/Actor';
 import { Search } from '@/Pages/Search';
 import { Auth } from './Auth/Auth';
-import { UserContext } from '@/hooks/context';
 import { getCurrentUser } from '@/service/serviceAuth';
-
-export interface User {
-  isLoggedIn: boolean;
-  isRefreshing: boolean;
-  name: string | null;
-}
+import { AppContext } from '@/context/app-context';
 
 const token =
   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTJlZmNjNTgyYTE0OTAwMTQ2Y2YxYjIiLCJpYXQiOjE3MDA0MjI0ODh9.34Q6fp_YVXLDkhbQEfRckg2xidQHOwm365Oiv6QEYrg';
 
 export function App() {
   const [page, setPage] = useState(1);
-
-  const [user, setUser] = useState<User>({
-    isLoggedIn: false,
-    isRefreshing: false,
-    name: null,
-  });
-
-  // useEffect(() => {
-  //   const result = async () => {
-  //     setUser(prevState => ({ ...prevState, isRefreshing: true }));
-  //     try {
-  //       const currentUser = await getCurrentUser(token);
-
-  //       if (currentUser.status !== 200) {
-  //         setUser({ isLoggedIn: false, isRefreshing: false, name: null });
-  //       } else {
-  //         setUser({
-  //           ...user,
-  //           isLoggedIn: true,
-  //           name: currentUser.data.name,
-  //           isRefreshing: false,
-  //         });
-  //       }
-  //       console.log(user.name);
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
-
-  //   result();
-  // }, [token]);
+  const { isRefreshing, setIsRefreshing } = useContext(AppContext);
+  const { isLoggedIn, setIsLoggedIn } = useContext(AppContext);
+  const { userName, setUserName } = useContext(AppContext);
 
   const fetchData = useCallback(async () => {
-    setUser(prevUser => ({ ...prevUser, isRefreshing: true }));
+    setIsRefreshing(true);
 
     try {
       const currentUser = await getCurrentUser(token);
 
       if (currentUser.status !== 200) {
-        setUser({ isLoggedIn: false, isRefreshing: false, name: null });
+        setIsRefreshing(false);
+        setIsLoggedIn(false);
+        setUserName('');
+
+        throw new Error('User is not logged in');
       } else {
-        setUser(prevUser => ({
-          ...prevUser,
-          isLoggedIn: true,
-          name: currentUser.data.name,
-          isRefreshing: false,
-        }));
+        setIsLoggedIn(true);
+        setUserName(currentUser.data.name);
+        setIsRefreshing(false);
+
+        console.log(isLoggedIn, userName, 'user logged in');
       }
     } catch (error) {
       console.log(error);
     }
-  }, [setUser]);
+  }, [setIsRefreshing, setIsLoggedIn, isLoggedIn, userName, setUserName]);
 
   useEffect(() => {
     fetchData();
@@ -130,13 +99,9 @@ export function App() {
     }
   );
 
-  return (
-    <UserContext.Provider value={user}>
-      {user.isRefreshing ? (
-        <div>Loading...</div>
-      ) : (
-        <RouterProvider router={browserRouter} />
-      )}
-    </UserContext.Provider>
+  return isRefreshing ? (
+    <div>Loading...</div>
+  ) : (
+    <RouterProvider router={browserRouter} />
   );
 }
