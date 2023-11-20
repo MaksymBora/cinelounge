@@ -24,8 +24,9 @@ import { Auth } from './Auth/Auth';
 import { getCurrentUser } from '@/service/serviceAuth';
 import { AppContext } from '@/context/app-context';
 
-const token =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTJlZmNjNTgyYTE0OTAwMTQ2Y2YxYjIiLCJpYXQiOjE3MDA0MjI0ODh9.34Q6fp_YVXLDkhbQEfRckg2xidQHOwm365Oiv6QEYrg';
+// const token =
+//   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTJlZmNjNTgyYTE0OTAwMTQ2Y2YxYjIiLCJpYXQiOjE3MDA0MjI0ODh9.34Q6fp_YVXLDkhbQEfRckg2xidQHOwm365Oiv6QEYrg';
+const token = localStorage.getItem('token');
 
 export function App() {
   const [page, setPage] = useState(1);
@@ -39,7 +40,7 @@ export function App() {
     try {
       const currentUser = await getCurrentUser(token);
 
-      if (currentUser.status !== 200) {
+      if (!currentUser) {
         setIsRefreshing(false);
         setIsLoggedIn(false);
         setUserName('');

@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 
 const swagger = axios.create({
   baseURL: 'https://connections-api.herokuapp.com',
@@ -31,22 +31,32 @@ export const register = async credentials => {
 export const login = async credentials => {
   try {
     const res = await swagger.post('/users/login', credentials);
-    setAuthHeader(res.data.token);
+
+    localStorage.setItem('token', res.data.token);
+
     return res.data;
   } catch (error) {
     throw Error(`${error}`);
   }
 };
 
-export const getCurrentUser = async token => {
+interface UserData {
+  email: string;
+  name: string;
+}
+
+export const getCurrentUser = async (
+  token: string | null
+): Promise<AxiosResponse<UserData> | void> => {
   try {
-    // setAuthHeader(token);
+    if (token === null) return;
     const res = await swagger.get('/users/current', {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
 
+    // eslint-disable-next-line consistent-return
     return res;
   } catch (error) {
     throw Error(`${error}`);

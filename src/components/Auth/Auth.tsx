@@ -1,11 +1,13 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { login, register } from '@/service/serviceAuth';
+import { AppContext } from '@/context/app-context';
 
 // const token =
 //   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTEyYjFmOWZkN2M0NzAwMTRmY2ViNDEiLCJpYXQiOjE3MDAzMzc2NTR9.K9umLwkn3vLaDsVyizdqAWPKhSo1p-qMEtR--_MmE0o';
 
 export const Auth = () => {
   const [isLoginForm, setIsLoginForm] = useState(false);
+  const { userName, setUserName } = useContext(AppContext);
 
   const handleSubmitForm = e => {
     e.preventDefault();
@@ -20,11 +22,28 @@ export const Auth = () => {
 
     if (isLoginForm) {
       login(formData);
+
+      const fetchLogin = async () => {
+        const savedToken = localStorage.getItem('token');
+        try {
+          const res = await login(formData);
+
+          if (savedToken !== null) {
+            setUserName(res.user.name);
+          }
+          setUserName('');
+          console.log(res);
+        } catch (error) {
+          console.log('Login or Password incorrect');
+        }
+      };
+      fetchLogin();
     } else {
       register(formData);
     }
 
     form.reset();
+    console.log(userName);
   };
 
   return (
