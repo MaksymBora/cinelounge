@@ -48,14 +48,14 @@ export const WatchlistComponent = () => {
       )}
 
       {/* Logged in but no items in watchlist */}
-      {watchlist.length === 0 && (
+      {isLoggedIn && watchlist.length === 0 && (
         <p className="mt-16 text-center">
           Add movies or shows to your Watchlist to have them appear here!
         </p>
       )}
 
       {/* Logged in and has items in watchlist */}
-      {watchlist && (
+      {isLoggedIn && watchlist && (
         <div className="grid grid-cols-5 gap-8 bg-inherit text-mainTextColo w-full mt-16">
           {watchlist.map(watchlistItem => (
             <WatchlistCard

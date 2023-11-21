@@ -91,7 +91,6 @@ export const Auth = () => {
           placeholder="Email"
           name="email"
           autoComplete="off"
-          //   onChange={e => setEmail(e.target.value)}
         />
         <label htmlFor="password" className="text-sm">
           Password

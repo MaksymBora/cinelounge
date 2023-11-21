@@ -15,6 +15,7 @@ export const AppState = ({ children }: { children: React.ReactNode }) => {
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userName, setUserName] = useState('');
+  const [filterMenuOpen, setFilterMenuOpen] = useState(false);
 
   // const [watchlist, setWatchlist] = useState<WatchListTypes[]>([]);
 
@@ -26,6 +27,8 @@ export const AppState = ({ children }: { children: React.ReactNode }) => {
       setIsLoggedIn,
       userName,
       setUserName,
+      filterMenuOpen,
+      setFilterMenuOpen,
       // watchlist,
       // setWatchlist,
     };
@@ -36,6 +39,8 @@ export const AppState = ({ children }: { children: React.ReactNode }) => {
     setIsLoggedIn,
     userName,
     setUserName,
+    filterMenuOpen,
+    setFilterMenuOpen,
     // watchlist,
     // setWatchlist,
   ]);

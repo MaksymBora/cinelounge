@@ -3,6 +3,7 @@ import { ThemeProvider, createTheme } from '@mui/material';
 import { useLoaderData } from 'react-router-dom';
 import { MovieList } from '@/components/Movies/MovieList';
 import { getDesignTokens } from '@/styleTheme/MuiPallete';
+import { FilterBtn } from '@/components/FilterMenu/FilterBtn';
 
 const darkModeTheme = createTheme(getDesignTokens('dark'));
 
@@ -42,6 +43,7 @@ const Movies = ({ setPage, currentPage }): JSX.Element => {
 
   return (
     <>
+      <FilterBtn />
       <div className="max-w-xxl mx-auto flex my-12 justify-center items-start gap-8">
         <MovieList />
       </div>
