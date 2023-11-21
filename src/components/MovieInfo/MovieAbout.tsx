@@ -1,4 +1,4 @@
-import { FC, useContext, useState } from 'react';
+import { FC, useContext, useEffect, useState } from 'react';
 import { HiOutlineArrowsExpand } from 'react-icons/hi';
 import { FiPercent } from 'react-icons/fi';
 import { BsPlay, BsBookmark } from 'react-icons/bs';
@@ -10,7 +10,11 @@ import { MovieGallery } from './MovieGallery';
 import { MovieTrailer } from './MovieTrailer';
 import { MovieInfoTypes } from '@/Pages/MovieInfo';
 import { AppContext } from '@/context/app-context';
-import { addWatchlist } from '@/service/serviceFavMovies';
+import {
+  addWatchlist,
+  deleteMovie,
+  getWatchList,
+} from '@/service/serviceFavMovies';
 
 interface MovieAboutProps {
   movieData: MovieInfoTypes | null;
@@ -22,8 +26,26 @@ export const MovieAbout: FC<MovieAboutProps> = ({
   const [viewGallery, setViewGallery] = useState(false);
   const [showTooltip, setShowTooltip] = useState(false);
   const [viewTrailer, setViewTrailer] = useState(false);
+  const [inWatchList, setInWatchList] = useState(false);
   const { isLoggedIn } = useContext(AppContext);
   const { id } = useParams();
+
+  useEffect(() => {
+    const result = async () => {
+      try {
+        const res = await getWatchList();
+
+        const inList = res.find(movie => movie.movieId === id);
+
+        if (inList) setInWatchList(true);
+      } catch (error) {
+        setInWatchList(false);
+        console.log(error);
+      }
+    };
+
+    result();
+  });
 
   if (!movieData) {
     return null;
@@ -37,9 +59,6 @@ export const MovieAbout: FC<MovieAboutProps> = ({
   // eslint-disable-next-line @typescript-eslint/naming-convention
   const { vote_average, genres }: { vote_average: number; genres: Genre[] } =
     movieData;
-
-  // Temporary
-  const inWatchList = false;
 
   const hasImages =
     movieData?.images.backdrops && movieData.images.backdrops.length > 0;
@@ -80,11 +99,30 @@ export const MovieAbout: FC<MovieAboutProps> = ({
     const postMovie = async dataMovie => {
       try {
         await addWatchlist(dataMovie);
+        setInWatchList(true);
       } catch (error) {
         console.log(error);
       }
     };
-    postMovie(data);
+
+    const removeFromWatchlist = async () => {
+      try {
+        const allMovies = await getWatchList();
+
+        const inList = allMovies.find(movie => movie.movieId === id);
+
+        const res = await deleteMovie(inList.id);
+        setInWatchList(false);
+
+        return res;
+      } catch (error) {
+        console.log(error);
+        return error;
+      }
+    };
+
+    if (!inWatchList) postMovie(data);
+    removeFromWatchlist();
   };
 
   return (

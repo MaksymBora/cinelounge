@@ -15,6 +15,7 @@ export const AppState = ({ children }: { children: React.ReactNode }) => {
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userName, setUserName] = useState('');
+
   // const [watchlist, setWatchlist] = useState<WatchListTypes[]>([]);
 
   const contextValue = useMemo(() => {
