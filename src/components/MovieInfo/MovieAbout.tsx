@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC, useContext, useState } from 'react';
 import { HiOutlineArrowsExpand } from 'react-icons/hi';
 import { FiPercent } from 'react-icons/fi';
 import { BsPlay, BsBookmark } from 'react-icons/bs';
@@ -8,6 +8,7 @@ import { colorPercentage, formatRuntime } from '@/utilities/utilities';
 import { MovieGallery } from './MovieGallery';
 import { MovieTrailer } from './MovieTrailer';
 import { MovieInfoTypes } from '@/Pages/MovieInfo';
+import { AppContext } from '@/context/app-context';
 
 interface MovieAboutProps {
   movieData: MovieInfoTypes | null;
@@ -19,6 +20,8 @@ export const MovieAbout: FC<MovieAboutProps> = ({
   const [viewGallery, setViewGallery] = useState(false);
   const [showTooltip, setShowTooltip] = useState(false);
   const [viewTrailer, setViewTrailer] = useState(false);
+  const { isLoggedIn } = useContext(AppContext);
+
   if (!movieData) {
     return null;
   }
@@ -32,6 +35,9 @@ export const MovieAbout: FC<MovieAboutProps> = ({
   const { vote_average, genres }: { vote_average: number; genres: Genre[] } =
     movieData;
 
+  // Temporary
+  const inWatchList = false;
+
   const hasImages =
     movieData?.images.backdrops && movieData.images.backdrops.length > 0;
 
@@ -43,6 +49,13 @@ export const MovieAbout: FC<MovieAboutProps> = ({
   });
 
   const handleViewGallery = () => hasImages && setViewGallery(true);
+
+  const toggleWatchlist = () => {
+    // User not logged in
+    if (!isLoggedIn) {
+      setShowTooltip(true);
+    }
+  };
 
   return (
     <section className="my-12 mx-0 relative">
@@ -189,9 +202,14 @@ export const MovieAbout: FC<MovieAboutProps> = ({
                     flex justify-center items-center 
                     text-base cursor-pointer bg-transparent border-none text-white 
                     transition-all tracking-[0.5px] min-h-[35px] hover:opacity-60 font-semibold"
+                    onClick={toggleWatchlist}
                   >
                     <BsBookmark />
-                    <span>Add To Watchlist</span>
+                    <span>
+                      {inWatchList
+                        ? 'Remove from Watchlist'
+                        : 'Add to Watchlist'}
+                    </span>
                   </button>
                 </Tooltip>
               </ClickAwayListener>

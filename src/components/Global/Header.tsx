@@ -47,7 +47,7 @@ export function Header() {
   };
 
   return (
-    <nav className="flex h-navHeight bg-headerColor shadow-headerShadow">
+    <nav className="flex h-navHeight bg-headerColor shadow-navShadow">
       <div className="flex items-center grow justify-between grow-1 container xl mx-auto">
         <ul className="flex basis-0 grow gap-8 items-center">
           <li>
