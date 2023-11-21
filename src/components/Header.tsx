@@ -9,15 +9,9 @@ export function Header() {
   const [query, setQuery] = useState<string | undefined>(
     searchParams.get('searchQuery') ?? ''
   );
-  const [token] = useState(() => {
-    const savedToken = localStorage.getItem('token');
 
-    if (savedToken !== null) return savedToken;
-
-    return null;
-  });
   const navigate = useNavigate();
-  const { isLoggedIn } = useContext(AppContext);
+  const { isLoggedIn, setIsLoggedIn } = useContext(AppContext);
 
   const handleQuery = e => {
     setQuery(e.target.value);
@@ -39,8 +33,11 @@ export function Header() {
 
   const handleLogout = async () => {
     try {
-      const res = await logout(token);
-      console.log(res);
+      const storedToken = localStorage.getItem('token');
+      const res = await logout(storedToken);
+
+      setIsLoggedIn(false);
+
       return res;
     } catch (error) {
       console.log(error);

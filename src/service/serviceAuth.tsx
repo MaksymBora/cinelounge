@@ -72,10 +72,15 @@ export const getCurrentUser = async (
 
 // ????? >>>>
 export const logout = async token => {
+  console.log(token, 'AUTH API');
   try {
-    await swagger.post('/users/logout', token);
+    const res = await swagger.post('/users/logout', null, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
 
-    localStorage.clear();
+    if (res) localStorage.clear();
   } catch (error) {
     console.log(error);
   }
