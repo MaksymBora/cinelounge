@@ -11,6 +11,7 @@ interface MovieInfo {
   id: number;
   rating: number;
   type: string;
+  movieId: number;
 }
 
 export const WatchlistComponent = () => {
@@ -21,8 +22,6 @@ export const WatchlistComponent = () => {
     const result = async () => {
       try {
         const res = await getWatchList();
-
-        console.log(res);
 
         if (res !== null) {
           setWatchlist(res);

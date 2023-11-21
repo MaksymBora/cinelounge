@@ -11,16 +11,16 @@ interface WatchlistCardProps {
     date: string;
     id: number;
     rating: number;
-    type: string;
+    movieId: number;
   };
 }
 
 export const WatchlistCard = ({
-  movieInfo: { poster, name, date, id, rating, type },
+  movieInfo: { poster, name, date, movieId, rating },
 }: WatchlistCardProps) => {
   return (
     <div className="bg-bgCard text-mainTextColo flex flex-col rounded-cardBr shadow-cardShadow">
-      <Link className="relative pt-[150%]" to={`/${type}s/${id}`}>
+      <Link className="relative pt-[150%]" to={`/${movieId}`}>
         <img
           className="absolute top-0 left-0 rounded-[3px 3px 0 0]"
           src={`${imageBase}w500${poster}`}

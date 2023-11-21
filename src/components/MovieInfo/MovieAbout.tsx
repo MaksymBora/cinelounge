@@ -69,7 +69,7 @@ export const MovieAbout: FC<MovieAboutProps> = ({
     } = movieData;
 
     const data = {
-      id,
+      movieId: id,
       date,
       rating,
       poster,
