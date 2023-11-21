@@ -38,7 +38,23 @@ export const Auth = () => {
 
       fetchLogin();
     } else {
-      register(formData);
+      const fetchRegistration = async () => {
+        try {
+          const res = await register(formData);
+
+          if (res === undefined) {
+            console.log('User with current email already exists');
+            return;
+          }
+          setIsLoggedIn(true);
+
+          setUserName(res.user.name);
+        } catch (error) {
+          console.log(error);
+        }
+      };
+
+      fetchRegistration();
     }
 
     form.reset();

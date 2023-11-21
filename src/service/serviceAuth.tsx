@@ -6,22 +6,11 @@ const swagger = axios.create({
   headers: { accept: 'application/json' },
 });
 
-// Utility to add JWT
-const setAuthHeader = token => {
-  axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-};
-
-// Utility to remove JWT
-// const clearAuthHeader = () => {
-//   axios.defaults.headers.common.Authorization = '';
-// };
-
 export const register = async credentials => {
   try {
     const res = await swagger.post('/users/signup', credentials);
-    // After successful registration, add the token to the HTTP header
-    setAuthHeader(res.data.token);
 
+    localStorage.setItem('token', res.data.token);
     return res.data;
   } catch (error) {
     return console.log(error);
@@ -70,9 +59,7 @@ export const getCurrentUser = async (
   }
 };
 
-// ????? >>>>
 export const logout = async token => {
-  console.log(token, 'AUTH API');
   try {
     const res = await swagger.post('/users/logout', null, {
       headers: {
