@@ -57,6 +57,7 @@ export const MovieAbout: FC<MovieAboutProps> = ({
     // User not logged in
     if (!isLoggedIn) {
       setShowTooltip(true);
+      return;
     }
 
     // Item not in Watchlist
@@ -76,9 +77,9 @@ export const MovieAbout: FC<MovieAboutProps> = ({
       type: 'movie',
     };
 
-    const postMovie = async data => {
+    const postMovie = async dataMovie => {
       try {
-        await addFavMovie(data);
+        await addFavMovie(dataMovie);
       } catch (error) {
         console.log(error);
       }
