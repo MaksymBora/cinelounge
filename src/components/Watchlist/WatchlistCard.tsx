@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { BsBookmarkFill } from 'react-icons/bs';
 import { imageBase } from '@/service/imagePath';
 import { colorPercentage, formatDate } from '@/utilities/utilities';
+import { deleteMovie } from '@/service/serviceFavMovies';
 
 interface WatchlistCardProps {
   movieInfo: {
@@ -16,8 +17,20 @@ interface WatchlistCardProps {
 }
 
 export const WatchlistCard = ({
-  movieInfo: { poster, name, date, movieId, rating },
-}: WatchlistCardProps) => {
+  movieInfo: { poster, name, date, movieId, rating, id },
+  removeFromWatchlist,
+}: WatchlistCardProps & { removeFromWatchlist: (id: number) => void }) => {
+  const hadnleDeleteFromWatchlist = async () => {
+    try {
+      const res = await deleteMovie(id);
+      removeFromWatchlist(id);
+      return res;
+    } catch (error) {
+      console.log(error);
+      return error;
+    }
+  };
+
   return (
     <div className="bg-bgCard text-mainTextColo flex flex-col rounded-cardBr shadow-cardShadow">
       <Link className="relative pt-[150%]" to={`/${movieId}`}>
@@ -50,7 +63,7 @@ export const WatchlistCard = ({
         </div>
         <button
           type="button"
-          onClick={() => console.log('delete movie')}
+          onClick={hadnleDeleteFromWatchlist}
           className="bg-transparent border-none text-mainTextColo text-sm cursor-pointer p-[5px] absolute right-2.5 bottom-2.5"
           title="Remove from watchlist"
         >

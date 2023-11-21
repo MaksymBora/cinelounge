@@ -23,3 +23,13 @@ export const getWatchList = async () => {
     return null;
   }
 };
+
+export const deleteMovie = async id => {
+  try {
+    const res = await mockApi.delete(`/favMovies/${id}`);
+    return res.data;
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
+};

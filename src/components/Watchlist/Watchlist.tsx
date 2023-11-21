@@ -57,8 +57,17 @@ export const WatchlistComponent = () => {
       {/* Logged in and has items in watchlist */}
       {watchlist && (
         <div className="grid grid-cols-5 gap-8 bg-inherit text-mainTextColo w-full mt-16">
-          {watchlist.map(item => (
-            <WatchlistCard movieInfo={item} key={`${item.type}-${item.id}`} />
+          {watchlist.map(watchlistItem => (
+            <WatchlistCard
+              movieInfo={watchlistItem}
+              removeFromWatchlist={(id: number) => {
+                const updatedWatchlist = watchlist.filter(
+                  item => item.id !== id
+                );
+                setWatchlist(updatedWatchlist);
+              }}
+              key={`${watchlistItem.type}-${watchlistItem.id}`}
+            />
           ))}
         </div>
       )}
