@@ -6,10 +6,20 @@ const mockApi = axios.create({
   headers: { accept: 'application/json' },
 });
 
-export const addFavMovie = async dataMovie => {
+export const addWatchlist = async dataMovie => {
   try {
     await mockApi.post('/favMovies', dataMovie);
   } catch (error) {
     console.log(error);
+  }
+};
+
+export const getWatchList = async () => {
+  try {
+    const watchlist = await mockApi.get('/favMovies');
+    return watchlist.data;
+  } catch (error) {
+    console.log(error);
+    return null;
   }
 };

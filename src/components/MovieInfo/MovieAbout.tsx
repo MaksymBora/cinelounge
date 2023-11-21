@@ -3,14 +3,14 @@ import { HiOutlineArrowsExpand } from 'react-icons/hi';
 import { FiPercent } from 'react-icons/fi';
 import { BsPlay, BsBookmark } from 'react-icons/bs';
 import { ClickAwayListener, Tooltip } from '@mui/material';
+import { useParams } from 'react-router-dom';
 import { imageBase } from '@/service/imagePath';
 import { colorPercentage, formatRuntime } from '@/utilities/utilities';
 import { MovieGallery } from './MovieGallery';
 import { MovieTrailer } from './MovieTrailer';
 import { MovieInfoTypes } from '@/Pages/MovieInfo';
 import { AppContext } from '@/context/app-context';
-import { addFavMovie } from '@/service/serviceFavMovies';
-import { useParams } from 'react-router-dom';
+import { addWatchlist } from '@/service/serviceFavMovies';
 
 interface MovieAboutProps {
   movieData: MovieInfoTypes | null;
@@ -79,7 +79,7 @@ export const MovieAbout: FC<MovieAboutProps> = ({
 
     const postMovie = async dataMovie => {
       try {
-        await addFavMovie(dataMovie);
+        await addWatchlist(dataMovie);
       } catch (error) {
         console.log(error);
       }
