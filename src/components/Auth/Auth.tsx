@@ -101,21 +101,6 @@ export const Auth = () => {
         </button>
       </form>
 
-      {/* Test request for getCurrent User */}
-      {/* <form
-        onSubmit={e => {
-          e.preventDefault();
-          getCurrentUser(token);
-        }}
-      >
-        <button
-          className="mt-12 py-[15px] px-0 text-base cursor-pointer bg-authBtn shadow-btnAuth font-bold 
-  		  uppercase tracking-[0.5px] active:transform scale-97 rounded"
-          type="submit"
-        >
-          Current
-        </button>
-      </form> */}
       <a
         href="#0"
         className="text-[13px] mt-6 text-mainTextColo hover:underline"

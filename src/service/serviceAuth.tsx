@@ -1,4 +1,4 @@
-import axios, { AxiosResponse } from 'axios';
+import axios, { AxiosError, AxiosResponse } from 'axios';
 
 const swagger = axios.create({
   baseURL: 'https://connections-api.herokuapp.com',
@@ -58,7 +58,25 @@ export const getCurrentUser = async (
 
     // eslint-disable-next-line consistent-return
     return res;
+  } catch (error: unknown) {
+    if (
+      error instanceof Error &&
+      'response' in error &&
+      (error as AxiosError).response?.status
+    ) {
+      localStorage.clear();
+      // console.log((error as AxiosError).response?.status);
+    }
+  }
+};
+
+// ????? >>>>
+export const logout = async token => {
+  try {
+    await swagger.post('/users/logout', token);
+
+    localStorage.clear();
   } catch (error) {
-    throw Error(`${error}`);
+    console.log(error);
   }
 };

@@ -33,6 +33,7 @@ export function App() {
 
     return null;
   });
+
   const { isRefreshing, setIsRefreshing } = useContext(AppContext);
   const { isLoggedIn, setIsLoggedIn } = useContext(AppContext);
   const { userName, setUserName } = useContext(AppContext);

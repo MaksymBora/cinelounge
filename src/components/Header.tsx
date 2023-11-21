@@ -2,15 +2,22 @@ import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { IoMoon, IoSunny } from 'react-icons/io5';
 import { useContext, useState } from 'react';
 import { AppContext } from '@/context/app-context';
+import { logout } from '@/service/serviceAuth';
 
 export function Header() {
   const [searchParams] = useSearchParams();
   const [query, setQuery] = useState<string | undefined>(
     searchParams.get('searchQuery') ?? ''
   );
+  const [token] = useState(() => {
+    const savedToken = localStorage.getItem('token');
+
+    if (savedToken !== null) return savedToken;
+
+    return null;
+  });
   const navigate = useNavigate();
   const { isLoggedIn } = useContext(AppContext);
-  // const isLogged = false;
 
   const handleQuery = e => {
     setQuery(e.target.value);
@@ -28,6 +35,17 @@ export function Header() {
       pathname: '/search',
       search: `?${newSearchParams.toString()}`,
     });
+  };
+
+  const handleLogout = async () => {
+    try {
+      const res = await logout(token);
+      console.log(res);
+      return res;
+    } catch (error) {
+      console.log(error);
+      return null;
+    }
   };
 
   return (
@@ -103,7 +121,7 @@ export function Header() {
           {isLoggedIn ? (
             <button
               type="button"
-              onClick={() => console.log('logout')}
+              onClick={handleLogout}
               className="py-[8px] px-[15px] cursor-pointer bg-authBtn border border-transparent rounded text-[15px] transition-opacity tracking-normal hover:opacity-80"
             >
               Logout
