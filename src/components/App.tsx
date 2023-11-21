@@ -103,7 +103,6 @@ export function App() {
           <Route path=":id" element={<Actor />} />
         </Route>
         <Route path="search" element={<Search />} />
-        {/* <Route path="login" element={<Auth />} /> */}
         <Route
           path="login"
           element={<RestrictedRoute component={<Auth />} redirectTo="/" />}

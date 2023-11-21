@@ -2,9 +2,6 @@ import { useContext, useState } from 'react';
 import { login, register } from '@/service/serviceAuth';
 import { AppContext } from '@/context/app-context';
 
-// const token =
-//   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTEyYjFmOWZkN2M0NzAwMTRmY2ViNDEiLCJpYXQiOjE3MDAzMzc2NTR9.K9umLwkn3vLaDsVyizdqAWPKhSo1p-qMEtR--_MmE0o';
-
 export const Auth = () => {
   const [isLoginForm, setIsLoginForm] = useState(false);
   const { setUserName } = useContext(AppContext);
@@ -81,7 +78,6 @@ export const Auth = () => {
               placeholder="Name"
               name="name"
               autoComplete="off"
-              //   onChange={e => setEmail(e.target.value)}
             />
           </>
         )}
