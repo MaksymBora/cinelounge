@@ -9,6 +9,8 @@ import { MovieGallery } from './MovieGallery';
 import { MovieTrailer } from './MovieTrailer';
 import { MovieInfoTypes } from '@/Pages/MovieInfo';
 import { AppContext } from '@/context/app-context';
+import { addFavMovie } from '@/service/serviceFavMovies';
+import { useParams } from 'react-router-dom';
 
 interface MovieAboutProps {
   movieData: MovieInfoTypes | null;
@@ -21,6 +23,7 @@ export const MovieAbout: FC<MovieAboutProps> = ({
   const [showTooltip, setShowTooltip] = useState(false);
   const [viewTrailer, setViewTrailer] = useState(false);
   const { isLoggedIn } = useContext(AppContext);
+  const { id } = useParams();
 
   if (!movieData) {
     return null;
@@ -55,6 +58,32 @@ export const MovieAbout: FC<MovieAboutProps> = ({
     if (!isLoggedIn) {
       setShowTooltip(true);
     }
+
+    // Item not in Watchlist
+    const {
+      release_date: date,
+      vote_average: rating,
+      poster_path: poster,
+      title: name,
+    } = movieData;
+
+    const data = {
+      id,
+      date,
+      rating,
+      poster,
+      name,
+      type: 'movie',
+    };
+
+    const postMovie = async data => {
+      try {
+        await addFavMovie(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    postMovie(data);
   };
 
   return (
