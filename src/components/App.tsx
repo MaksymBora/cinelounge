@@ -23,6 +23,7 @@ import { Search } from '@/Pages/Search';
 import { Auth } from './Auth/Auth';
 import { getCurrentUser } from '@/service/serviceAuth';
 import { AppContext } from '@/context/app-context';
+import { RestrictedRoute } from '@/RestrictedRoute/RestrictedRoute';
 
 export function App() {
   const [page, setPage] = useState(1);
@@ -102,7 +103,11 @@ export function App() {
           <Route path=":id" element={<Actor />} />
         </Route>
         <Route path="search" element={<Search />} />
-        <Route path="login" element={<Auth />} />
+        {/* <Route path="login" element={<Auth />} /> */}
+        <Route
+          path="login"
+          element={<RestrictedRoute component={<Auth />} redirectTo="/" />}
+        />
       </Route>
     ),
     {
