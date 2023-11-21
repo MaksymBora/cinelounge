@@ -54,6 +54,7 @@ export default {
       },
       minHeight: {
         100: '100px',
+        watchlist: 'calc(100vh - 171px)',
       },
       fontSize: {
         13: ['13px', '20px'],

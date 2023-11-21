@@ -1,6 +1,7 @@
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { IoMoon, IoSunny } from 'react-icons/io5';
 import { useContext, useState } from 'react';
+import { BsBookmarkFill } from 'react-icons/bs';
 import { AppContext } from '@/context/app-context';
 import { logout } from '@/service/serviceAuth';
 
@@ -114,7 +115,12 @@ export function Header() {
         <div className="flex items-center justify-end gap-3 grow">
           <IoMoon />
           <IoSunny />
-          <button type="button">Watchlist</button>
+          {/* ======== Watchlist  ======= */}
+          <Link to="/watchlist" className="flex items-center mr-3">
+            <BsBookmarkFill className="mr-2" />
+            Watchlist
+          </Link>
+
           {isLoggedIn ? (
             <button
               type="button"

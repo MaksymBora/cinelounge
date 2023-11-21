@@ -5,7 +5,7 @@ import {
   createRoutesFromElements,
 } from 'react-router-dom';
 import { useContext, useEffect, useState } from 'react';
-import { Layout } from './Layout';
+import { Layout } from './Global/Layout';
 import Movies from '@/Pages/Movies';
 import Shows from '@/Pages/Shows';
 import Cast from '@/Pages/Cast';
@@ -24,6 +24,7 @@ import { Auth } from './Auth/Auth';
 import { getCurrentUser } from '@/service/serviceAuth';
 import { AppContext } from '@/context/app-context';
 import { RestrictedRoute } from '@/RestrictedRoute/RestrictedRoute';
+import { Watchlist } from '@/Pages/WatchList';
 
 export function App() {
   const [page, setPage] = useState(1);
@@ -107,6 +108,7 @@ export function App() {
           path="login"
           element={<RestrictedRoute component={<Auth />} redirectTo="/" />}
         />
+        <Route path="watchlist" element={<Watchlist />} />
       </Route>
     ),
     {
