@@ -92,7 +92,6 @@ export const MovieFilterMenu = () => {
           <ul className="w-full grid gap-[5px] grid-cols-4">
             {watchProviders.map(p => (
               <MoviesServiceItem
-                formData={formData}
                 setFormData={setFormData}
                 state={formData.services}
                 stateStr="services"

@@ -22,7 +22,6 @@ import { imageBase } from '@/service/imagePath';
 // }
 
 export const MoviesServiceItem = ({
-  formData,
   setFormData,
   id,
   name,
@@ -31,16 +30,15 @@ export const MoviesServiceItem = ({
   img,
 }) => {
   const toggleService = () => {
-    let newState = [];
+    setFormData(prevData => {
+      const newState = state.includes(id)
+        ? state.filter(x => x !== id)
+        : [...state, id];
 
-    // If item not already in list, add item
-    if (!state.includes(id)) newState = [...state, id];
-    // If item already in list, remove item
-    else newState = state.filter(x => x !== id);
-
-    setFormData({
-      ...formData,
-      [stateStr]: newState,
+      return {
+        ...prevData,
+        [stateStr]: newState,
+      };
     });
   };
 
@@ -49,7 +47,6 @@ export const MoviesServiceItem = ({
       <button
         type="button"
         onClick={toggleService}
-        // className={state.length > 0 && !state.includes(id) ? styles.fade : ''}
         className={`bg-transparent cursor-pointer duration-500 border-[1px] border-[black] m-[2px] rounded-[2px] opacity-100 ${
           state.length > 0 && !state.includes(id) ? 'opacity-20' : ''
         }`}
