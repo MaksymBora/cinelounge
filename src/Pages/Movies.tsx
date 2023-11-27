@@ -1,9 +1,12 @@
 import Pagination from '@mui/material/Pagination';
 import { ThemeProvider, createTheme } from '@mui/material';
 import { useLoaderData } from 'react-router-dom';
+import { useContext } from 'react';
 import { MovieList } from '@/components/Movies/MovieList';
 import { getDesignTokens } from '@/styleTheme/MuiPallete';
 import { FilterBtn } from '@/components/FilterMenu/FilterBtn';
+import { MovieFilterMenu } from '@/components/FilterMenu/MovieFilterMenu';
+import { FilterContext } from '@/context/filter-context';
 
 const darkModeTheme = createTheme(getDesignTokens('dark'));
 
@@ -14,6 +17,7 @@ interface ApiResponse {
 }
 
 const Movies = ({ setPage, currentPage }): JSX.Element => {
+  const { filterMenuOpen } = useContext(FilterContext);
   const response = useLoaderData() as ApiResponse;
 
   const { data } = response;
@@ -44,9 +48,11 @@ const Movies = ({ setPage, currentPage }): JSX.Element => {
   return (
     <>
       <FilterBtn />
-      <div className="max-w-xxl mx-auto flex my-12 justify-center items-start gap-8">
+      <div className="max-w-xxl mx-auto flex my-12 justify-center items-start gap-x-8">
+        {filterMenuOpen && <MovieFilterMenu />}
         <MovieList />
       </div>
+
       <ThemeProvider theme={darkModeTheme}>
         <section className="max-w-xxl mx-auto flex items-center justify-center my-12">
           <Pagination

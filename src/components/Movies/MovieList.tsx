@@ -1,5 +1,7 @@
 import { useLoaderData } from 'react-router-dom';
+import { useContext } from 'react';
 import { MovieCard } from './MovieCard';
+import { FilterContext } from '@/context/filter-context';
 
 interface MovieListProps {
   poster_path: string;
@@ -16,12 +18,17 @@ interface ApiResponse {
 }
 
 export const MovieList = (): JSX.Element => {
+  const { filterMenuOpen } = useContext(FilterContext);
   const response = useLoaderData() as ApiResponse;
 
   const data = response.data.results;
 
   return (
-    <section className="container grid grid-cols-filmList gap-8 bg-inherit text-mainTextColo w-full">
+    <section
+      className={` grid grid-cols-filmList gap-8 bg-inherit text-mainTextColo  ${
+        filterMenuOpen ? 'widthWithFilter' : 'w-full'
+      }`}
+    >
       {data.map(
         (movie: MovieListProps) =>
           movie.poster_path && <MovieCard movieData={movie} key={movie.id} />

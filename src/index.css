@@ -81,3 +81,7 @@ ul.control-dots {
   }
   /* ... */
 }
+
+.widthWithFilter {
+  width: calc(100% - 230px);
+}

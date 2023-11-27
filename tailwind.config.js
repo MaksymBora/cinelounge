@@ -19,6 +19,7 @@ export default {
         imageGallery: 'rgba(0, 0, 0, 0.88)',
         line: 'rgba(150, 150, 150, 0.5)',
         authBtn: '#17b28e',
+        clearAllBtn: 'rgb(242, 242, 242)',
       },
       spacing: {
         rateT: '-20px',
@@ -38,6 +39,7 @@ export default {
         castShadow: '0 1px 12px -3px rgba(0, 0, 0, 0.1);',
         actorShadow: '1px 0 10px rgba(0, 0, 0, 0.2);',
         btnAuth: '0 0 20px -1px rgba(13, 13, 13, 0.2)',
+        filterBtn: '0 0 4px -1px rgba(0, 0, 0, 0.5)',
       },
       gridTemplateColumns: {
         filmList: 'repeat(auto-fit, minmax(215px, 1fr))',
