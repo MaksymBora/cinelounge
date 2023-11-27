@@ -31,7 +31,7 @@ export const MoviesServiceItem = ({
   img,
 }) => {
   const toggleService = () => {
-    let newState;
+    let newState = [];
 
     // If item not already in list, add item
     if (!state.includes(id)) newState = [...state, id];
@@ -50,7 +50,9 @@ export const MoviesServiceItem = ({
         type="button"
         onClick={toggleService}
         // className={state.length > 0 && !state.includes(id) ? styles.fade : ''}
-        className="bg-transparent cursor-pointer duration-500 border-[1px] border-[black] m-[2px] rounded-[2px] opacity-100"
+        className={`bg-transparent cursor-pointer duration-500 border-[1px] border-[black] m-[2px] rounded-[2px] opacity-100 ${
+          state.length > 0 && !state.includes(id) ? 'opacity-20' : ''
+        }`}
         aria-pressed={state.includes(id)}
         aria-label={name}
       >

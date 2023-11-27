@@ -102,7 +102,6 @@ export const MovieFilterMenu = () => {
                 key={`${p.provider_id}-${p.provider_name}`}
               />
             ))}
-            <li>test</li>
           </ul>
         </div>
         <div className="bg-[#ddd] h-px rounded-[10px] mb-4"></div>
