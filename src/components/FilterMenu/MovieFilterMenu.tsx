@@ -18,14 +18,16 @@ import { MoviesServiceItem } from './MovieServiceItem';
 //   }[];
 // }
 
+const initialMovieFilterState = {
+  year: [1000, 9999],
+  runtime: [0, 999],
+  rating: [0, 100],
+  genres: [],
+  services: [],
+};
+
 export const MovieFilterMenu = () => {
-  const [formData, setFormData] = useState({
-    year: [1000, 9999],
-    runtime: [0, 999],
-    rating: [0, 100],
-    services: [],
-    genres: [],
-  });
+  const [formData, setFormData] = useState(initialMovieFilterState);
 
   const rangeProps = [
     {
@@ -61,6 +63,13 @@ export const MovieFilterMenu = () => {
     e.preventDefault();
 
     console.log(formData);
+  };
+
+  const resetForm = e => {
+    e.preventDefault();
+    setFormData(initialMovieFilterState);
+
+    window.scrollTo(0, 0);
   };
 
   return (
@@ -117,7 +126,7 @@ export const MovieFilterMenu = () => {
           <button
             className="text-[17px] font-medium p-[15px] rounded-[3px] border-none text-left cursor-pointer shadow-filterBtn bg-clearAllBtn text-black"
             type="button"
-            //   onClick={resetForm}
+            onClick={resetForm}
             aria-label="Clear all filters"
           >
             Clear All
