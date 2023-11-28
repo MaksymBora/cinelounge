@@ -8,10 +8,16 @@ interface MovieListProps {
   vote_average: number;
 }
 
+interface ApiResponse {
+  results: MovieListProps[];
+  page: number;
+  total_pages: number;
+}
+
 export const FilterDataContext = createContext<{
-  filterData: MovieListProps[];
-  setFilterData: React.Dispatch<React.SetStateAction<MovieListProps[]>>;
+  filterData: ApiResponse | null;
+  setFilterData: React.Dispatch<React.SetStateAction<ApiResponse | null>>;
 }>({
-  filterData: [],
+  filterData: null,
   setFilterData: () => {},
 });

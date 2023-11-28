@@ -9,12 +9,18 @@ interface MovieListProps {
   vote_average: number;
 }
 
+interface ApiResponse {
+  results: MovieListProps[];
+  page: number;
+  total_pages: number;
+}
+
 export const FilterDataState = ({
   children,
 }: {
   children: React.ReactNode;
 }) => {
-  const [filterData, setFilterData] = useState<MovieListProps[]>([]);
+  const [filterData, setFilterData] = useState<ApiResponse | null>(null);
 
   const contextValue = useMemo(() => {
     return {

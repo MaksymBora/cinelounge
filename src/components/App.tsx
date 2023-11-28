@@ -26,6 +26,7 @@ import { AppContext } from '@/context/app-context';
 import { RestrictedRoute } from '@/RestrictedRoute/RestrictedRoute';
 import { Watchlist } from '@/Pages/WatchList';
 import { FilterState } from '@/context/FilterMenuState';
+import { FilterDataState } from '@/context/filterDataState';
 
 export function App() {
   const [page, setPage] = useState(1);
@@ -81,7 +82,9 @@ export function App() {
         <Route path="/">
           <Route
             index
-            element={<Movies setPage={setPage} currentPage={page} />}
+            element={
+              <Movies setPage={setPage} pageNum={page} currentPage={page} />
+            }
             loader={() => getAllMovies(page)}
           />
           <Route path=":id" element={<MovieInfo />} />
@@ -121,7 +124,9 @@ export function App() {
     <div>Loading...</div>
   ) : (
     <FilterState>
-      <RouterProvider router={browserRouter} />
+      <FilterDataState>
+        <RouterProvider router={browserRouter} />
+      </FilterDataState>
     </FilterState>
   );
 }

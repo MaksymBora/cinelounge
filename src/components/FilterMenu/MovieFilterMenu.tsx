@@ -17,8 +17,23 @@ export const initialMovieFilterState = {
   services: [],
 };
 
+interface OptionsType {
+  value: MovieSort;
+  label: string;
+}
+
+type MovieSort =
+  | 'popularity.desc'
+  | 'vote_average.desc'
+  | 'primary_release_date.desc'
+  | 'revenue.desc'
+  | 'vote_count.desc';
+
 export const MovieFilterMenu = () => {
   const [formData, setFormData] = useState(initialMovieFilterState);
+  const [selectedOption, setSelectedOption] = useState<OptionsType | null>(
+    null
+  );
   const { setFilterData } = useContext(FilterDataContext);
 
   const rangeProps = [
@@ -58,7 +73,7 @@ export const MovieFilterMenu = () => {
       try {
         const res = await getSortedBy(sortData, filterData);
 
-        return setFilterData(res.results);
+        return setFilterData(res);
       } catch (error) {
         console.log(error);
         return undefined;
@@ -70,14 +85,18 @@ export const MovieFilterMenu = () => {
   const resetForm = e => {
     e.preventDefault();
     setFormData(initialMovieFilterState);
-    setFilterData([]);
+    setFilterData(null);
+    setSelectedOption(null);
     window.scrollTo(0, 0);
   };
 
   return (
     <div className="scroll  w-[230px] px-px sticky h-[80vh] active:translate-x-0 active: opacity-100">
       <form className="form" onSubmit={applyFilters}>
-        <SortDropDown />
+        <SortDropDown
+          selectedOption={selectedOption}
+          setSelectedOption={setSelectedOption}
+        />
         <div className="bg-[#ddd] h-px rounded-[10px] mb-4"></div>
 
         <GenreDropdown formData={formData} setFormData={setFormData} />

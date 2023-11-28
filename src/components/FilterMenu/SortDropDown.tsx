@@ -1,5 +1,5 @@
 import Select from 'react-select';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect } from 'react';
 import { dropdownStyles } from '@/utilities/dropdownStyles';
 import { FilterDataContext } from '@/context/filterData-context';
 import { getSortedBy } from '@/service/serviceFilter';
@@ -32,10 +32,7 @@ export const initialMovieFilterState = {
   services: [],
 };
 
-export const SortDropDown = () => {
-  const [selectedOption, setSelectedOption] = useState<OptionsType | null>(
-    null
-  );
+export const SortDropDown = ({ selectedOption, setSelectedOption }) => {
   const { setFilterData } = useContext(FilterDataContext);
 
   const setSortOption = (selected: OptionsType | null) => {
@@ -48,7 +45,7 @@ export const SortDropDown = () => {
         try {
           const res = await getSortedBy(sortData, filterData);
 
-          return setFilterData(res.results);
+          return setFilterData(res);
         } catch (error) {
           console.log(error);
           return undefined;

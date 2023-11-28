@@ -1,35 +1,9 @@
-import { useLoaderData } from 'react-router-dom';
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import { MovieCard } from './MovieCard';
 import { FilterContext } from '@/context/filterMenu-context';
-import { FilterDataContext } from '@/context/filterData-context';
 
-interface MovieListProps {
-  poster_path: string;
-  title: string;
-  release_date: string;
-  id: number;
-  vote_average: number;
-}
-
-interface ApiResponse {
-  data: {
-    results: MovieListProps[];
-  };
-}
-
-export const MovieList = (): JSX.Element => {
+export const MovieList = ({ filterData }): JSX.Element => {
   const { filterMenuOpen } = useContext(FilterContext);
-  const { filterData, setFilterData } = useContext(FilterDataContext);
-
-  const response = useLoaderData() as ApiResponse;
-  const data = response.data.results;
-
-  useEffect(() => {
-    if (filterData.length > 0 === false) setFilterData([...data]);
-  }, [data, filterData, setFilterData]);
-
-  console.log(filterData, 'filterData');
 
   return (
     <section
@@ -37,8 +11,8 @@ export const MovieList = (): JSX.Element => {
         filterMenuOpen ? 'widthWithFilter' : 'w-full'
       }`}
     >
-      {filterData.map(
-        (movie: MovieListProps) =>
+      {filterData?.results.map(
+        movie =>
           movie.poster_path && <MovieCard movieData={movie} key={movie.id} />
       )}
     </section>
