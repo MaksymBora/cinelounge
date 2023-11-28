@@ -1,6 +1,8 @@
-import { useState } from 'react';
 import Select from 'react-select';
+import { useContext, useEffect, useState } from 'react';
 import { dropdownStyles } from '@/utilities/dropdownStyles';
+import { FilterDataContext } from '@/context/filterData-context';
+import { getSortedBy } from '@/service/serviceFilter';
 
 type MovieSort =
   | 'popularity.desc'
@@ -22,16 +24,39 @@ const options: OptionsType[] = [
   { value: 'vote_count.desc', label: 'Review count' },
 ];
 
+export const initialMovieFilterState = {
+  year: [1000, 9999],
+  runtime: [0, 999],
+  rating: [0, 100],
+  genres: [],
+  services: [],
+};
+
 export const SortDropDown = () => {
   const [selectedOption, setSelectedOption] = useState<OptionsType | null>(
     null
   );
+  const { setFilterData } = useContext(FilterDataContext);
 
   const setSortOption = (selected: OptionsType | null) => {
     setSelectedOption(selected);
-
-    console.log(selected);
   };
+
+  useEffect(() => {
+    if (selectedOption) {
+      const fetchSortedBy = async (sortData, filterData) => {
+        try {
+          const res = await getSortedBy(sortData, filterData);
+
+          return setFilterData(res.results);
+        } catch (error) {
+          console.log(error);
+          return undefined;
+        }
+      };
+      fetchSortedBy(selectedOption.value, initialMovieFilterState);
+    }
+  }, [selectedOption, setFilterData]);
 
   return (
     <div className="mb-8">

@@ -2,29 +2,6 @@ import Slider, { createSliderWithTooltip } from 'rc-slider';
 import { CustomRangeStyles } from '../../utilities/CustomRangeStyles';
 import 'rc-slider/assets/index.css';
 
-// interface MovieFilterData {
-//   year: number[];
-//   runtime: number[];
-//   rating: number[];
-//   services: number[];
-//   genres: {
-//     value: number;
-//     label: string;
-//   }[];
-// }
-
-// interface MoviesCustomRangeProps {
-//   formData: MovieFilterData;
-//   setFormData: React.Dispatch<React.SetStateAction<MovieFilterData>>;
-//   name: string;
-//   state: number[];
-//   min: number;
-//   max: number;
-//   step: number;
-//   tipFormatter: (value: number) => string;
-//   marks: number[];
-// }
-
 const Range = createSliderWithTooltip(Slider.Range);
 
 export const MoviesCustomRange = ({

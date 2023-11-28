@@ -1,26 +1,5 @@
 import { imageBase } from '@/service/imagePath';
 
-// interface MovieFilterData {
-//   year: number[];
-//   runtime: number[];
-//   rating: number[];
-//   services: number[];
-//   genres: {
-//     value: number;
-//     label: string;
-//   }[];
-// }
-
-// interface MoviesServiceItemProps {
-//   formData: MovieFilterData;
-//   setFormData: React.Dispatch<React.SetStateAction<MovieFilterData>>;
-//   id: number;
-//   name: string;
-//   img: string;
-//   state: number[];
-//   stateStr: string;
-// }
-
 export const MoviesServiceItem = ({
   setFormData,
   id,

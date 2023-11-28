@@ -6,7 +6,8 @@ import { MovieList } from '@/components/Movies/MovieList';
 import { getDesignTokens } from '@/styleTheme/MuiPallete';
 import { FilterBtn } from '@/components/FilterMenu/FilterBtn';
 import { MovieFilterMenu } from '@/components/FilterMenu/MovieFilterMenu';
-import { FilterContext } from '@/context/filter-context';
+import { FilterContext } from '@/context/filterMenu-context';
+import { FilterDataState } from '@/context/filterDataState';
 
 const darkModeTheme = createTheme(getDesignTokens('dark'));
 
@@ -48,23 +49,25 @@ const Movies = ({ setPage, currentPage }): JSX.Element => {
   return (
     <>
       <FilterBtn />
-      <div className="max-w-xxl mx-auto flex my-12 justify-center items-start gap-x-8">
-        {filterMenuOpen && <MovieFilterMenu />}
-        <MovieList />
-      </div>
+      <FilterDataState>
+        <div className="max-w-xxl mx-auto flex my-12 justify-center items-start gap-x-8">
+          {filterMenuOpen && <MovieFilterMenu />}
+          <MovieList />
+        </div>
 
-      <ThemeProvider theme={darkModeTheme}>
-        <section className="max-w-xxl mx-auto flex items-center justify-center my-12">
-          <Pagination
-            count={data.total_pages > 25 ? 25 : data.total_pages}
-            variant="outlined"
-            shape="rounded"
-            sx={{ button: { padding: '15px' } }}
-            siblingCount={1}
-            onChange={handlePagination}
-          />
-        </section>
-      </ThemeProvider>
+        <ThemeProvider theme={darkModeTheme}>
+          <section className="max-w-xxl mx-auto flex items-center justify-center my-12">
+            <Pagination
+              count={data.total_pages > 25 ? 25 : data.total_pages}
+              variant="outlined"
+              shape="rounded"
+              sx={{ button: { padding: '15px' } }}
+              siblingCount={1}
+              onChange={handlePagination}
+            />
+          </section>
+        </ThemeProvider>
+      </FilterDataState>
     </>
   );
 };

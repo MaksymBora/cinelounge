@@ -25,7 +25,7 @@ import { getCurrentUser } from '@/service/serviceAuth';
 import { AppContext } from '@/context/app-context';
 import { RestrictedRoute } from '@/RestrictedRoute/RestrictedRoute';
 import { Watchlist } from '@/Pages/WatchList';
-import { FilterState } from '@/context/FilterState';
+import { FilterState } from '@/context/FilterMenuState';
 
 export function App() {
   const [page, setPage] = useState(1);

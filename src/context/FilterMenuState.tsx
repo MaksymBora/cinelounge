@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import { FilterContext } from './filter-context';
+import { FilterContext } from './filterMenu-context';
 
 export const FilterState = ({ children }: { children: React.ReactNode }) => {
   const [filterMenuOpen, setFilterMenuOpen] = useState(false);

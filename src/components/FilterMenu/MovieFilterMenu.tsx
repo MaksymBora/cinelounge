@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { HiOutlineArrowNarrowRight } from 'react-icons/hi';
 import { SortDropDown } from './SortDropDown';
 import { GenreDropdown } from './GenreDropDown';
@@ -6,19 +6,10 @@ import { MoviesCustomRange } from './MovieCustomRange';
 import { markStyles } from '@/utilities/CustomRangeMarksStyles';
 import { watchProviders } from '@/data/watchProviders';
 import { MoviesServiceItem } from './MovieServiceItem';
+import { getSortedBy } from '@/service/serviceFilter';
+import { FilterDataContext } from '@/context/filterData-context';
 
-// interface MovieFilterData {
-//   year: [];
-//   runtime: [];
-//   rating: [];
-//   services: [];
-//   genres: {
-//     value: number;
-//     label: string;
-//   }[];
-// }
-
-const initialMovieFilterState = {
+export const initialMovieFilterState = {
   year: [1000, 9999],
   runtime: [0, 999],
   rating: [0, 100],
@@ -28,6 +19,7 @@ const initialMovieFilterState = {
 
 export const MovieFilterMenu = () => {
   const [formData, setFormData] = useState(initialMovieFilterState);
+  const { setFilterData } = useContext(FilterDataContext);
 
   const rangeProps = [
     {
@@ -61,14 +53,24 @@ export const MovieFilterMenu = () => {
 
   const applyFilters = e => {
     e.preventDefault();
+    const sort = 'popularity.desc';
+    const fetchSortedBy = async (sortData, filterData) => {
+      try {
+        const res = await getSortedBy(sortData, filterData);
 
-    console.log(formData);
+        return setFilterData(res.results);
+      } catch (error) {
+        console.log(error);
+        return undefined;
+      }
+    };
+    fetchSortedBy(sort, formData);
   };
 
   const resetForm = e => {
     e.preventDefault();
     setFormData(initialMovieFilterState);
-
+    setFilterData([]);
     window.scrollTo(0, 0);
   };
 
