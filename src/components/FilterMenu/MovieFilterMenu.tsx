@@ -8,6 +8,7 @@ import { watchProviders } from '@/data/watchProviders';
 import { MoviesServiceItem } from './MovieServiceItem';
 import { getSortedBy } from '@/service/serviceFilter';
 import { FilterDataContext } from '@/context/filterData-context';
+import { AppContext } from '@/context/app-context';
 
 export const initialMovieFilterState = {
   year: [1000, 9999],
@@ -35,6 +36,8 @@ export const MovieFilterMenu = () => {
     null
   );
   const { setFilterData } = useContext(FilterDataContext);
+  const { setPage } = useContext(AppContext);
+  const { setShouldFetchData } = useContext(AppContext);
 
   const rangeProps = [
     {
@@ -69,14 +72,12 @@ export const MovieFilterMenu = () => {
   const applyFilters = e => {
     e.preventDefault();
     const sort = 'popularity.desc';
-    const fetchSortedBy = async (sortData, filterData) => {
+    const fetchSortedBy = async (sortData, dataFromFilters) => {
       try {
-        const res = await getSortedBy(sortData, filterData);
-
-        return setFilterData(res);
+        const res = await getSortedBy(sortData, dataFromFilters);
+        setFilterData(res?.data);
       } catch (error) {
         console.log(error);
-        return undefined;
       }
     };
     fetchSortedBy(sort, formData);
@@ -87,6 +88,8 @@ export const MovieFilterMenu = () => {
     setFormData(initialMovieFilterState);
     setFilterData(null);
     setSelectedOption(null);
+    setPage(1);
+    setShouldFetchData(true);
     window.scrollTo(0, 0);
   };
 

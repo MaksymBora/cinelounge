@@ -7,57 +7,48 @@ import { FilterBtn } from '@/components/FilterMenu/FilterBtn';
 import { MovieFilterMenu } from '@/components/FilterMenu/MovieFilterMenu';
 import { FilterContext } from '@/context/filterMenu-context';
 import { FilterDataContext } from '@/context/filterData-context';
-import { getAllMovies } from '@/service/serviceMovies';
+// import { getAllMovies } from '@/service/serviceMovies';
+import { AppContext } from '@/context/app-context';
+import { getSortedBy } from '@/service/serviceFilter';
 
 const darkModeTheme = createTheme(getDesignTokens('dark'));
 
-// interface ApiResponse {
-//   data: {
-//     total_pages: number;
-//   };
-// }
-
-// interface MovieListProps {
-//   poster_path: string;
-//   title: string;
-//   release_date: string;
-//   id: number;
-//   vote_average: number;
-// }
-
-// interface ApiResponse {
-//   data: {
-//     results: MovieListProps[];
-//     page: number;
-//     total_pages: number;
-//   };
-// }
-
-const Movies = ({ setPage, pageNum, currentPage }): JSX.Element => {
+export const initialMovieFilterState = {
+  year: [1000, 9999],
+  runtime: [0, 999],
+  rating: [0, 100],
+  genres: [],
+  services: [],
+};
+const Movies = (): JSX.Element => {
+  const { shouldFetchData, setShouldFetchData } = useContext(AppContext);
+  const { page, setPage } = useContext(AppContext);
   const { filterMenuOpen } = useContext(FilterContext);
   const { filterData, setFilterData } = useContext(FilterDataContext);
 
   useEffect(() => {
-    if (filterData === null) {
-      const fetchAllMovies = async () => {
-        try {
-          const res = await getAllMovies(pageNum);
-          if (res) {
-            setFilterData(res.data);
-          }
-        } catch (error) {
-          console.log(error);
+    const sort = 'popularity.desc';
+    const fetchAllMovies = async (sortData, filterDefaultData, pageNumber) => {
+      try {
+        const res = await getSortedBy(sortData, filterDefaultData, pageNumber);
+        if (res) {
+          setFilterData(res.data);
+          setShouldFetchData(false);
         }
-      };
-      fetchAllMovies();
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    if (shouldFetchData && (filterData === null || page !== 1 || page === 1)) {
+      fetchAllMovies(sort, initialMovieFilterState, page);
     }
-  }, [filterData, setFilterData, pageNum]);
-  console.log(filterData);
+  }, [filterData, setFilterData, page, shouldFetchData, setShouldFetchData]);
 
   const handlePagination = e => {
     const pageNumber = parseInt(e.target.textContent, 10);
     const NextAndPrev = e.target.dataset.testid;
     const click = pageNumber || NextAndPrev;
+    setShouldFetchData(true);
 
     switch (typeof click) {
       case 'number':
@@ -66,7 +57,7 @@ const Movies = ({ setPage, pageNum, currentPage }): JSX.Element => {
       case 'string':
         if (NextAndPrev === 'NavigateNextIcon') {
           setPage(prev => prev + 1);
-        } else if (NextAndPrev === 'NavigateBeforeIcon' && currentPage > 1) {
+        } else if (NextAndPrev === 'NavigateBeforeIcon' && page > 1) {
           setPage(prev => prev - 1);
         } else {
           setPage(1);

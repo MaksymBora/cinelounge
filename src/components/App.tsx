@@ -9,11 +9,7 @@ import { Layout } from './Global/Layout';
 import Movies from '@/Pages/Movies';
 import Shows from '@/Pages/Shows';
 import Cast from '@/Pages/Cast';
-import {
-  getAllMovies,
-  getAllShows,
-  getPopularCast,
-} from '@/service/serviceMovies';
+import { getAllShows, getPopularCast } from '@/service/serviceMovies';
 import MovieInfo from '@/Pages/MovieInfo';
 import MovieCastAndCrew from '@/Pages/MovieCastAndCrew';
 import ShowInfo from '@/Pages/ShowInfo';
@@ -80,13 +76,7 @@ export function App() {
     createRoutesFromElements(
       <Route element={<Layout />}>
         <Route path="/">
-          <Route
-            index
-            element={
-              <Movies setPage={setPage} pageNum={page} currentPage={page} />
-            }
-            loader={() => getAllMovies(page)}
-          />
+          <Route index element={<Movies />} />
           <Route path=":id" element={<MovieInfo />} />
           <Route path=":id/casts" element={<MovieCastAndCrew />} />
         </Route>

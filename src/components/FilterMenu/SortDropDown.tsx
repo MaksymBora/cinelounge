@@ -44,11 +44,9 @@ export const SortDropDown = ({ selectedOption, setSelectedOption }) => {
       const fetchSortedBy = async (sortData, filterData) => {
         try {
           const res = await getSortedBy(sortData, filterData);
-
-          return setFilterData(res);
+          if (res) setFilterData(res.data);
         } catch (error) {
           console.log(error);
-          return undefined;
         }
       };
       fetchSortedBy(selectedOption.value, initialMovieFilterState);

@@ -16,6 +16,8 @@ export const AppState = ({ children }: { children: React.ReactNode }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userName, setUserName] = useState('');
   const [filterMenuOpen, setFilterMenuOpen] = useState(false);
+  const [page, setPage] = useState(1);
+  const [shouldFetchData, setShouldFetchData] = useState(true);
 
   // const [watchlist, setWatchlist] = useState<WatchListTypes[]>([]);
 
@@ -29,6 +31,10 @@ export const AppState = ({ children }: { children: React.ReactNode }) => {
       setUserName,
       filterMenuOpen,
       setFilterMenuOpen,
+      page,
+      setPage,
+      shouldFetchData,
+      setShouldFetchData,
       // watchlist,
       // setWatchlist,
     };
@@ -41,6 +47,10 @@ export const AppState = ({ children }: { children: React.ReactNode }) => {
     setUserName,
     filterMenuOpen,
     setFilterMenuOpen,
+    page,
+    setPage,
+    shouldFetchData,
+    setShouldFetchData,
     // watchlist,
     // setWatchlist,
   ]);

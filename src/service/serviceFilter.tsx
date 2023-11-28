@@ -8,8 +8,8 @@ const themoviedb = axios.create({
   headers: { accept: 'application/json' },
 });
 
-export const getSortedBy = async (sort, filterData) => {
-  const endPoint = `/discover/movie${API_KEY}&language=en-US&with_original_language=en&sort_by=${sort}&page=1`;
+export const getSortedBy = async (sort, filterData, page = 1) => {
+  const endPoint = `/discover/movie${API_KEY}&language=en-US&with_original_language=en&sort_by=${sort}&page=${page}`;
 
   const { year, runtime, rating, genres, services } = filterData;
 
@@ -33,8 +33,7 @@ export const getSortedBy = async (sort, filterData) => {
   ];
 
   try {
-    const response = await themoviedb.get(endPoint + paramsSort.join(''));
-    return response.data;
+    return await themoviedb.get(endPoint + paramsSort.join(''));
   } catch (err) {
     console.log(err);
     return undefined;

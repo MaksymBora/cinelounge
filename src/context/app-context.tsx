@@ -17,6 +17,10 @@ interface ContextProps {
   setIsLoggedIn: Dispatch<SetStateAction<boolean>>;
   userName: string;
   setUserName: Dispatch<SetStateAction<string>>;
+  page: number;
+  setPage: Dispatch<SetStateAction<number>>;
+  shouldFetchData: boolean;
+  setShouldFetchData: Dispatch<SetStateAction<boolean>>;
   // watchlist: WatchListTypes[];
   // setWatchlist: Dispatch<SetStateAction<WatchListTypes[]>>;
 }
@@ -28,6 +32,10 @@ export const AppContext = createContext<ContextProps>({
   setIsLoggedIn: () => {},
   userName: '',
   setUserName: () => {},
+  page: 1,
+  setPage: () => {},
+  shouldFetchData: true,
+  setShouldFetchData: () => {},
   // watchlist: [],
   // setWatchlist: () => {},
 } as ContextProps);
