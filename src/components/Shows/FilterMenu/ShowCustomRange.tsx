@@ -4,7 +4,7 @@ import 'rc-slider/assets/index.css';
 
 const Range = createSliderWithTooltip(Slider.Range);
 
-export const MoviesCustomRange = ({
+export const ShowCustomRange = ({
   formData,
   setFormData,
   name,

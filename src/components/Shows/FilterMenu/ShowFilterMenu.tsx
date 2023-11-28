@@ -1,16 +1,16 @@
 import { useContext, useState } from 'react';
 import { HiOutlineArrowNarrowRight } from 'react-icons/hi';
 import { SortDropDown } from './SortDropDown';
-import { GenreDropdown } from './GenreDropDown';
-import { MoviesCustomRange } from './MovieCustomRange';
 import { markStyles } from '@/utilities/CustomRangeMarksStyles';
 import { watchProviders } from '@/data/watchProviders';
-import { MoviesServiceItem } from './MovieServiceItem';
 import { getSortedBy } from '@/service/serviceFilterMovies';
 import { FilterDataContext } from '@/context/filterData-context';
 import { AppContext } from '@/context/app-context';
 import { TypeDropdown } from './TypeDropdown';
 import { StatusDropdown } from './StatusDropdown';
+import { ShowCustomRange } from './ShowCustomRange';
+import { GenreDropdown } from './GenreDropdown';
+import { ShowsServiceItem } from './ShowsServiceItem';
 
 const initialMovieFilterState = {
   year: [1000, 9999],
@@ -112,7 +112,7 @@ export const ShowFilterMenu = () => {
         <div className="bg-[#ddd] h-px rounded-[10px] mb-4"></div>
 
         {rangeProps.map(r => (
-          <MoviesCustomRange
+          <ShowCustomRange
             key={r.name}
             formData={formData}
             setFormData={setFormData}
@@ -125,12 +125,14 @@ export const ShowFilterMenu = () => {
             tipFormatter={r.tipFormatter}
           />
         ))}
+
         <div className="bg-[#ddd] h-px rounded-[10px] mb-4"></div>
+
         <div className="flex flex-col items-center w-full mb-8">
           <h3 className="w-full mb-6 text-center">Services</h3>
           <ul className="w-full grid gap-[5px] grid-cols-4">
             {watchProviders.map(p => (
-              <MoviesServiceItem
+              <ShowsServiceItem
                 setFormData={setFormData}
                 state={formData.services}
                 stateStr="services"

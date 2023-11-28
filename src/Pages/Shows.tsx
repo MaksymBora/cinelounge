@@ -55,7 +55,7 @@ function Shows({ setPage, currentPage }): JSX.Element {
         {filterMenuOpen && <ShowFilterMenu />}
 
         {/* filterMenuOpen={filterMenuOpen} add in ShowList !!!! */}
-        <ShowsList />
+        <ShowsList filterMenuOpen={filterMenuOpen} />
       </div>
       <ThemeProvider theme={darkModeTheme}>
         <section className="max-w-xxl mx-auto flex items-center justify-center my-12">
