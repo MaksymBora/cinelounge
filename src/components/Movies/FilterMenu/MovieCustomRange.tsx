@@ -1,5 +1,5 @@
 import Slider, { createSliderWithTooltip } from 'rc-slider';
-import { CustomRangeStyles } from '../../utilities/CustomRangeStyles';
+import { CustomRangeStyles } from '../../../utilities/CustomRangeStyles';
 import 'rc-slider/assets/index.css';
 
 const Range = createSliderWithTooltip(Slider.Range);
