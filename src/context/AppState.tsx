@@ -15,11 +15,8 @@ export const AppState = ({ children }: { children: React.ReactNode }) => {
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userName, setUserName] = useState('');
-  const [filterMenuOpen, setFilterMenuOpen] = useState(false);
   const [page, setPage] = useState(1);
   const [shouldFetchData, setShouldFetchData] = useState(true);
-
-  // const [watchlist, setWatchlist] = useState<WatchListTypes[]>([]);
 
   const contextValue = useMemo(() => {
     return {
@@ -29,14 +26,11 @@ export const AppState = ({ children }: { children: React.ReactNode }) => {
       setIsLoggedIn,
       userName,
       setUserName,
-      filterMenuOpen,
-      setFilterMenuOpen,
+
       page,
       setPage,
       shouldFetchData,
       setShouldFetchData,
-      // watchlist,
-      // setWatchlist,
     };
   }, [
     isRefreshing,
@@ -45,14 +39,11 @@ export const AppState = ({ children }: { children: React.ReactNode }) => {
     setIsLoggedIn,
     userName,
     setUserName,
-    filterMenuOpen,
-    setFilterMenuOpen,
+
     page,
     setPage,
     shouldFetchData,
     setShouldFetchData,
-    // watchlist,
-    // setWatchlist,
   ]);
 
   return (

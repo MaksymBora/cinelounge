@@ -21,7 +21,6 @@ import { getCurrentUser } from '@/service/serviceAuth';
 import { AppContext } from '@/context/app-context';
 import { RestrictedRoute } from '@/RestrictedRoute/RestrictedRoute';
 import { Watchlist } from '@/Pages/WatchList';
-import { FilterState } from '@/context/FilterMenuState';
 import { FilterDataState } from '@/context/filterDataState';
 
 export function App() {
@@ -113,10 +112,8 @@ export function App() {
   return isRefreshing ? (
     <div>Loading...</div>
   ) : (
-    <FilterState>
-      <FilterDataState>
-        <RouterProvider router={browserRouter} />
-      </FilterDataState>
-    </FilterState>
+    <FilterDataState>
+      <RouterProvider router={browserRouter} />
+    </FilterDataState>
   );
 }
