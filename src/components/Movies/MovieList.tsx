@@ -1,10 +1,6 @@
-import { useContext } from 'react';
 import { MovieCard } from './MovieCard';
-import { FilterContext } from '@/context/filterMenu-context';
 
-export const MovieList = ({ filterData }): JSX.Element => {
-  const { filterMenuOpen } = useContext(FilterContext);
-
+export const MovieList = ({ filterData, filterMenuOpen }): JSX.Element => {
   return (
     <section
       className={` grid grid-cols-filmList gap-8 bg-inherit text-mainTextColo  ${

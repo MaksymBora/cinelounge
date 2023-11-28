@@ -1,11 +1,10 @@
 import Pagination from '@mui/material/Pagination';
 import { ThemeProvider, createTheme } from '@mui/material';
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { MovieList } from '@/components/Movies/MovieList';
 import { getDesignTokens } from '@/styleTheme/MuiPallete';
-import { FilterBtn } from '@/components/FilterMenu/FilterBtn';
-import { MovieFilterMenu } from '@/components/FilterMenu/MovieFilterMenu';
-import { FilterContext } from '@/context/filterMenu-context';
+import { FilterBtn } from '@/components/Movies/FilterMenu/FilterBtn';
+import { MovieFilterMenu } from '@/components/Movies/FilterMenu/MovieFilterMenu';
 import { FilterDataContext } from '@/context/filterData-context';
 import { AppContext } from '@/context/app-context';
 import { getSortedBy } from '@/service/serviceFilterMovies';
@@ -15,9 +14,9 @@ const darkModeTheme = createTheme(getDesignTokens('dark'));
 const Movies = (): JSX.Element => {
   const { shouldFetchData, setShouldFetchData } = useContext(AppContext);
   const { page, setPage } = useContext(AppContext);
-  const { filterMenuOpen } = useContext(FilterContext);
   const { filterData, setFilterData } = useContext(FilterDataContext);
   const { formData } = useContext(FilterDataContext);
+  const [filterMenuOpen, setFilterMenuOpen] = useState(false);
 
   useEffect(() => {
     const sort = 'popularity.desc';
@@ -70,11 +69,14 @@ const Movies = (): JSX.Element => {
 
   return (
     <>
-      <FilterBtn />
+      <FilterBtn
+        filterMenuOpen={filterMenuOpen}
+        setFilterMenuOpen={setFilterMenuOpen}
+      />
 
       <div className="max-w-xxl mx-auto flex my-12 justify-center items-start gap-x-8">
         {filterMenuOpen && <MovieFilterMenu />}
-        <MovieList filterData={filterData} />
+        <MovieList filterData={filterData} filterMenuOpen={filterMenuOpen} />
       </div>
 
       <ThemeProvider theme={darkModeTheme}>

@@ -1,8 +1,11 @@
 import { ThemeProvider, createTheme } from '@mui/material';
 import Pagination from '@mui/material/Pagination';
+import { useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
 import { ShowsList } from '@/components/Shows/ShowsList';
 import { getDesignTokens } from '@/styleTheme/MuiPallete';
+import { FilterBtn } from '@/components/Movies/FilterMenu/FilterBtn';
+import { ShowFilterMenu } from '@/components/Shows/FilterMenu/ShowFilterMenu';
 
 const darkModeTheme = createTheme(getDesignTokens('dark'));
 
@@ -13,6 +16,8 @@ interface ApiResponse {
 }
 
 function Shows({ setPage, currentPage }): JSX.Element {
+  const [filterMenuOpen, setFilterMenuOpen] = useState(false);
+
   const response = useLoaderData() as ApiResponse;
 
   const { data } = response;
@@ -42,8 +47,15 @@ function Shows({ setPage, currentPage }): JSX.Element {
 
   return (
     <>
+      <FilterBtn
+        filterMenuOpen={filterMenuOpen}
+        setFilterMenuOpen={setFilterMenuOpen}
+      />
       <div className="max-w-xxl mx-auto flex my-12 justify-center items-start gap-8">
-        <ShowsList />
+        {filterMenuOpen && <ShowFilterMenu />}
+
+        {/* filterMenuOpen={filterMenuOpen} add in ShowList !!!! */}
+        <ShowsList filterMenuOpen={filterMenuOpen} />
       </div>
       <ThemeProvider theme={darkModeTheme}>
         <section className="max-w-xxl mx-auto flex items-center justify-center my-12">

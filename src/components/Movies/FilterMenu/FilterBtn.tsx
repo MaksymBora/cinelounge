@@ -1,10 +1,6 @@
-import { useContext } from 'react';
 import { IoOptionsOutline } from 'react-icons/io5';
-import { FilterContext } from '@/context/filterMenu-context';
 
-export const FilterBtn = () => {
-  const { filterMenuOpen, setFilterMenuOpen } = useContext(FilterContext);
-
+export const FilterBtn = ({ filterMenuOpen, setFilterMenuOpen }) => {
   const toggleMenu = () => {
     setFilterMenuOpen(prevState => !prevState);
   };
