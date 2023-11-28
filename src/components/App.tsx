@@ -26,6 +26,7 @@ import { FilterDataState } from '@/context/filterDataState';
 
 export function App() {
   const [page, setPage] = useState(1);
+
   const [token] = useState(() => {
     const savedToken = localStorage.getItem('token');
 
@@ -35,11 +36,13 @@ export function App() {
   });
 
   const { isRefreshing, setIsRefreshing } = useContext(AppContext);
-  const { isLoggedIn, setIsLoggedIn } = useContext(AppContext);
-  const { userName, setUserName } = useContext(AppContext);
+  const { setIsLoggedIn } = useContext(AppContext);
+  const { setUserName } = useContext(AppContext);
 
   useEffect(() => {
-    if (token === null) return;
+    if (token === null) {
+      return;
+    }
 
     const result = async () => {
       try {
@@ -62,15 +65,12 @@ export function App() {
       }
     };
 
-    result();
-  }, [
-    isLoggedIn,
-    setIsLoggedIn,
-    setIsRefreshing,
-    setUserName,
-    token,
-    userName,
-  ]);
+    if (token) {
+      setIsRefreshing(true);
+      result();
+      setIsRefreshing(false);
+    }
+  }, [token, setIsLoggedIn, setUserName, setIsRefreshing]);
 
   const browserRouter = createBrowserRouter(
     createRoutesFromElements(

@@ -10,7 +10,7 @@ import { getSortedBy } from '@/service/serviceFilter';
 import { FilterDataContext } from '@/context/filterData-context';
 import { AppContext } from '@/context/app-context';
 
-export const initialMovieFilterState = {
+const initialMovieFilterState = {
   year: [1000, 9999],
   runtime: [0, 999],
   rating: [0, 100],
@@ -31,7 +31,7 @@ type MovieSort =
   | 'vote_count.desc';
 
 export const MovieFilterMenu = () => {
-  const [formData, setFormData] = useState(initialMovieFilterState);
+  const { formData, setFormData } = useContext(FilterDataContext);
   const [selectedOption, setSelectedOption] = useState<OptionsType | null>(
     null
   );

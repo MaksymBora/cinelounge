@@ -7,24 +7,17 @@ import { FilterBtn } from '@/components/FilterMenu/FilterBtn';
 import { MovieFilterMenu } from '@/components/FilterMenu/MovieFilterMenu';
 import { FilterContext } from '@/context/filterMenu-context';
 import { FilterDataContext } from '@/context/filterData-context';
-// import { getAllMovies } from '@/service/serviceMovies';
 import { AppContext } from '@/context/app-context';
 import { getSortedBy } from '@/service/serviceFilter';
 
 const darkModeTheme = createTheme(getDesignTokens('dark'));
 
-export const initialMovieFilterState = {
-  year: [1000, 9999],
-  runtime: [0, 999],
-  rating: [0, 100],
-  genres: [],
-  services: [],
-};
 const Movies = (): JSX.Element => {
   const { shouldFetchData, setShouldFetchData } = useContext(AppContext);
   const { page, setPage } = useContext(AppContext);
   const { filterMenuOpen } = useContext(FilterContext);
   const { filterData, setFilterData } = useContext(FilterDataContext);
+  const { formData } = useContext(FilterDataContext);
 
   useEffect(() => {
     const sort = 'popularity.desc';
@@ -40,9 +33,16 @@ const Movies = (): JSX.Element => {
       }
     };
     if (shouldFetchData && (filterData === null || page !== 1 || page === 1)) {
-      fetchAllMovies(sort, initialMovieFilterState, page);
+      fetchAllMovies(sort, formData, page);
     }
-  }, [filterData, setFilterData, page, shouldFetchData, setShouldFetchData]);
+  }, [
+    filterData,
+    setFilterData,
+    page,
+    shouldFetchData,
+    setShouldFetchData,
+    formData,
+  ]);
 
   const handlePagination = e => {
     const pageNumber = parseInt(e.target.textContent, 10);
