@@ -6,7 +6,7 @@ import { MoviesCustomRange } from './MovieCustomRange';
 import { markStyles } from '@/utilities/CustomRangeMarksStyles';
 import { watchProviders } from '@/data/watchProviders';
 import { MoviesServiceItem } from './MovieServiceItem';
-import { getSortedBy } from '@/service/serviceFilter';
+import { getSortedBy } from '@/service/serviceFilterMovies';
 import { FilterDataContext } from '@/context/filterData-context';
 import { AppContext } from '@/context/app-context';
 

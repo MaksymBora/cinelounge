@@ -8,7 +8,7 @@ import { MovieFilterMenu } from '@/components/FilterMenu/MovieFilterMenu';
 import { FilterContext } from '@/context/filterMenu-context';
 import { FilterDataContext } from '@/context/filterData-context';
 import { AppContext } from '@/context/app-context';
-import { getSortedBy } from '@/service/serviceFilter';
+import { getSortedBy } from '@/service/serviceFilterMovies';
 
 const darkModeTheme = createTheme(getDesignTokens('dark'));
 

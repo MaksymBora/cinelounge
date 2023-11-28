@@ -2,7 +2,7 @@ import Select from 'react-select';
 import { useContext, useEffect } from 'react';
 import { dropdownStyles } from '@/utilities/dropdownStyles';
 import { FilterDataContext } from '@/context/filterData-context';
-import { getSortedBy } from '@/service/serviceFilter';
+import { getSortedBy } from '@/service/serviceFilterMovies';
 
 type MovieSort =
   | 'popularity.desc'
