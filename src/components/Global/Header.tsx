@@ -61,10 +61,12 @@ export function Header() {
   useEffect(() => {
     if (!darkMode) {
       document.documentElement.classList.remove('dark');
+      localStorage.setItem('theme', 'light');
     } else {
       document.documentElement.classList.add('dark');
+      localStorage.setItem('theme', 'dark');
     }
-  }, [darkMode]);
+  }, [darkMode, setDarkMode]);
 
   return (
     <nav className="flex h-navHeight bg-[#f5f5f5] dark:bg-headerColor shadow-navShadow">

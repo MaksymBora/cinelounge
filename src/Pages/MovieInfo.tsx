@@ -76,7 +76,7 @@ export interface MovieInfoTypes {
 const MovieInfo = (): JSX.Element => {
   const [movie, setMovie] = useState<MovieInfoTypes | null>(null);
   const { id } = useParams();
-  console.log(movie);
+
   useEffect(() => {
     if (!id) return;
 

@@ -19,7 +19,14 @@ export const AppState = ({ children }: { children: React.ReactNode }) => {
   const [showsPage, setShowsPage] = useState(1);
   const [shouldFetchData, setShouldFetchData] = useState(true);
   const [shouldFetchShowsData, setShouldFetchShowsData] = useState(true);
-  const [darkMode, setDarkMode] = useState(true);
+  const [darkMode, setDarkMode] = useState(() => {
+    const mode = localStorage.getItem('theme');
+
+    if (mode === 'dark' || null) return true;
+    if (mode === 'light') return false;
+
+    return true;
+  });
 
   const contextValue = useMemo(() => {
     return {
