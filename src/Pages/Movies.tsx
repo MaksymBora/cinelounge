@@ -14,8 +14,8 @@ const darkModeTheme = createTheme(getDesignTokens('dark'));
 const Movies = (): JSX.Element => {
   const { shouldFetchData, setShouldFetchData } = useContext(AppContext);
   const { page, setPage } = useContext(AppContext);
-  const { filterData, setFilterData } = useContext(FilterDataContext);
-  const { formData } = useContext(FilterDataContext);
+  const { moviesData, setMoviesData } = useContext(FilterDataContext);
+  const { MoviesformData } = useContext(FilterDataContext);
   const [filterMenuOpen, setFilterMenuOpen] = useState(false);
 
   useEffect(() => {
@@ -24,23 +24,23 @@ const Movies = (): JSX.Element => {
       try {
         const res = await getSortedBy(sortData, filterDefaultData, pageNumber);
         if (res) {
-          setFilterData(res.data);
+          setMoviesData(res.data);
           setShouldFetchData(false);
         }
       } catch (error) {
         console.log(error);
       }
     };
-    if (shouldFetchData && (filterData === null || page !== 1 || page === 1)) {
-      fetchAllMovies(sort, formData, page);
+    if (shouldFetchData && (moviesData === null || page !== 1 || page === 1)) {
+      fetchAllMovies(sort, MoviesformData, page);
     }
   }, [
-    filterData,
-    setFilterData,
+    moviesData,
+    setMoviesData,
     page,
     shouldFetchData,
     setShouldFetchData,
-    formData,
+    MoviesformData,
   ]);
 
   const handlePagination = e => {
@@ -76,15 +76,15 @@ const Movies = (): JSX.Element => {
 
       <div className="max-w-xxl mx-auto flex my-12 justify-center items-start gap-x-8">
         {filterMenuOpen && <MovieFilterMenu />}
-        <MovieList filterData={filterData} filterMenuOpen={filterMenuOpen} />
+        <MovieList moviesData={moviesData} filterMenuOpen={filterMenuOpen} />
       </div>
 
       <ThemeProvider theme={darkModeTheme}>
         <section className="max-w-xxl mx-auto flex items-center justify-center my-12">
-          {filterData?.total_pages && (
+          {moviesData?.total_pages && (
             <Pagination
               count={
-                filterData?.total_pages > 25 ? 25 : filterData?.total_pages
+                moviesData?.total_pages > 25 ? 25 : moviesData?.total_pages
               }
               variant="outlined"
               shape="rounded"

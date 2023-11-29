@@ -39,3 +39,41 @@ export const getSortedBy = async (sort, filterData, page = 1) => {
     return undefined;
   }
 };
+
+export const getShowsSortedBy = async (sort, filterData, page = 1) => {
+  const endPoint = `/discover/tv${API_KEY}&language=en-US&with_original_language=en&sort_by=${sort}&page=${page}`;
+
+  const { year, rating, genres, services, status, type } = filterData;
+
+  const genreValues = genres.map(opt => opt.value);
+  const statusValues = status.map(opt => opt.value);
+  const typeValues = type.map(opt => opt.value);
+
+  let minimumVotes = 100;
+  if (sort === 'first_air_date.desc') minimumVotes = 10;
+
+  // Remove talk shows and news genres from base request unless user has activated genres filter
+  let WithoutGenres = '10767|10763';
+  if (genres.length > 0) WithoutGenres = '';
+
+  const paramsSort = [
+    `&first_air_date.gte=${year[0]}-01-01`,
+    `&first_air_date.lte=${year[1]}-12-31`,
+    `&vote_average.gte=${rating[0] / 10}`,
+    `&vote_average.lte=${rating[1] / 10}`,
+    `&with_genres=${genreValues.join('|')}`,
+    `&with_watch_providers=${services.join('|')}`,
+    `&watch_region=US`,
+    `&vote_count.gte=${minimumVotes}`,
+    `&without_genres=${WithoutGenres}`,
+    `&with_status=${statusValues.join('|')}`,
+    `&with_type=${typeValues.join('|')}`,
+  ];
+
+  try {
+    return await themoviedb.get(endPoint + paramsSort.join(''));
+  } catch (err) {
+    console.log(err);
+    return undefined;
+  }
+};

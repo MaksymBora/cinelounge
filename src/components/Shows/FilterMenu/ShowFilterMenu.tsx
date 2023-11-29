@@ -3,7 +3,6 @@ import { HiOutlineArrowNarrowRight } from 'react-icons/hi';
 import { SortDropDown } from './SortDropDown';
 import { markStyles } from '@/utilities/CustomRangeMarksStyles';
 import { watchProviders } from '@/data/watchProviders';
-import { getSortedBy } from '@/service/serviceFilterMovies';
 import { FilterDataContext } from '@/context/filterData-context';
 import { AppContext } from '@/context/app-context';
 import { TypeDropdown } from './TypeDropdown';
@@ -11,13 +10,15 @@ import { StatusDropdown } from './StatusDropdown';
 import { ShowCustomRange } from './ShowCustomRange';
 import { GenreDropdown } from './GenreDropdown';
 import { ShowsServiceItem } from './ShowsServiceItem';
+import { getShowsSortedBy } from '@/service/serviceFilterMovies';
 
 const initialMovieFilterState = {
   year: [1000, 9999],
-  runtime: [0, 999],
   rating: [0, 100],
   genres: [],
   services: [],
+  status: [],
+  type: [],
 };
 
 interface OptionsType {
@@ -71,7 +72,7 @@ export const ShowFilterMenu = () => {
     const sort = 'popularity.desc';
     const fetchSortedBy = async (sortData, dataFromFilters) => {
       try {
-        const res = await getSortedBy(sortData, dataFromFilters);
+        const res = await getShowsSortedBy(sortData, dataFromFilters);
         setFilterData(res?.data);
       } catch (error) {
         console.log(error);

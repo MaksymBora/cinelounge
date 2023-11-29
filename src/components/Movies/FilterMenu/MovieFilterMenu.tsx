@@ -31,11 +31,11 @@ type MovieSort =
   | 'vote_count.desc';
 
 export const MovieFilterMenu = () => {
-  const { formData, setFormData } = useContext(FilterDataContext);
+  const { MoviesformData, setMoviesFormData } = useContext(FilterDataContext);
   const [selectedOption, setSelectedOption] = useState<OptionsType | null>(
     null
   );
-  const { setFilterData } = useContext(FilterDataContext);
+  const { setMoviesData } = useContext(FilterDataContext);
   const { setPage } = useContext(AppContext);
   const { setShouldFetchData } = useContext(AppContext);
 
@@ -46,7 +46,7 @@ export const MovieFilterMenu = () => {
       max: 2023,
       step: 1,
       tipFormatter: (v: number) => v,
-      state: formData.year,
+      state: MoviesformData.year,
       marks: markStyles.year,
     },
     {
@@ -55,7 +55,7 @@ export const MovieFilterMenu = () => {
       max: 100,
       step: 1,
       tipFormatter: (v: number) => `${v}%`,
-      state: formData.rating,
+      state: MoviesformData.rating,
       marks: markStyles.rating,
     },
     {
@@ -64,7 +64,7 @@ export const MovieFilterMenu = () => {
       max: 240,
       step: 5,
       tipFormatter: (v: number) => `${v}%`,
-      state: formData.runtime,
+      state: MoviesformData.runtime,
       marks: markStyles.runtime,
     },
   ];
@@ -75,18 +75,18 @@ export const MovieFilterMenu = () => {
     const fetchSortedBy = async (sortData, dataFromFilters) => {
       try {
         const res = await getSortedBy(sortData, dataFromFilters);
-        setFilterData(res?.data);
+        setMoviesData(res?.data);
       } catch (error) {
         console.log(error);
       }
     };
-    fetchSortedBy(sort, formData);
+    fetchSortedBy(sort, MoviesformData);
   };
 
   const resetForm = e => {
     e.preventDefault();
-    setFormData(initialMovieFilterState);
-    setFilterData(null);
+    setMoviesFormData(initialMovieFilterState);
+    setMoviesData(null);
     setSelectedOption(null);
     setPage(1);
     setShouldFetchData(true);
@@ -102,14 +102,17 @@ export const MovieFilterMenu = () => {
         />
         <div className="bg-[#ddd] h-px rounded-[10px] mb-4"></div>
 
-        <GenreDropdown formData={formData} setFormData={setFormData} />
+        <GenreDropdown
+          formData={MoviesformData}
+          setFormData={setMoviesFormData}
+        />
 
         <div className="bg-[#ddd] h-px rounded-[10px] mb-4"></div>
         {rangeProps.map(r => (
           <MoviesCustomRange
             key={r.name}
-            formData={formData}
-            setFormData={setFormData}
+            formData={MoviesformData}
+            setFormData={setMoviesFormData}
             name={r.name}
             min={r.min}
             max={r.max}
@@ -125,8 +128,8 @@ export const MovieFilterMenu = () => {
           <ul className="w-full grid gap-[5px] grid-cols-4">
             {watchProviders.map(p => (
               <MoviesServiceItem
-                setFormData={setFormData}
-                state={formData.services}
+                setFormData={setMoviesFormData}
+                state={MoviesformData.services}
                 stateStr="services"
                 id={p.provider_id}
                 name={p.provider_name}

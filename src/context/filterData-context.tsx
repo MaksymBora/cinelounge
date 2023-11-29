@@ -38,13 +38,13 @@ const initialMovieFilterState = {
 };
 
 export const FilterDataContext = createContext<{
-  filterData: ApiResponse | null;
-  setFilterData: React.Dispatch<React.SetStateAction<ApiResponse | null>>;
-  formData: FormDataTypes;
-  setFormData: React.Dispatch<React.SetStateAction<FormDataTypes>>;
+  moviesData: ApiResponse | null;
+  setMoviesData: React.Dispatch<React.SetStateAction<ApiResponse | null>>;
+  MoviesformData: FormDataTypes;
+  setMoviesFormData: React.Dispatch<React.SetStateAction<FormDataTypes>>;
 }>({
-  filterData: null,
-  setFilterData: () => {},
-  formData: initialMovieFilterState,
-  setFormData: () => {},
+  moviesData: null,
+  setMoviesData: () => {},
+  MoviesformData: initialMovieFilterState,
+  setMoviesFormData: () => {},
 });

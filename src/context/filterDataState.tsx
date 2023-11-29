@@ -43,19 +43,22 @@ export const FilterDataState = ({
 }: {
   children: React.ReactNode;
 }) => {
-  const [filterData, setFilterData] = useState<ApiResponse | null>(null);
-  const [formData, setFormData] = useState<FormDataTypes>(
+  const [moviesData, setMoviesData] = useState<ApiResponse | null>(null);
+  const [MoviesformData, setMoviesFormData] = useState<FormDataTypes>(
     initialMovieFilterState
   );
+  // const [ShowsformData, setShowsFormData] = useState<FormDataTypes>(
+  //   initialMovieFilterState
+  // );
 
   const contextValue = useMemo(() => {
     return {
-      filterData,
-      setFilterData,
-      formData,
-      setFormData,
+      moviesData,
+      setMoviesData,
+      MoviesformData,
+      setMoviesFormData,
     };
-  }, [filterData, setFilterData, formData, setFormData]);
+  }, [moviesData, setMoviesData, MoviesformData, setMoviesFormData]);
 
   return (
     <FilterDataContext.Provider value={contextValue}>
