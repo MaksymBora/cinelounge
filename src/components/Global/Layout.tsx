@@ -4,7 +4,7 @@ import { Footer } from './Footer';
 
 export function Layout() {
   return (
-    <div>
+    <div className="dark:bg-mainBgColor">
       <Header />
 
       <Outlet />

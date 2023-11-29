@@ -1,6 +1,6 @@
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { IoMoon, IoSunny } from 'react-icons/io5';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { BsBookmarkFill } from 'react-icons/bs';
 import { AppContext } from '@/context/app-context';
 import { logout } from '@/service/serviceAuth';
@@ -51,24 +51,41 @@ export function Header() {
     setDarkMode(prevState => !prevState);
   };
 
+  useEffect(() => {
+    if (!darkMode) {
+      document.documentElement.classList.remove('dark');
+    } else {
+      document.documentElement.classList.add('dark');
+    }
+  }, [darkMode]);
+
   return (
-    <nav className="flex h-navHeight bg-headerColor shadow-navShadow">
+    <nav className="flex h-navHeight bg-[#f5f5f5] dark:bg-headerColor shadow-navShadow">
       <div className="flex items-center grow justify-between grow-1 container xl mx-auto">
         <ul className="flex basis-0 grow gap-8 items-center">
           <li>
-            <Link to="/" className="text-lg py-3 hover:opacity-75">
+            <Link
+              to="/"
+              className="text-lg text-black dark:text-mainTextColo py-3 hover:opacity-75"
+            >
               Movies
             </Link>
           </li>
 
           <li>
-            <Link to="shows" className="text-lg py-3 hover:opacity-75">
+            <Link
+              to="shows"
+              className="text-lg text-black dark:text-mainTextColo py-3 hover:opacity-75"
+            >
               Shows
             </Link>
           </li>
 
           <li>
-            <Link to="cast" className="text-lg py-3 hover:opacity-75">
+            <Link
+              to="cast"
+              className="text-lg text-black dark:text-mainTextColo py-3 hover:opacity-75"
+            >
               Cast
             </Link>
           </li>
@@ -119,13 +136,22 @@ export function Header() {
         </form>
         <div className="flex items-center justify-end gap-3 grow">
           {darkMode ? (
-            <IoSunny onClick={toggleUiTheme} className="cursor-pointer" />
+            <IoSunny
+              onClick={toggleUiTheme}
+              className="cursor-pointer text-black dark:text-mainTextColo text-[21px]"
+            />
           ) : (
-            <IoMoon onClick={toggleUiTheme} className="cursor-pointer" />
+            <IoMoon
+              onClick={toggleUiTheme}
+              className="cursor-pointer text-black dark:text-mainTextColo text-[21px]"
+            />
           )}
 
           {/* ======== Watchlist  ======= */}
-          <Link to="/watchlist" className="flex items-center mr-3">
+          <Link
+            to="/watchlist"
+            className="flex items-center text-black dark:text-mainTextColo mr-3"
+          >
             <BsBookmarkFill className="mr-2" />
             Watchlist
           </Link>
@@ -134,14 +160,14 @@ export function Header() {
             <button
               type="button"
               onClick={handleLogout}
-              className="py-[8px] px-[15px] cursor-pointer bg-authBtn border border-transparent rounded text-[15px] transition-opacity tracking-normal hover:opacity-80"
+              className="py-[8px] px-[15px] cursor-pointer bg-authBtn border border-transparent rounded text-[15px] transition-opacity tracking-normal hover:opacity-80 text-black dark:text-mainTextColo"
             >
               Logout
             </button>
           ) : (
             <Link
               to="/login"
-              className="py-[8px] px-[15px] cursor-pointer bg-authBtn border border-transparent rounded text-[15px] transition-opacity tracking-normal hover:opacity-80"
+              className="py-[8px] px-[15px] cursor-pointer bg-authBtn border border-transparent rounded text-[15px] transition-opacity tracking-normal hover:opacity-80 text-black dark:text-mainTextColo"
             >
               Login
             </Link>
