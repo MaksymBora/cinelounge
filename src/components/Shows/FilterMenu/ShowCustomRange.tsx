@@ -25,7 +25,7 @@ export const ShowCustomRange = ({
   return (
     <div className="mb-12 py-0 px-[14px]">
       <header className="flex mb-[2.4 rem] justify-center items-center">
-        <h3 className="capitalize">{name}</h3>
+        <h3 className="capitalize text-black dark:text-mainTextColo">{name}</h3>
       </header>
       <Range
         className="text-[20px] mr-[5px]"

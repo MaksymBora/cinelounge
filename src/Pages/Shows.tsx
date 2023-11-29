@@ -9,8 +9,6 @@ import { AppContext } from '@/context/app-context';
 import { FilterDataContext } from '@/context/filterData-context';
 import { getShowsSortedBy } from '@/service/serviceFilterMovies';
 
-const darkModeTheme = createTheme(getDesignTokens('dark'));
-
 function Shows(): JSX.Element {
   const [filterMenuOpen, setFilterMenuOpen] = useState(false);
   const { shouldFetchShowsData, setShouldFetchShowsData } =
@@ -18,6 +16,10 @@ function Shows(): JSX.Element {
   const { showsPage, setShowsPage } = useContext(AppContext);
   const { showsData, setShowsData } = useContext(FilterDataContext);
   const { showsFormData } = useContext(FilterDataContext);
+  const { darkMode } = useContext(AppContext);
+
+  const themeValue = darkMode ? 'dark' : 'light';
+  const darkModeTheme = createTheme(getDesignTokens(themeValue));
 
   useEffect(() => {
     const sort = 'popularity.desc';

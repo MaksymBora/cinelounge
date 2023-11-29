@@ -15,7 +15,9 @@ export const GenreDropdown = ({ showsFormData, setShowsFormData }) => {
 
   return (
     <div className="mb-8">
-      <h3 className="text-center">Genre</h3>
+      <h3 className="text-center text-black dark:text-mainTextColo mb-2 font-semibold text-[18px]">
+        Genre
+      </h3>
       <Select
         options={showGenres}
         className="text-black"

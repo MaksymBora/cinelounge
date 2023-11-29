@@ -129,7 +129,9 @@ export const ShowFilterMenu = () => {
         <div className="bg-[#ddd] h-px rounded-[10px] mb-4"></div>
 
         <div className="flex flex-col items-center w-full mb-8">
-          <h3 className="w-full mb-6 text-center">Services</h3>
+          <h3 className="w-full mb-6 text-center text-black dark:text-mainTextColo font-semibold text-[18px]">
+            Services
+          </h3>
           <ul className="w-full grid gap-[5px] grid-cols-4">
             {watchProviders.map(p => (
               <ShowsServiceItem
@@ -147,7 +149,7 @@ export const ShowFilterMenu = () => {
         <div className="bg-[#ddd] h-px rounded-[10px] mb-4"></div>
         <div className="flex flex-col gap-y-5 mt-8 mr-0 mb-8 ml-[2px]">
           <button
-            className="text-[17px] font-medium p-[15px] rounded-[3px] border-none text-left cursor-pointer shadow-filterBtn bg-authBtn text-black"
+            className="text-[17px] font-medium p-[15px] rounded-[3px] border-none text-left cursor-pointer shadow-filterBtn bg-authBtn text-black dark:text-mainTextColo"
             type="submit"
             aria-label="Apply filters"
           >

@@ -1,10 +1,10 @@
 import Pagination from '@mui/material/Pagination';
 import { ThemeProvider, createTheme } from '@mui/material';
+import { useContext } from 'react';
 import { useLoaderData } from 'react-router-dom';
 import { CastList } from '@/components/Cast/CastList';
 import { getDesignTokens } from '@/styleTheme/MuiPallete';
-
-const darkModeTheme = createTheme(getDesignTokens('dark'));
+import { AppContext } from '@/context/app-context';
 
 interface ApiResponse {
   data: {
@@ -13,9 +13,13 @@ interface ApiResponse {
 }
 
 function Cast({ setPage, currentPage }): JSX.Element {
+  const { darkMode } = useContext(AppContext);
   const response = useLoaderData() as ApiResponse;
 
   const { data } = response;
+
+  const themeValue = darkMode ? 'dark' : 'light';
+  const darkModeTheme = createTheme(getDesignTokens(themeValue));
 
   const handlePagination = e => {
     const pageNumber = parseInt(e.target.textContent, 10);

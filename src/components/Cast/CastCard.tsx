@@ -19,7 +19,7 @@ export const CastCard: FC<CastCardProps> = ({
   castData: { profile_path, name, known_for, id },
 }) => {
   return (
-    <div className="flex flex-col bg-bgCard rounded-cardBr shadow-cardShadow min-w-0">
+    <div className="flex flex-col bg-white dark:bg-bgCard rounded-cardBr shadow-cardShadow min-w-0">
       <Link to={`/cast/${id}`} className="relative pt-150">
         <img
           src={`${imageBase}w500${profile_path}`}
@@ -29,12 +29,14 @@ export const CastCard: FC<CastCardProps> = ({
         />
       </Link>
       <div className="p-details flex flex-col">
-        <h2 className="tex-base font-semibold">{name}</h2>
-        <ul className="flex flex-col gap-y-2.5 text-sm mt-4 text-secondaryText">
+        <h2 className="tex-base font-semibold text-black dark:text-mainTextColo">
+          {name}
+        </h2>
+        <ul className="flex flex-col gap-y-2.5 text-sm mt-4 text-[#3c3c3c] dark:text-secondaryText">
           {known_for.map(movie => (
             <li
               key={movie.id}
-              className="overflow-hidden whitespace-nowrap text-ellipsis"
+              className="overflow-hidden whitespace-nowrap text-ellipsis text-[#3c3c3c] dark:text-secondaryText"
             >
               {movie.title || movie.name}
             </li>

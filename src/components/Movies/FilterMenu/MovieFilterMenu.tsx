@@ -124,7 +124,9 @@ export const MovieFilterMenu = () => {
         ))}
         <div className="bg-[#ddd] h-px rounded-[10px] mb-4"></div>
         <div className="flex flex-col items-center w-full mb-8">
-          <h3 className="w-full mb-6 text-center">Services</h3>
+          <h3 className="w-full mb-6 text-center text-black dark:text-mainTextColo font-semibold text-[18px]">
+            Services
+          </h3>
           <ul className="w-full grid gap-[5px] grid-cols-4">
             {watchProviders.map(p => (
               <MoviesServiceItem
