@@ -19,10 +19,7 @@ export const ShowCastCard = ({
   id,
 }: ShowCastCardPropTypes): JSX.Element => {
   return (
-    <li
-      className="w-[138px] bg-bgCard rounded-cardBr shadow-castShadow border
-	 border-black"
-    >
+    <li className="w-[138px] bg-white dark:bg-bgCard rounded-cardBr shadow-castShadow border">
       <Link to={`/cast/${id}`}>
         {/* Person ID */}
         <img
@@ -32,8 +29,8 @@ export const ShowCastCard = ({
         />
       </Link>
       <div className="py-[13px] px-[11px]">
-        <h3 className="text-sm">{name}</h3>
-        <p className="text-xs mt-[5px] text-secondaryText">
+        <h3 className="text-sm text-black dark:text-mainTextColo">{name}</h3>
+        <p className="text-xs mt-[5px] text-[#3c3c3c] dark:text-secondaryText">
           {roles[0].character}
         </p>
       </div>

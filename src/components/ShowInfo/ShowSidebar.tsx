@@ -57,7 +57,7 @@ export const ShowSidebar: FC<MovieCastProps> = ({ movieData }): JSX.Element => {
                   target="_blank"
                   rel="noreferrer"
                   aria-label={`${movieData?.title} ${social.name}`}
-                  className="flex justify-center items-center py-[5px] px-[10px] transition-all text-mainTextColo hover:opacity-60"
+                  className="flex justify-center items-center py-[5px] px-[10px] transition-all text-black dark:text-mainTextColo hover:opacity-60"
                 >
                   <social.icon />
                 </a>
@@ -70,21 +70,35 @@ export const ShowSidebar: FC<MovieCastProps> = ({ movieData }): JSX.Element => {
       )}
       <div className="flex flex-col gap-y-4">
         <div>
-          <h3 className="text-[18px] font-bold">Status</h3>
-          <p className="text-sm mt-[2px]">{movieData?.status}</p>
+          <h3 className="text-[18px] font-bold text-black dark:text-mainTextColo">
+            Status
+          </h3>
+          <p className="text-sm mt-[2px] text-black dark:text-mainTextColo">
+            {movieData?.status}
+          </p>
         </div>
         <div>
-          <h3 className="text-[18px] font-bold">Seasons</h3>
-          <p className="text-sm mt-[2px]">{movieData?.number_of_seasons}</p>
+          <h3 className="text-[18px] font-bold text-black dark:text-mainTextColo">
+            Seasons
+          </h3>
+          <p className="text-sm mt-[2px] text-black dark:text-mainTextColo">
+            {movieData?.number_of_seasons}
+          </p>
         </div>
         <div>
-          <h3 className="text-[18px] font-bold">Episodes</h3>
-          <p className="text-sm mt-[2px]">{movieData?.number_of_episodes}</p>
+          <h3 className="text-[18px] font-bold text-black dark:text-mainTextColo">
+            Episodes
+          </h3>
+          <p className="text-sm mt-[2px] text-black dark:text-mainTextColo">
+            {movieData?.number_of_episodes}
+          </p>
         </div>
         <div>
-          <h3 className="text-[18px] font-bold">Last Air Date</h3>
+          <h3 className="text-[18px] font-bold text-black dark:text-mainTextColo">
+            Last Air Date
+          </h3>
           {movieData?.last_air_date && (
-            <p className="text-sm mt-[2px]">
+            <p className="text-sm mt-[2px] text-black dark:text-mainTextColo">
               {formatDate(movieData.last_air_date.replace(/-/g, '/'), 'short')}
             </p>
           )}
@@ -92,11 +106,13 @@ export const ShowSidebar: FC<MovieCastProps> = ({ movieData }): JSX.Element => {
         <div>
           {movieData?.networks && movieData.networks.length > 0 && (
             <>
-              <h3 className="text-[18px] font-bold">Network</h3>
+              <h3 className="text-[18px] font-bold text-black dark:text-mainTextColo">
+                Network
+              </h3>
               <img
                 src={`${imageBase}original${movieData?.networks[0].logo_path}`}
                 alt={movieData?.networks[0].name}
-                className="w-[45px]"
+                className="w-[45px] mt-2"
               />
             </>
           )}
