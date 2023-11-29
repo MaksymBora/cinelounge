@@ -20,7 +20,7 @@ export const StatusDropdown = ({ formData, setFormData }) => {
 
   return (
     <div className="mb-8">
-      <h3 className="text-center">Type</h3>
+      <h3 className="text-center">Status</h3>
       <Select
         options={options}
         className="text-black"
