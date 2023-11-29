@@ -13,7 +13,9 @@ export const Recommendations: FC<MovieRecommencdationsProps> = ({
 
   return (
     <section className="container max-w-xxl mx-auto my-0">
-      <h2 className="mb-4 text-2xl">Recommendations</h2>
+      <h2 className="mb-4 text-2xl text-black dark:text-mainTextColo">
+        Recommendations
+      </h2>
       <ul className="grid relative grid-cols-6 justify-start items-start gap-[0.5rem] mb-6 pb-4">
         {movieData?.recommendations?.results.map(entry => {
           return (

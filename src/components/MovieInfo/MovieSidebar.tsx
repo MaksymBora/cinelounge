@@ -58,7 +58,7 @@ export const MovieSidebar: FC<MovieCastProps> = ({
                   target="_blank"
                   rel="noreferrer"
                   aria-label={`${movieData?.title} ${social.name}`}
-                  className="flex justify-center items-center py-[5px] px-[10px] transition-all text-mainTextColo hover:opacity-60"
+                  className="flex justify-center items-center py-[5px] px-[10px] transition-all text-black dark:text-mainTextColo hover:opacity-60"
                 >
                   <social.icon />
                 </a>
@@ -71,8 +71,8 @@ export const MovieSidebar: FC<MovieCastProps> = ({
       )}
       <div className="flex flex-col gap-y-4">
         <div>
-          <h3>Status</h3>
-          <p className="text-sm mt-[2px]">
+          <h3 className="text-black dark:text-mainTextColo">Status</h3>
+          <p className="text-sm mt-[2px] text-black dark:text-mainTextColo">
             {movieData?.status}
             {movieData?.status === 'Released' &&
               ` (${formatDate(
@@ -83,16 +83,16 @@ export const MovieSidebar: FC<MovieCastProps> = ({
         </div>
         {movieData?.budget! > 0 && (
           <div>
-            <h3>Budget</h3>
-            <p className="tracking-[0.5px]">
+            <h3 className="text-black dark:text-mainTextColo">Budget</h3>
+            <p className="tracking-[0.5px] text-black dark:text-mainTextColo">
               ${Number(movieData?.budget).toLocaleString()}
             </p>
           </div>
         )}
         {movieData?.revenue! > 0 && (
           <div>
-            <h3>Revenue</h3>
-            <p className="tracking-[0.5px]">
+            <h3 className="text-black dark:text-mainTextColo">Revenue</h3>
+            <p className="tracking-[0.5px] text-black dark:text-mainTextColo">
               ${Number(movieData?.revenue).toLocaleString()}
             </p>
           </div>

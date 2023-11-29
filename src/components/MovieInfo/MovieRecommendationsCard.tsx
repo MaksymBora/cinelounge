@@ -13,7 +13,7 @@ export const MovieRecommendationsCard = ({
   id,
 }: MovieRecommendationsCardProps) => {
   return (
-    <li className="flex flex-col rounded-[4px] shadow-castShadow border border-black">
+    <li className="flex flex-col rounded-[4px] shadow-castShadow border">
       <Link to={`/${id}`} className="flex z-[2]">
         <img
           src={`${imageBase}w780${backdrop_path}`}
@@ -22,8 +22,10 @@ export const MovieRecommendationsCard = ({
           className="rounded-b-[3px]"
         />
       </Link>
-      <div className="p-3 bg-bgCard whitespace-nowrap overflow-hidden text-ellipsis">
-        <h3>{title}</h3>
+      <div className="p-3 bg-white dark:bg-bgCard whitespace-nowrap overflow-hidden text-ellipsis">
+        <h3 className="text-black dark:text-mainTextColo font-medium">
+          {title}
+        </h3>
       </div>
     </li>
   );

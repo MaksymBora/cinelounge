@@ -15,10 +15,7 @@ export const MovieCastCard = ({
   id,
 }: MovieCastCardProps) => {
   return (
-    <li
-      className="w-[138px] bg-bgCard rounded-cardBr shadow-castShadow border
-	 border-black"
-    >
+    <li className="w-[138px] bg-white dark:bg-bgCard rounded-cardBr shadow-castShadow border">
       <Link to={`/cast/${id}`}>
         {/* Person ID */}
         <img
@@ -28,8 +25,10 @@ export const MovieCastCard = ({
         />
       </Link>
       <div className="py-[13px] px-[11px]">
-        <h3 className="text-sm">{name}</h3>
-        <p className="text-xs mt-[5px] text-secondaryText">{character}</p>
+        <h3 className="text-sm text-black dark:text-mainTextColo">{name}</h3>
+        <p className="text-xs mt-[5px] text-[#3c3c3c] dark:text-secondaryText">
+          {character}
+        </p>
       </div>
     </li>
   );

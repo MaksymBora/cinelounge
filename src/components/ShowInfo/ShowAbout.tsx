@@ -46,12 +46,16 @@ export const ShowAbout: FC<MovieAboutProps> = ({
 
   return (
     <section className="my-12 mx-0 relative">
-      <div className="h-[600px] bg-movieAboutBg">
+      <div
+        className={`h-[600px]  {${
+          movieData?.backdrop_path ? '' : 'bg-movieAboutBg'
+        }}`}
+      >
         <div
           style={{
             background: `url('${imageBase}original${movieData?.backdrop_path}') no-repeat top center/cover`,
           }}
-          className="absolute w-full h-full -z-[1]"
+          className="absolute w-full h-full -z-5"
         />
         <div className="grid grid-cols-[1fr,4fr] items-center gap-x-16 z-[1] max-w-xxl mx-auto my-0 text-white relative h-full">
           {hasImages ? (
