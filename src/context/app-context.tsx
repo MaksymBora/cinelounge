@@ -25,6 +25,8 @@ interface ContextProps {
   setShowsPage: Dispatch<SetStateAction<number>>;
   shouldFetchShowsData: boolean;
   setShouldFetchShowsData: Dispatch<SetStateAction<boolean>>;
+  darkMode: boolean;
+  setDarkMode: Dispatch<SetStateAction<boolean>>;
 }
 
 export const AppContext = createContext<ContextProps>({
@@ -42,4 +44,6 @@ export const AppContext = createContext<ContextProps>({
   setShowsPage: () => {},
   shouldFetchShowsData: true,
   setShouldFetchShowsData: () => {},
+  darkMode: true,
+  setDarkMode: () => {},
 } as ContextProps);

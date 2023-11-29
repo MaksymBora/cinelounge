@@ -12,8 +12,8 @@ export function Header() {
   );
   const { isLoggedIn, setIsLoggedIn } = useContext(AppContext);
   const navigate = useNavigate();
-  // const [darkMode, setDarkMode] = useState(true);
-  // console.log(darkMode);
+  const { darkMode, setDarkMode } = useContext(AppContext);
+  console.log(darkMode);
 
   const handleQuery = e => {
     setQuery(e.target.value);
@@ -45,6 +45,10 @@ export function Header() {
       console.log(error);
       return null;
     }
+  };
+
+  const toggleUiTheme = () => {
+    setDarkMode(prevState => !prevState);
   };
 
   return (
@@ -114,8 +118,12 @@ export function Header() {
           </div>
         </form>
         <div className="flex items-center justify-end gap-3 grow">
-          <IoMoon />
-          <IoSunny />
+          {darkMode ? (
+            <IoSunny onClick={toggleUiTheme} className="cursor-pointer" />
+          ) : (
+            <IoMoon onClick={toggleUiTheme} className="cursor-pointer" />
+          )}
+
           {/* ======== Watchlist  ======= */}
           <Link to="/watchlist" className="flex items-center mr-3">
             <BsBookmarkFill className="mr-2" />
