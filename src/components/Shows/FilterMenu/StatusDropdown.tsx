@@ -14,7 +14,7 @@ export const StatusDropdown = ({ showsFormData, setShowsFormData }) => {
   const handleGenreChange = active => {
     setShowsFormData({
       ...showsFormData,
-      genres: active,
+      status: active,
     });
   };
 

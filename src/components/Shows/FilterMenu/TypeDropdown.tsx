@@ -16,7 +16,7 @@ export const TypeDropdown = ({ showsFormData, setShowsFormData }) => {
   const handleGenreChange = active => {
     setShowsFormData({
       ...showsFormData,
-      genres: active,
+      type: active,
     });
   };
 
