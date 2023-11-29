@@ -12,7 +12,7 @@ import { GenreDropdown } from './GenreDropdown';
 import { ShowsServiceItem } from './ShowsServiceItem';
 import { getShowsSortedBy } from '@/service/serviceFilterMovies';
 
-const initialMovieFilterState = {
+const initialShowsFilterState = {
   year: [1000, 9999],
   rating: [0, 100],
   genres: [],
@@ -29,7 +29,7 @@ interface OptionsType {
 type ShowSort = 'popularity.desc' | 'vote_average.desc' | 'first_air_date.desc';
 
 export const ShowFilterMenu = () => {
-  const { formData, setFormData } = useContext(FilterDataContext);
+  const { showsFormData, setShowsFormData } = useContext(FilterDataContext);
   const [selectedOption, setSelectedOption] = useState<OptionsType | null>(
     null
   );
@@ -44,7 +44,7 @@ export const ShowFilterMenu = () => {
       max: 2023,
       step: 1,
       tipFormatter: (v: number) => v,
-      state: formData.year,
+      state: showsFormData.year,
       marks: markStyles.year,
     },
     {
@@ -52,21 +52,11 @@ export const ShowFilterMenu = () => {
       min: 0,
       max: 100,
       step: 1,
-      tipFormatter: (v: number) => `${v}%`,
-      state: formData.rating,
+      tipFormatter: (v: number) => `${v} + '%'`,
+      state: showsFormData.rating,
       marks: markStyles.rating,
     },
-    {
-      name: 'runtime',
-      min: 0,
-      max: 240,
-      step: 5,
-      tipFormatter: (v: number) => `${v}%`,
-      state: formData.runtime,
-      marks: markStyles.runtime,
-    },
   ];
-
   const applyFilters = e => {
     e.preventDefault();
     const sort = 'popularity.desc';
@@ -78,12 +68,12 @@ export const ShowFilterMenu = () => {
         console.log(error);
       }
     };
-    fetchSortedBy(sort, formData);
+    fetchSortedBy(sort, showsFormData);
   };
 
   const resetForm = e => {
     e.preventDefault();
-    setFormData(initialMovieFilterState);
+    setShowsFormData(initialShowsFilterState);
     setFilterData(null);
     setSelectedOption(null);
     setPage(1);
@@ -100,23 +90,29 @@ export const ShowFilterMenu = () => {
         />
         <div className="bg-[#ddd] h-px rounded-[10px] mb-4"></div>
 
-        <GenreDropdown formData={formData} setFormData={setFormData} />
+        <GenreDropdown
+          formData={showsFormData}
+          setFormData={setShowsFormData}
+        />
 
         <div className="bg-[#ddd] h-px rounded-[10px] mb-4"></div>
 
-        <TypeDropdown formData={formData} setFormData={setFormData} />
+        <TypeDropdown formData={showsFormData} setFormData={setShowsFormData} />
 
         <div className="bg-[#ddd] h-px rounded-[10px] mb-4"></div>
 
-        <StatusDropdown formData={formData} setFormData={setFormData} />
+        <StatusDropdown
+          formData={showsFormData}
+          setFormData={setShowsFormData}
+        />
 
         <div className="bg-[#ddd] h-px rounded-[10px] mb-4"></div>
 
         {rangeProps.map(r => (
           <ShowCustomRange
             key={r.name}
-            formData={formData}
-            setFormData={setFormData}
+            formData={showsFormData}
+            setFormData={setShowsFormData}
             name={r.name}
             min={r.min}
             max={r.max}
@@ -134,8 +130,8 @@ export const ShowFilterMenu = () => {
           <ul className="w-full grid gap-[5px] grid-cols-4">
             {watchProviders.map(p => (
               <ShowsServiceItem
-                setFormData={setFormData}
-                state={formData.services}
+                setFormData={setShowsFormData}
+                state={showsFormData.services}
                 stateStr="services"
                 id={p.provider_id}
                 name={p.provider_name}

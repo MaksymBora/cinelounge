@@ -37,19 +37,55 @@ const initialMovieFilterState = {
   genres: [],
   services: [],
 };
+const initialShowsFilterState = {
+  year: [1000, 9999],
+  rating: [0, 100],
+  genres: [],
+  services: [],
+  status: [],
+  type: [],
+};
+
+interface ShowsServicesTypes {
+  display_priority: number;
+  logo_path: string;
+  provider_name: string;
+  provider_id: number;
+}
+
+interface ShowsTypeOptios {
+  value: number;
+  label: string;
+}
+interface ShowsStatusOptios {
+  value: number;
+  label: string;
+}
+
+interface ShowsFormDataTypes {
+  year: number[];
+  rating: number[];
+  genres: number[];
+  services: ShowsServicesTypes[];
+  status: ShowsStatusOptios[];
+  type: ShowsTypeOptios[];
+}
 
 export const FilterDataState = ({
   children,
 }: {
   children: React.ReactNode;
 }) => {
+  // Movies
   const [moviesData, setMoviesData] = useState<ApiResponse | null>(null);
   const [MoviesformData, setMoviesFormData] = useState<FormDataTypes>(
     initialMovieFilterState
   );
-  // const [ShowsformData, setShowsFormData] = useState<FormDataTypes>(
-  //   initialMovieFilterState
-  // );
+
+  // Shows
+  const [showsFormData, setShowsFormData] = useState<ShowsFormDataTypes>(
+    initialShowsFilterState
+  );
 
   const contextValue = useMemo(() => {
     return {
@@ -57,8 +93,17 @@ export const FilterDataState = ({
       setMoviesData,
       MoviesformData,
       setMoviesFormData,
+      showsFormData,
+      setShowsFormData,
     };
-  }, [moviesData, setMoviesData, MoviesformData, setMoviesFormData]);
+  }, [
+    moviesData,
+    setMoviesData,
+    MoviesformData,
+    setMoviesFormData,
+    showsFormData,
+    setShowsFormData,
+  ]);
 
   return (
     <FilterDataContext.Provider value={contextValue}>
