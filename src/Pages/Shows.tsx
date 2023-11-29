@@ -13,7 +13,8 @@ const darkModeTheme = createTheme(getDesignTokens('dark'));
 
 function Shows(): JSX.Element {
   const [filterMenuOpen, setFilterMenuOpen] = useState(false);
-  const { shouldFetchData, setShouldFetchData } = useContext(AppContext);
+  const { shouldFetchShowsData, setShouldFetchShowsData } =
+    useContext(AppContext);
   const { showsPage, setShowsPage } = useContext(AppContext);
   const { showsData, setShowsData } = useContext(FilterDataContext);
   const { showsFormData } = useContext(FilterDataContext);
@@ -29,14 +30,14 @@ function Shows(): JSX.Element {
         );
         if (res) {
           setShowsData(res.data);
-          setShouldFetchData(false);
+          setShouldFetchShowsData(false);
         }
       } catch (error) {
         console.log(error);
       }
     };
     if (
-      shouldFetchData &&
+      shouldFetchShowsData &&
       (showsData === null || showsPage !== 1 || showsPage === 1)
     ) {
       fetchAllMovies(sort, showsFormData, showsPage);
@@ -45,8 +46,8 @@ function Shows(): JSX.Element {
     showsData,
     setShowsData,
     showsPage,
-    shouldFetchData,
-    setShouldFetchData,
+    shouldFetchShowsData,
+    setShouldFetchShowsData,
     showsFormData,
   ]);
 
@@ -54,7 +55,7 @@ function Shows(): JSX.Element {
     const pageNumber = parseInt(e.target.textContent, 10);
     const NextAndPrev = e.target.dataset.testid;
     const click = pageNumber || NextAndPrev;
-    setShouldFetchData(true);
+    setShouldFetchShowsData(true);
 
     switch (typeof click) {
       case 'number':

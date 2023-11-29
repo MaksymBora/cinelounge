@@ -18,6 +18,7 @@ export const AppState = ({ children }: { children: React.ReactNode }) => {
   const [page, setPage] = useState(1);
   const [showsPage, setShowsPage] = useState(1);
   const [shouldFetchData, setShouldFetchData] = useState(true);
+  const [shouldFetchShowsData, setShouldFetchShowsData] = useState(true);
 
   const contextValue = useMemo(() => {
     return {
@@ -33,6 +34,8 @@ export const AppState = ({ children }: { children: React.ReactNode }) => {
       setPage,
       shouldFetchData,
       setShouldFetchData,
+      shouldFetchShowsData,
+      setShouldFetchShowsData,
     };
   }, [
     isRefreshing,
@@ -47,6 +50,8 @@ export const AppState = ({ children }: { children: React.ReactNode }) => {
     setPage,
     shouldFetchData,
     setShouldFetchData,
+    shouldFetchShowsData,
+    setShouldFetchShowsData,
   ]);
 
   return (

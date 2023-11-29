@@ -23,6 +23,8 @@ interface ContextProps {
   setShouldFetchData: Dispatch<SetStateAction<boolean>>;
   showsPage: number;
   setShowsPage: Dispatch<SetStateAction<number>>;
+  shouldFetchShowsData: boolean;
+  setShouldFetchShowsData: Dispatch<SetStateAction<boolean>>;
 }
 
 export const AppContext = createContext<ContextProps>({
@@ -38,4 +40,6 @@ export const AppContext = createContext<ContextProps>({
   setShouldFetchData: () => {},
   showsPage: 1,
   setShowsPage: () => {},
+  shouldFetchShowsData: true,
+  setShouldFetchShowsData: () => {},
 } as ContextProps);
