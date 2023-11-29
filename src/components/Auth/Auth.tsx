@@ -59,7 +59,7 @@ export const Auth = () => {
 
   return (
     <div className="max-w-xxl my-0 mx-auto h-auth flex flex-col justify-center items-center">
-      <h1 className="mb-8 text-4xl font-semibold">
+      <h1 className="mb-8 text-4xl font-semibold text-black dark:text-mainTextColo">
         {isLoginForm ? 'Login' : 'Register'}
       </h1>
       <form
@@ -68,12 +68,15 @@ export const Auth = () => {
       >
         {!isLoginForm && (
           <>
-            <label htmlFor="name" className="text-sm">
+            <label
+              htmlFor="name"
+              className="text-sm text-black dark:text-mainTextColo"
+            >
               Name
             </label>
             <input
               id="name"
-              className="h-full p-3 my-2 mx-0 w-[300px] mb-8 bg-gray-600 outline-authBtn rounded"
+              className="h-full p-3 my-2 mx-0 w-[300px] mb-8 bg-white  dark:bg-gray-600 border outline-authBtn rounded"
               type="name"
               placeholder="Name"
               name="name"
@@ -81,23 +84,29 @@ export const Auth = () => {
             />
           </>
         )}
-        <label htmlFor="email" className="text-sm">
+        <label
+          htmlFor="email"
+          className="text-sm text-black dark:text-mainTextColo"
+        >
           Email Address
         </label>
         <input
           id="email"
-          className="h-full p-3 my-2 mx-0 w-[300px] mb-8 bg-gray-600 outline-authBtn rounded"
+          className="h-full p-3 my-2 mx-0 w-[300px] mb-8 bg-white  dark:bg-gray-600 border outline-authBtn rounded"
           type="text"
           placeholder="Email"
           name="email"
           autoComplete="off"
         />
-        <label htmlFor="password" className="text-sm">
+        <label
+          htmlFor="password"
+          className="text-sm text-black dark:text-mainTextColo"
+        >
           Password
         </label>
         <input
           id="password"
-          className="h-full p-3 my-2 mx-0 w-[300px] mb-8 bg-gray-600 outline-authBtn rounded"
+          className="h-full p-3 my-2 mx-0 w-[300px] mb-8 bg-white  dark:bg-gray-600 border outline-authBtn rounded"
           type="password"
           placeholder="Password"
           name="password"
@@ -105,7 +114,7 @@ export const Auth = () => {
         />
         <button
           className="mt-12 py-[15px] px-0 text-base cursor-pointer bg-authBtn shadow-btnAuth font-bold 
-		  uppercase tracking-[0.5px] active:transform scale-97 rounded"
+		  uppercase tracking-[0.5px] active:transform scale-97 rounded text-black dark:text-mainTextColo"
           type="submit"
         >
           {isLoginForm ? 'Login' : 'Register'}
@@ -114,7 +123,7 @@ export const Auth = () => {
 
       <a
         href="#0"
-        className="text-[13px] mt-6 text-mainTextColo hover:underline"
+        className="text-[13px] mt-6 text-black dark:text-mainTextColo hover:underline"
         onClick={() => {
           console.log(isLoginForm);
           setIsLoginForm(prevState => !prevState);
