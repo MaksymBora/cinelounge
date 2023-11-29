@@ -50,12 +50,11 @@ function Shows(): JSX.Element {
     showsFormData,
   ]);
 
-  console.log(showsPage);
-
   const handlePagination = e => {
     const pageNumber = parseInt(e.target.textContent, 10);
     const NextAndPrev = e.target.dataset.testid;
     const click = pageNumber || NextAndPrev;
+    setShouldFetchData(true);
 
     switch (typeof click) {
       case 'number':

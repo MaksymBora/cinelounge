@@ -17,12 +17,13 @@ const options: OptionsType[] = [
   { value: 'first_air_date.desc', label: 'Newly released' },
 ];
 
-export const initialMovieFilterState = {
+export const initialShowsFilterState = {
   year: [1000, 9999],
-  runtime: [0, 999],
   rating: [0, 100],
   genres: [],
   services: [],
+  status: [],
+  type: [],
 };
 
 export const SortDropDown = ({ selectedOption, setSelectedOption }) => {
@@ -42,7 +43,7 @@ export const SortDropDown = ({ selectedOption, setSelectedOption }) => {
           console.log(error);
         }
       };
-      fetchSortedBy(selectedOption.value, initialMovieFilterState);
+      fetchSortedBy(selectedOption.value, initialShowsFilterState);
     }
   }, [selectedOption, setShowsData]);
 
