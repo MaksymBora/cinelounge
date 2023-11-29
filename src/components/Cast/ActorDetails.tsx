@@ -2,10 +2,11 @@ import { Link } from 'react-router-dom';
 import { Carousel } from 'react-responsive-carousel';
 import { HiChevronRight, HiChevronLeft } from 'react-icons/hi';
 import { BsInstagram, BsFacebook, BsTwitter, BsTiktok } from 'react-icons/bs';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { imageBase } from '@/service/imagePath';
 import { formatDate, getAge } from '@/utilities/utilities';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
+import { AppContext } from '@/context/app-context';
 
 type Media = {
   media_type: 'movie';
@@ -20,6 +21,7 @@ type Media = {
 
 export const ActorDetails = ({ person, hasMultipleImages }): JSX.Element => {
   const [filteredKnownFor, setFilteredKnownFor] = useState([]);
+  const { darkMode } = useContext(AppContext);
   const socials = [
     {
       base: 'https://instagram.com/',
@@ -141,7 +143,7 @@ export const ActorDetails = ({ person, hasMultipleImages }): JSX.Element => {
                       target="_blank"
                       rel="noreferrer"
                       aria-label={`${person?.name} ${social.name}`}
-                      className="py-[5px] px-[10px] text-mainTextColo flex justify-center items-center"
+                      className="py-[5px] px-[10px] text-black dark:text-mainTextColo flex justify-center items-center"
                     >
                       <social.icon />
                     </a>
@@ -153,19 +155,23 @@ export const ActorDetails = ({ person, hasMultipleImages }): JSX.Element => {
           {socials.some(social => social.id) && (
             <div className="w-full bg-line h-[1px] mb-4 rounded-[50px]"></div>
           )}
-          <div className="mt-[8px] flex flex-col">
+          <div className="mt-[8px] flex flex-col text-black dark:text-mainTextColo">
             {person?.known_for_department && (
               <div className="mb-6">
                 <h2 className="text-[17px] font-semibold mb-[3px]">
                   Known For
                 </h2>
-                <p>{person?.known_for_department}</p>
+                <p className="text-black dark:text-mainTextColo">
+                  {person?.known_for_department}
+                </p>
               </div>
             )}
             {person?.birthday && (
               <div className="mb-6">
-                <h2 className="text-[17px] font-semibold mb-[3px]">Birthday</h2>
-                <p>
+                <h2 className="text-[17px] font-semibold mb-[3px] text-black dark:text-mainTextColo">
+                  Birthday
+                </h2>
+                <p className="text-black dark:text-mainTextColo">
                   {formatDate(person?.birthday.replace(/-/g, '/'))}
                   {!person.deathday && (
                     <span>
@@ -178,12 +184,12 @@ export const ActorDetails = ({ person, hasMultipleImages }): JSX.Element => {
             )}
             {person?.deathday && (
               <div className="mb-6">
-                <h2 className="text-[17px] font-semibold mb-[3px]">
+                <h2 className="text-[17px] font-semibold mb-[3px] text-black dark:text-mainTextColo">
                   Day of Death
                 </h2>
-                <p>
+                <p className="text-black dark:text-mainTextColo">
                   {formatDate(person?.deathday.replace(/-/g, '/'))}
-                  <span>
+                  <span className="text-black dark:text-mainTextColo">
                     ({getAge(person?.birthday, person?.deathday)}
                     years old)
                   </span>
@@ -192,10 +198,12 @@ export const ActorDetails = ({ person, hasMultipleImages }): JSX.Element => {
             )}
             {person?.place_of_birth && (
               <div>
-                <h2 className="text-[17px] font-semibold mb-[3px]">
+                <h2 className="text-[17px] font-semibold mb-[3px] text-black dark:text-mainTextColo">
                   Place of Birth
                 </h2>
-                <p>{person?.place_of_birth}</p>
+                <p className="text-black dark:text-mainTextColo">
+                  {person?.place_of_birth}
+                </p>
               </div>
             )}
           </div>
@@ -207,17 +215,19 @@ export const ActorDetails = ({ person, hasMultipleImages }): JSX.Element => {
         <div>
           <Link
             to={`/search?query=${person?.name?.split(' ').join('+')}`}
-            className="inline-flex items-center mb-8 text-[18px] transition-opacity text-mainTextColo"
+            className="inline-flex items-center mb-8 text-[18px] transition-opacity text-black dark:text-mainTextColo"
             aria-label={`Get search results for ${person?.name}`}
             title={`Get search results for ${person?.name}`}
           >
-            <h1 className="font-bold text-[30px] hover:opacity-60">
+            <h1 className="font-bold text-[30px] hover:opacity-60 text-black dark:text-mainTextColo">
               {person?.name}
             </h1>
           </Link>
           <div className="w-full bg-[rgba(150, 150, 150, 0.5) h-[1px] mb-4 rounded-[50px]]"></div>
-          <h2 className="text-[17px] font-semibold mb-[10px]">Biography</h2>
-          <p className="leading-[1.6] tracking-normal whitespace-pre-wrap mb-8">
+          <h2 className="text-[17px] font-semibold mb-[10px] text-black dark:text-mainTextColo">
+            Biography
+          </h2>
+          <p className="leading-[1.6] tracking-normal whitespace-pre-wrap mb-8 text-black dark:text-mainTextColo">
             {person?.biography
               ? person.biography
               : `We don't have a biography for ${person?.name}`}{' '}
@@ -226,13 +236,19 @@ export const ActorDetails = ({ person, hasMultipleImages }): JSX.Element => {
 
         {/* Known For Part */}
         <div className="translate-y-4">
-          <h2 className="text-[17px] mb-4 font-semibold">Known For</h2>
-          <ul className="relative grid grid-flow-col justify-start gap-4 overflow-x-auto pt-[2px] pb-4 translate-y-[-2px] scroll">
+          <h2 className="text-[17px] mb-4 font-semibold text-black dark:text-mainTextColo">
+            Known For
+          </h2>
+          <ul
+            className={`relative grid grid-flow-col justify-start gap-4 overflow-x-auto translate-y-[-2px] pt-[2px] pb-4 ${
+              darkMode ? 'scroll' : 'scroll-day'
+            }`}
+          >
             {filteredKnownFor.map((media: Media) => {
               const isMovie = media.media_type === 'movie';
               return (
                 <li
-                  className="flex flex-col bg-bgCard w-[145px] rounded-cardBr shadow-castShadow border border-black"
+                  className="flex flex-col bg-white dark:bg-bgCard w-[145px] rounded-cardBr shadow-castShadow border dark:border-black"
                   key={`${media.id}-${media.credit_id}`}
                 >
                   <Link
@@ -246,11 +262,11 @@ export const ActorDetails = ({ person, hasMultipleImages }): JSX.Element => {
                       className="absolute top-0 left-0 rounded-s-sm"
                     />
                   </Link>
-                  <div className="p-actor min-h-[65px] text-mainTextColo overflow-hidden">
-                    <h3 className="text-sm font-semibold mb-[5px] overflow-hidden line-clamp-3">
+                  <div className="p-actor min-h-[65px] text-black dark:text-mainTextColo overflow-hidden">
+                    <h3 className="text-sm font-semibold mb-[5px] overflow-hidden line-clamp-3 text-black dark:text-mainTextColo">
                       {isMovie ? media.title : media.name}
                     </h3>
-                    <p className="text-[13px] text-secondaryText">
+                    <p className="text-[13px] text-black dark:text-mainTextColo">
                       {isMovie
                         ? media.release_date?.slice(0, 4)
                         : media.first_air_date?.slice(0, 4)}

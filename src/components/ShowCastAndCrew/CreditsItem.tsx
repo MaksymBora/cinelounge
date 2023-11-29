@@ -57,11 +57,15 @@ export const CreditsItem = ({
       </Link>
       <div className="flex flex-col ml-6">
         <Link to={`/person/${id}`}>
-          <h3 className="text-mainTextColo">{name}</h3>
+          <h3 className="text-black dark:text-mainTextColo font-medium">
+            {name}
+          </h3>
         </Link>
-        <p className="text-sm text-secondaryText">
+        <p className="text-sm text-black dark:text-mainTextColo">
           {role}
-          <span>({total_episode_count} episodes)</span>
+          <span className="text-black dark:text-mainTextColo">
+            ({total_episode_count} episodes)
+          </span>
         </p>
       </div>
     </li>

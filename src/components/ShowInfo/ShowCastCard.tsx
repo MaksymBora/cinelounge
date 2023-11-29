@@ -19,7 +19,7 @@ export const ShowCastCard = ({
   id,
 }: ShowCastCardPropTypes): JSX.Element => {
   return (
-    <li className="w-[138px] bg-white dark:bg-bgCard rounded-cardBr shadow-castShadow border">
+    <li className="w-[138px] bg-white dark:bg-bgCard rounded-cardBr shadow-castShadow border dark:border-black">
       <Link to={`/cast/${id}`}>
         {/* Person ID */}
         <img
