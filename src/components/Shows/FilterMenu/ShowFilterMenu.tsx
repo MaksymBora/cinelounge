@@ -35,7 +35,7 @@ export const ShowFilterMenu = () => {
   );
   const { setShowsData } = useContext(FilterDataContext);
   const { setPage } = useContext(AppContext);
-  const { setShouldFetchData } = useContext(AppContext);
+  const { setShouldFetchShowsData } = useContext(AppContext);
 
   const rangeProps = [
     {
@@ -69,7 +69,6 @@ export const ShowFilterMenu = () => {
       }
     };
     fetchSortedBy(sort, showsFormData);
-    console.log(showsFormData);
   };
 
   const resetForm = e => {
@@ -78,7 +77,7 @@ export const ShowFilterMenu = () => {
     setShowsData(null);
     setSelectedOption(null);
     setPage(1);
-    setShouldFetchData(true);
+    setShouldFetchShowsData(true);
     window.scrollTo(0, 0);
   };
 
