@@ -70,7 +70,7 @@ export function Header() {
 
   return (
     <nav className="flex h-navHeight bg-[#f5f5f5] dark:bg-headerColor shadow-navShadow">
-      <div className="flex items-center grow justify-between grow-1 container xl mx-auto">
+      <div className="max-w-xxl mx-auto flex items-center grow justify-between grow-1 container xl mx-auto">
         <ul className="flex basis-0 grow gap-8 items-center">
           <li>
             <Link
