@@ -142,7 +142,7 @@ export const MovieFilterMenu = () => {
         <div className="bg-[#ddd] h-px rounded-[10px] mb-4"></div>
         <div className="flex flex-col gap-y-5 mt-8 mr-0 mb-8 ml-[2px]">
           <button
-            className="text-[17px] font-medium p-[15px] rounded-[3px] border-none text-left cursor-pointer shadow-filterBtn bg-authBtn text-black"
+            className="text-[17px] font-medium p-[15px] rounded-[3px] border-none text-left cursor-pointer shadow-filterBtn bg-authBtn text-black dark:text-mainTextColo"
             type="submit"
             aria-label="Apply filters"
           >

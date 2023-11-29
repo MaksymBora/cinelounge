@@ -12,8 +12,11 @@ export const FilterBtn = ({ filterMenuOpen, setFilterMenuOpen }) => {
         type="button"
         onClick={toggleMenu}
       >
-        <IoOptionsOutline size={32} />
-        <span className="text-mainTextColo text-base ml-2">
+        <IoOptionsOutline
+          size={32}
+          className="text-black dark:text-mainTextColo"
+        />
+        <span className="text-black dark:text-mainTextColo text-base ml-2">
           {filterMenuOpen ? 'Hide Filters' : 'Show Filters'}
         </span>
       </button>

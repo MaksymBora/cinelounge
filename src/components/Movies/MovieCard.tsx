@@ -17,7 +17,7 @@ interface MovieCardProps {
 export const MovieCard: FC<MovieCardProps> = ({
   movieData: { poster_path, title, release_date, vote_average, id },
 }) => (
-  <div className="bg-bgCard flex flex-col rounded-cardBr shadow-cardShadow">
+  <div className="bg-white dark:bg-bgCard flex flex-col rounded-cardBr shadow-cardShadow">
     <Link to={`/${id}`} className="relative pt-150">
       <img
         src={`${imageBase}w500${poster_path}`}
@@ -27,8 +27,10 @@ export const MovieCard: FC<MovieCardProps> = ({
       />
     </Link>
     <div className="p-details min-h-100 flex flex-col relative">
-      <h2 className="font-semibold text-base">{title}</h2>
-      <p className="text-13 mt-1.5 text-secondaryText">
+      <h2 className="font-semibold text-base text-black dark:text-mainTextColo">
+        {title}
+      </h2>
+      <p className="text-13 mt-1.5 text-[#3c3c3c] dark:text-secondaryText">
         {release_date
           ? formatDate(release_date.replace(/-/g, '/'), 'short')
           : ''}

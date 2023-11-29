@@ -9,15 +9,16 @@ import { FilterDataContext } from '@/context/filterData-context';
 import { AppContext } from '@/context/app-context';
 import { getSortedBy } from '@/service/serviceFilterMovies';
 
-const darkModeTheme = createTheme(getDesignTokens('dark'));
-
 const Movies = (): JSX.Element => {
   const [filterMenuOpen, setFilterMenuOpen] = useState(false);
   const { shouldFetchData, setShouldFetchData } = useContext(AppContext);
   const { page, setPage } = useContext(AppContext);
   const { moviesData, setMoviesData } = useContext(FilterDataContext);
   const { MoviesformData } = useContext(FilterDataContext);
+  const { darkMode } = useContext(AppContext);
 
+  const themeValue = darkMode ? 'dark' : 'light';
+  const darkModeTheme = createTheme(getDesignTokens(themeValue));
   useEffect(() => {
     const sort = 'popularity.desc';
     const fetchAllMovies = async (sortData, filterDefaultData, pageNumber) => {

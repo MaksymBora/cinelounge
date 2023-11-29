@@ -35,9 +35,9 @@ export default {
         navShadow:
           '0 0 20px -10px hsla(0,0%,59%,.2), 0 0 1px 1px hsla(0,0%,49%,.2)',
         cardShadow:
-          'rgba(0, 0, 0, 0.07) 0px 1px 3px 0px rgba(27, 31, 35, 0.12) 0px 0px 0px 1px;',
-        castShadow: '0 1px 12px -3px rgba(0, 0, 0, 0.1);',
-        actorShadow: '1px 0 10px rgba(0, 0, 0, 0.2);',
+          'rgba(0, 0, 0, 0.07) 0px 1px 3px 0px, rgba(27, 31, 35, 0.12) 0px 0px 0px 1px',
+        castShadow: '0 1px 12px -3px rgba(0, 0, 0, 0.1)',
+        actorShadow: '1px 0 10px rgba(0, 0, 0, 0.2)',
         btnAuth: '0 0 20px -1px rgba(13, 13, 13, 0.2)',
         filterBtn: '0 0 4px -1px rgba(0, 0, 0, 0.5)',
       },

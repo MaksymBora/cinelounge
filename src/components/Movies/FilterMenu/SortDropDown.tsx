@@ -55,7 +55,9 @@ export const SortDropDown = ({ selectedOption, setSelectedOption }) => {
 
   return (
     <div className="mb-8">
-      <h3 className="text-center">Sort by</h3>
+      <h3 className="text-center text-black dark:text-mainTextColo mb-2 font-semibold text-[18px]">
+        Sort by
+      </h3>
       <Select
         options={options}
         className="text-black"

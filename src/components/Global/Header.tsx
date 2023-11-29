@@ -1,4 +1,9 @@
-import { Link, useNavigate, useSearchParams } from 'react-router-dom';
+import {
+  Link,
+  useLocation,
+  useNavigate,
+  useSearchParams,
+} from 'react-router-dom';
 import { IoMoon, IoSunny } from 'react-icons/io5';
 import { useContext, useEffect, useState } from 'react';
 import { BsBookmarkFill } from 'react-icons/bs';
@@ -13,7 +18,9 @@ export function Header() {
   const { isLoggedIn, setIsLoggedIn } = useContext(AppContext);
   const navigate = useNavigate();
   const { darkMode, setDarkMode } = useContext(AppContext);
-  console.log(darkMode);
+  const { userName } = useContext(AppContext);
+
+  const { pathname } = useLocation();
 
   const handleQuery = e => {
     setQuery(e.target.value);
@@ -66,7 +73,9 @@ export function Header() {
           <li>
             <Link
               to="/"
-              className="text-lg text-black dark:text-mainTextColo py-3 hover:opacity-75"
+              className={`text-lg text-black dark:text-mainTextColo py-3 hover:opacity-70 ${
+                pathname === '/' && 'border-b-2 border-[#17b28e]'
+              }`}
             >
               Movies
             </Link>
@@ -75,7 +84,9 @@ export function Header() {
           <li>
             <Link
               to="shows"
-              className="text-lg text-black dark:text-mainTextColo py-3 hover:opacity-75"
+              className={`text-lg text-black dark:text-mainTextColo py-3 hover:opacity-70 ${
+                pathname === '/shows' && 'border-b-2 border-[#17b28e]'
+              }`}
             >
               Shows
             </Link>
@@ -84,7 +95,9 @@ export function Header() {
           <li>
             <Link
               to="cast"
-              className="text-lg text-black dark:text-mainTextColo py-3 hover:opacity-75"
+              className={`text-lg text-black dark:text-mainTextColo py-3 hover:opacity-70 ${
+                pathname === '/cast' && 'border-b-2 border-[#17b28e]'
+              }`}
             >
               Cast
             </Link>
@@ -138,12 +151,12 @@ export function Header() {
           {darkMode ? (
             <IoSunny
               onClick={toggleUiTheme}
-              className="cursor-pointer text-black dark:text-mainTextColo text-[21px]"
+              className="cursor-pointer text-black dark:text-mainTextColo text-[21px] mr-4"
             />
           ) : (
             <IoMoon
               onClick={toggleUiTheme}
-              className="cursor-pointer text-black dark:text-mainTextColo text-[21px]"
+              className="cursor-pointer text-black dark:text-mainTextColo text-[21px] mr-4"
             />
           )}
 
@@ -155,7 +168,11 @@ export function Header() {
             <BsBookmarkFill className="mr-2" />
             Watchlist
           </Link>
-
+          {isLoggedIn && (
+            <p className="mr-2 text-[14px] text-black dark:text-mainTextColo">
+              {`User: ${userName}`}
+            </p>
+          )}
           {isLoggedIn ? (
             <button
               type="button"
@@ -167,7 +184,7 @@ export function Header() {
           ) : (
             <Link
               to="/login"
-              className="py-[8px] px-[15px] cursor-pointer bg-authBtn border border-transparent rounded text-[15px] transition-opacity tracking-normal hover:opacity-80 text-black dark:text-mainTextColo"
+              className="py-[8px] px-[15px] cursor-pointer bg-authBtn border border-transparent rounded text-[15px] transition-opacity tracking-normal hover:opacity-80 text-black dark:text-mainTextColo shadow-lg"
             >
               Login
             </Link>
