@@ -15,6 +15,20 @@ interface ApiResponse {
   total_pages: number;
 }
 
+interface ShowsListProps {
+  poster_path: string;
+  name: string;
+  first_air_date: string;
+  id: number;
+  vote_average: number;
+}
+
+interface ShowsApiResponse {
+  results: ShowsListProps[];
+  page: number;
+  total_pages: number;
+}
+
 interface ServicesTypes {
   display_priority: number;
   logo_path: string;
@@ -86,6 +100,7 @@ export const FilterDataState = ({
   const [showsFormData, setShowsFormData] = useState<ShowsFormDataTypes>(
     initialShowsFilterState
   );
+  const [showsData, setShowsData] = useState<ShowsApiResponse | null>(null);
 
   const contextValue = useMemo(() => {
     return {
@@ -95,6 +110,8 @@ export const FilterDataState = ({
       setMoviesFormData,
       showsFormData,
       setShowsFormData,
+      showsData,
+      setShowsData,
     };
   }, [
     moviesData,
@@ -103,6 +120,8 @@ export const FilterDataState = ({
     setMoviesFormData,
     showsFormData,
     setShowsFormData,
+    showsData,
+    setShowsData,
   ]);
 
   return (

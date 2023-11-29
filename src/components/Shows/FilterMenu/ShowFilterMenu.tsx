@@ -33,7 +33,7 @@ export const ShowFilterMenu = () => {
   const [selectedOption, setSelectedOption] = useState<OptionsType | null>(
     null
   );
-  const { setFilterData } = useContext(FilterDataContext);
+  const { setShowsData } = useContext(FilterDataContext);
   const { setPage } = useContext(AppContext);
   const { setShouldFetchData } = useContext(AppContext);
 
@@ -63,7 +63,7 @@ export const ShowFilterMenu = () => {
     const fetchSortedBy = async (sortData, dataFromFilters) => {
       try {
         const res = await getShowsSortedBy(sortData, dataFromFilters);
-        setFilterData(res?.data);
+        setShowsData(res?.data);
       } catch (error) {
         console.log(error);
       }
@@ -74,7 +74,7 @@ export const ShowFilterMenu = () => {
   const resetForm = e => {
     e.preventDefault();
     setShowsFormData(initialShowsFilterState);
-    setFilterData(null);
+    setShowsData(null);
     setSelectedOption(null);
     setPage(1);
     setShouldFetchData(true);

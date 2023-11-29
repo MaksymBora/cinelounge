@@ -71,6 +71,20 @@ interface ShowsFormDataTypes {
   type: ShowsTypeOptios[];
 }
 
+interface ShowsListProps {
+  poster_path: string;
+  name: string;
+  first_air_date: string;
+  id: number;
+  vote_average: number;
+}
+
+interface ShowsApiResponse {
+  results: ShowsListProps[];
+  page: number;
+  total_pages: number;
+}
+
 export const FilterDataContext = createContext<{
   moviesData: ApiResponse | null;
   setMoviesData: React.Dispatch<React.SetStateAction<ApiResponse | null>>;
@@ -78,6 +92,8 @@ export const FilterDataContext = createContext<{
   setMoviesFormData: React.Dispatch<React.SetStateAction<FormDataTypes>>;
   showsFormData: ShowsFormDataTypes;
   setShowsFormData: React.Dispatch<React.SetStateAction<ShowsFormDataTypes>>;
+  showsData: ShowsApiResponse | null;
+  setShowsData: React.Dispatch<React.SetStateAction<ShowsApiResponse | null>>;
 }>({
   moviesData: null,
   setMoviesData: () => {},
@@ -85,4 +101,6 @@ export const FilterDataContext = createContext<{
   setMoviesFormData: () => {},
   showsFormData: initialShowsFilterState,
   setShowsFormData: () => {},
+  showsData: null,
+  setShowsData: () => {},
 });
