@@ -16,6 +16,7 @@ export const AppState = ({ children }: { children: React.ReactNode }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userName, setUserName] = useState('');
   const [page, setPage] = useState(1);
+  const [showsPage, setShowsPage] = useState(1);
   const [shouldFetchData, setShouldFetchData] = useState(true);
 
   const contextValue = useMemo(() => {
@@ -26,7 +27,8 @@ export const AppState = ({ children }: { children: React.ReactNode }) => {
       setIsLoggedIn,
       userName,
       setUserName,
-
+      showsPage,
+      setShowsPage,
       page,
       setPage,
       shouldFetchData,
@@ -39,7 +41,8 @@ export const AppState = ({ children }: { children: React.ReactNode }) => {
     setIsLoggedIn,
     userName,
     setUserName,
-
+    showsPage,
+    setShowsPage,
     page,
     setPage,
     shouldFetchData,

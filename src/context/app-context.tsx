@@ -21,8 +21,8 @@ interface ContextProps {
   setPage: Dispatch<SetStateAction<number>>;
   shouldFetchData: boolean;
   setShouldFetchData: Dispatch<SetStateAction<boolean>>;
-  // watchlist: WatchListTypes[];
-  // setWatchlist: Dispatch<SetStateAction<WatchListTypes[]>>;
+  showsPage: number;
+  setShowsPage: Dispatch<SetStateAction<number>>;
 }
 
 export const AppContext = createContext<ContextProps>({
@@ -36,6 +36,6 @@ export const AppContext = createContext<ContextProps>({
   setPage: () => {},
   shouldFetchData: true,
   setShouldFetchData: () => {},
-  // watchlist: [],
-  // setWatchlist: () => {},
+  showsPage: 1,
+  setShowsPage: () => {},
 } as ContextProps);

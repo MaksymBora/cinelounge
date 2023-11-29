@@ -1,4 +1,3 @@
-import { useLoaderData } from 'react-router-dom';
 import { ShowsCard } from './ShowsCard';
 
 interface ShowsCardProps {
@@ -9,24 +8,14 @@ interface ShowsCardProps {
   vote_average: number;
 }
 
-interface ApiResponse {
-  data: {
-    results: ShowsCardProps[];
-  };
-}
-
-export const ShowsList = ({ filterMenuOpen }) => {
-  const response = useLoaderData() as ApiResponse;
-
-  const data = response.data.results;
-
+export const ShowsList = ({ filterMenuOpen, showsData }) => {
   return (
     <section
       className={` grid grid-cols-filmList gap-8 bg-inherit text-mainTextColo  ${
         filterMenuOpen ? 'widthWithFilter' : 'w-full'
       }`}
     >
-      {data.map(
+      {showsData?.results.map(
         (movie: ShowsCardProps) =>
           movie.poster_path && <ShowsCard showsData={movie} key={movie.id} />
       )}

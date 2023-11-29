@@ -12,11 +12,11 @@ import { getSortedBy } from '@/service/serviceFilterMovies';
 const darkModeTheme = createTheme(getDesignTokens('dark'));
 
 const Movies = (): JSX.Element => {
+  const [filterMenuOpen, setFilterMenuOpen] = useState(false);
   const { shouldFetchData, setShouldFetchData } = useContext(AppContext);
   const { page, setPage } = useContext(AppContext);
   const { moviesData, setMoviesData } = useContext(FilterDataContext);
   const { MoviesformData } = useContext(FilterDataContext);
-  const [filterMenuOpen, setFilterMenuOpen] = useState(false);
 
   useEffect(() => {
     const sort = 'popularity.desc';
