@@ -2,7 +2,7 @@ import Select from 'react-select';
 import { useContext, useEffect } from 'react';
 import { dropdownStyles } from '@/utilities/dropdownStyles';
 import { FilterDataContext } from '@/context/filterData-context';
-import { getSortedBy } from '@/service/serviceFilterMovies';
+import { getShowsSortedBy } from '@/service/serviceFilterMovies';
 
 type ShowSort = 'popularity.desc' | 'vote_average.desc' | 'first_air_date.desc';
 
@@ -26,7 +26,7 @@ export const initialMovieFilterState = {
 };
 
 export const SortDropDown = ({ selectedOption, setSelectedOption }) => {
-  const { setFilterData } = useContext(FilterDataContext);
+  const { setShowsData } = useContext(FilterDataContext);
 
   const setSortOption = (selected: OptionsType | null) => {
     setSelectedOption(selected);
@@ -36,15 +36,15 @@ export const SortDropDown = ({ selectedOption, setSelectedOption }) => {
     if (selectedOption) {
       const fetchSortedBy = async (sortData, filterData) => {
         try {
-          const res = await getSortedBy(sortData, filterData);
-          if (res) setFilterData(res.data);
+          const res = await getShowsSortedBy(sortData, filterData);
+          if (res) setShowsData(res.data);
         } catch (error) {
           console.log(error);
         }
       };
       fetchSortedBy(selectedOption.value, initialMovieFilterState);
     }
-  }, [selectedOption, setFilterData]);
+  }, [selectedOption, setShowsData]);
 
   return (
     <div className="mb-8">

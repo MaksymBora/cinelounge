@@ -33,7 +33,7 @@ export const initialMovieFilterState = {
 };
 
 export const SortDropDown = ({ selectedOption, setSelectedOption }) => {
-  const { setFilterData } = useContext(FilterDataContext);
+  const { setMoviesData } = useContext(FilterDataContext);
 
   const setSortOption = (selected: OptionsType | null) => {
     setSelectedOption(selected);
@@ -44,14 +44,14 @@ export const SortDropDown = ({ selectedOption, setSelectedOption }) => {
       const fetchSortedBy = async (sortData, filterData) => {
         try {
           const res = await getSortedBy(sortData, filterData);
-          if (res) setFilterData(res.data);
+          if (res) setMoviesData(res.data);
         } catch (error) {
           console.log(error);
         }
       };
       fetchSortedBy(selectedOption.value, initialMovieFilterState);
     }
-  }, [selectedOption, setFilterData]);
+  }, [selectedOption, setMoviesData]);
 
   return (
     <div className="mb-8">

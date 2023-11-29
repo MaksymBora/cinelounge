@@ -5,10 +5,10 @@ import { showGenres } from '@/data/genres';
 
 const animatedComponents = makeAnimated();
 
-export const GenreDropdown = ({ formData, setFormData }) => {
+export const GenreDropdown = ({ showsFormData, setShowsFormData }) => {
   const handleGenreChange = active => {
-    setFormData({
-      ...formData,
+    setShowsFormData({
+      ...showsFormData,
       genres: active,
     });
   };
@@ -20,7 +20,7 @@ export const GenreDropdown = ({ formData, setFormData }) => {
         options={showGenres}
         className="text-black"
         styles={dropdownStyles}
-        value={formData.genres}
+        value={showsFormData.genres}
         isSearchable={false}
         isMulti
         onChange={handleGenreChange}

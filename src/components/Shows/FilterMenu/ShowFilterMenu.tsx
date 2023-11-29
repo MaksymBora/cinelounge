@@ -91,19 +91,22 @@ export const ShowFilterMenu = () => {
         <div className="bg-[#ddd] h-px rounded-[10px] mb-4"></div>
 
         <GenreDropdown
-          formData={showsFormData}
-          setFormData={setShowsFormData}
+          showsFormData={showsFormData}
+          setShowsFormData={setShowsFormData}
         />
 
         <div className="bg-[#ddd] h-px rounded-[10px] mb-4"></div>
 
-        <TypeDropdown formData={showsFormData} setFormData={setShowsFormData} />
+        <TypeDropdown
+          showsFormData={showsFormData}
+          setShowsFormData={setShowsFormData}
+        />
 
         <div className="bg-[#ddd] h-px rounded-[10px] mb-4"></div>
 
         <StatusDropdown
-          formData={showsFormData}
-          setFormData={setShowsFormData}
+          showsFormData={showsFormData}
+          setShowsFormData={setShowsFormData}
         />
 
         <div className="bg-[#ddd] h-px rounded-[10px] mb-4"></div>
@@ -111,8 +114,8 @@ export const ShowFilterMenu = () => {
         {rangeProps.map(r => (
           <ShowCustomRange
             key={r.name}
-            formData={showsFormData}
-            setFormData={setShowsFormData}
+            showsFormData={showsFormData}
+            setShowsFormData={setShowsFormData}
             name={r.name}
             min={r.min}
             max={r.max}
@@ -130,7 +133,7 @@ export const ShowFilterMenu = () => {
           <ul className="w-full grid gap-[5px] grid-cols-4">
             {watchProviders.map(p => (
               <ShowsServiceItem
-                setFormData={setShowsFormData}
+                setShowsFormData={setShowsFormData}
                 state={showsFormData.services}
                 stateStr="services"
                 id={p.provider_id}

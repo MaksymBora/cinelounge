@@ -1,7 +1,7 @@
 import { imageBase } from '@/service/imagePath';
 
 export const ShowsServiceItem = ({
-  setFormData,
+  setShowsFormData,
   id,
   name,
   state,
@@ -9,7 +9,7 @@ export const ShowsServiceItem = ({
   img,
 }) => {
   const toggleService = () => {
-    setFormData(prevData => {
+    setShowsFormData(prevData => {
       const newState = state.includes(id)
         ? state.filter(x => x !== id)
         : [...state, id];

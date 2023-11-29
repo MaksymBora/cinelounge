@@ -10,10 +10,10 @@ const options = [
   { value: 4, label: 'Cancelled' },
 ];
 
-export const StatusDropdown = ({ formData, setFormData }) => {
+export const StatusDropdown = ({ showsFormData, setShowsFormData }) => {
   const handleGenreChange = active => {
-    setFormData({
-      ...formData,
+    setShowsFormData({
+      ...showsFormData,
       genres: active,
     });
   };
@@ -25,7 +25,7 @@ export const StatusDropdown = ({ formData, setFormData }) => {
         options={options}
         className="text-black"
         styles={dropdownStyles}
-        value={formData.genres}
+        value={showsFormData.genres}
         isSearchable={false}
         isMulti
         onChange={handleGenreChange}

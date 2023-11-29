@@ -5,8 +5,8 @@ import 'rc-slider/assets/index.css';
 const Range = createSliderWithTooltip(Slider.Range);
 
 export const ShowCustomRange = ({
-  formData,
-  setFormData,
+  showsFormData,
+  setShowsFormData,
   name,
   min,
   max,
@@ -16,8 +16,8 @@ export const ShowCustomRange = ({
   tipFormatter,
 }) => {
   const handleSliderChange = (v: number[]) => {
-    setFormData({
-      ...formData,
+    setShowsFormData({
+      ...showsFormData,
       [name]: v,
     });
   };

@@ -12,10 +12,10 @@ const options = [
   { value: 5, label: 'Talk Show' },
 ];
 
-export const TypeDropdown = ({ formData, setFormData }) => {
+export const TypeDropdown = ({ showsFormData, setShowsFormData }) => {
   const handleGenreChange = active => {
-    setFormData({
-      ...formData,
+    setShowsFormData({
+      ...showsFormData,
       genres: active,
     });
   };
@@ -27,7 +27,7 @@ export const TypeDropdown = ({ formData, setFormData }) => {
         options={options}
         className="text-black"
         styles={dropdownStyles}
-        value={formData.genres}
+        value={showsFormData.genres}
         isSearchable={false}
         isMulti
         onChange={handleGenreChange}
