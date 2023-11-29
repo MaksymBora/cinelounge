@@ -25,7 +25,7 @@ export const StatusDropdown = ({ showsFormData, setShowsFormData }) => {
         options={options}
         className="text-black"
         styles={dropdownStyles}
-        value={showsFormData.genres}
+        value={showsFormData.status}
         isSearchable={false}
         isMulti
         onChange={handleGenreChange}

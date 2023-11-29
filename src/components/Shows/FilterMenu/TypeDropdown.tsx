@@ -27,7 +27,7 @@ export const TypeDropdown = ({ showsFormData, setShowsFormData }) => {
         options={options}
         className="text-black"
         styles={dropdownStyles}
-        value={showsFormData.genres}
+        value={showsFormData.type}
         isSearchable={false}
         isMulti
         onChange={handleGenreChange}

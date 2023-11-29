@@ -10,9 +10,10 @@ export function Header() {
   const [query, setQuery] = useState<string | undefined>(
     searchParams.get('searchQuery') ?? ''
   );
-
-  const navigate = useNavigate();
   const { isLoggedIn, setIsLoggedIn } = useContext(AppContext);
+  const navigate = useNavigate();
+  // const [darkMode, setDarkMode] = useState(true);
+  // console.log(darkMode);
 
   const handleQuery = e => {
     setQuery(e.target.value);

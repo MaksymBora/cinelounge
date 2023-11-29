@@ -69,6 +69,7 @@ export const ShowFilterMenu = () => {
       }
     };
     fetchSortedBy(sort, showsFormData);
+    console.log(showsFormData);
   };
 
   const resetForm = e => {
