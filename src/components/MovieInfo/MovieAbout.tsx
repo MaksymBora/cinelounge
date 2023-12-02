@@ -278,7 +278,7 @@ export const MovieAbout: FC<MovieAboutProps> = ({
                   >
                     <BsBookmark />
                     <span>
-                      {inWatchList
+                      {inWatchList && isLoggedIn
                         ? 'Remove from Watchlist'
                         : 'Add to Watchlist'}
                     </span>
