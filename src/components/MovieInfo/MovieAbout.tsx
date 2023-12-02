@@ -36,7 +36,7 @@ export const MovieAbout: FC<MovieAboutProps> = ({
       try {
         const res = await getWatchList();
 
-        const inList = res.find(movie => movie.movieId === id);
+        const inList = res.find(movie => movie.movieId === Number(id));
 
         if (inList) setInWatchList(true);
       } catch (error) {
@@ -110,8 +110,8 @@ export const MovieAbout: FC<MovieAboutProps> = ({
     const removeFromWatchlist = async () => {
       try {
         const allMovies = await getWatchList();
-
-        const inList = allMovies.find(movie => movie.movieId === id);
+        console.log(allMovies);
+        const inList = allMovies.find(movie => movie.movieId === Number(id));
 
         // eslint-disable-next-line no-underscore-dangle
         const res = await deleteMovie(inList?._id);

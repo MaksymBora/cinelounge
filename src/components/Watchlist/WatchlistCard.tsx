@@ -13,11 +13,12 @@ interface WatchlistCardProps {
     _id: number;
     rating: number;
     movieId: number;
+    type: string;
   };
 }
 
 export const WatchlistCard = ({
-  movieInfo: { poster, name, date, movieId, rating, _id },
+  movieInfo: { poster, name, date, movieId, rating, _id, type },
   removeFromWatchlist,
 }: WatchlistCardProps & { removeFromWatchlist: (id: number) => void }) => {
   const hadnleDeleteFromWatchlist = async () => {
@@ -32,9 +33,11 @@ export const WatchlistCard = ({
     }
   };
 
+  const route = type === 'movie' ? `/${movieId}` : `/shows/${movieId}`;
+
   return (
     <div className="bg-bgCard text-mainTextColo flex flex-col rounded-cardBr shadow-cardShadow">
-      <Link className="relative pt-[150%]" to={`/${movieId}`}>
+      <Link className="relative pt-[150%]" to={route}>
         <img
           className="absolute top-0 left-0 rounded-[3px 3px 0 0]"
           src={`${imageBase}w500${poster}`}

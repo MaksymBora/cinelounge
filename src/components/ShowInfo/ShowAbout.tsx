@@ -1,13 +1,21 @@
-import { FC, useState } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import { FC, useContext, useEffect, useState } from 'react';
 import { HiOutlineArrowsExpand } from 'react-icons/hi';
 import { FiPercent } from 'react-icons/fi';
 import { BsPlay, BsBookmark } from 'react-icons/bs';
 import { ClickAwayListener, Tooltip } from '@mui/material';
+import { useParams } from 'react-router-dom';
 import { imageBase } from '@/service/imagePath';
 import { colorPercentage, formatRuntime } from '@/utilities/utilities';
 import { ShowTrailer } from './ShowTrailer';
 import { ShowGallery } from './ShowGallery';
 import { ShowInfoTypes } from '@/Pages/ShowInfo';
+import {
+  addWatchlist,
+  deleteMovie,
+  getWatchList,
+} from '@/service/serviceFavMovies';
+import { AppContext } from '@/context/app-context';
 
 interface MovieAboutProps {
   movieData: ShowInfoTypes | null;
@@ -19,6 +27,26 @@ export const ShowAbout: FC<MovieAboutProps> = ({
   const [viewGallery, setViewGallery] = useState(false);
   const [showTooltip, setShowTooltip] = useState(false);
   const [viewTrailer, setViewTrailer] = useState(false);
+  const [inWatchList, setInWatchList] = useState(false);
+  const { isLoggedIn } = useContext(AppContext);
+  const { id } = useParams();
+
+  useEffect(() => {
+    const result = async () => {
+      try {
+        const res = await getWatchList();
+
+        const inList = res.find(movie => movie.movieId === Number(id));
+
+        if (inList) setInWatchList(true);
+      } catch (error) {
+        setInWatchList(false);
+        console.log(error);
+      }
+    };
+    if (!inWatchList) result();
+  }, []);
+
   if (!movieData) {
     return null;
   }
@@ -43,6 +71,66 @@ export const ShowAbout: FC<MovieAboutProps> = ({
   });
 
   const handleViewGallery = () => hasImages && setViewGallery(true);
+
+  const toggleWatchlist = () => {
+    // User not logged in
+    if (!isLoggedIn) {
+      setShowTooltip(true);
+      return;
+    }
+
+    // Item not in Watchlist
+    const {
+      first_air_date: date,
+      vote_average: rating,
+      poster_path: poster,
+      id: movieId,
+      name,
+    } = movieData;
+
+    const data = {
+      movieId,
+      date,
+      rating,
+      poster,
+      name,
+      type: 'shows',
+    };
+
+    // Add to favorites list
+    const postMovie = async dataMovie => {
+      try {
+        await addWatchlist(dataMovie);
+        setInWatchList(true);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    // Remove from Favorite List
+    const removeFromWatchlist = async () => {
+      try {
+        const allMovies = await getWatchList();
+
+        const inList = allMovies.find(movie => movie.movieId === Number(id));
+
+        // eslint-disable-next-line no-underscore-dangle
+        const res = await deleteMovie(inList?._id);
+
+        console.log(res, 'response');
+
+        setInWatchList(false);
+
+        return res;
+      } catch (error) {
+        console.log(error);
+        return error;
+      }
+    };
+
+    if (!inWatchList) postMovie(data);
+    if (inWatchList) removeFromWatchlist();
+  };
 
   return (
     <section className="my-12 mx-0 relative">
@@ -193,9 +281,14 @@ export const ShowAbout: FC<MovieAboutProps> = ({
                     flex justify-center items-center 
                     text-base cursor-pointer bg-transparent border-none text-white 
                     transition-all tracking-[0.5px] min-h-[35px] hover:opacity-60 font-semibold"
+                    onClick={toggleWatchlist}
                   >
                     <BsBookmark />
-                    <span>Add To Watchlist</span>
+                    <span>
+                      {inWatchList && isLoggedIn
+                        ? 'Remove from Watchlist'
+                        : 'Add to Watchlist'}
+                    </span>
                   </button>
                 </Tooltip>
               </ClickAwayListener>

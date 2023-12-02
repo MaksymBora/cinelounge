@@ -14,6 +14,7 @@ export interface ShowInfoTypes {
   tagline: string;
   vote_average: number;
   runtime: number;
+  id: number;
   genres: {
     id: number;
     name: string;
