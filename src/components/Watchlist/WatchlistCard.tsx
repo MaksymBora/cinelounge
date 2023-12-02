@@ -23,7 +23,7 @@ export const WatchlistCard = ({
   const hadnleDeleteFromWatchlist = async () => {
     try {
       const res = await deleteMovie(_id);
-      console.log(res);
+
       removeFromWatchlist(_id);
       return res;
     } catch (error) {

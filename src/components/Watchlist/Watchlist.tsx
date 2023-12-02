@@ -22,7 +22,7 @@ export const WatchlistComponent = () => {
     const result = async () => {
       try {
         const res = await getWatchList();
-        console.log(res);
+
         if (res !== null) {
           setWatchlist(res);
         }
@@ -32,8 +32,6 @@ export const WatchlistComponent = () => {
     };
     result();
   }, []);
-
-  console.log(watchlist, 'watchlist');
 
   return (
     <div className="max-w-xxl my-12 mx-auto min-h-watchlist">

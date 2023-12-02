@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { FC, useContext, useEffect, useState } from 'react';
 import { HiOutlineArrowsExpand } from 'react-icons/hi';
 import { FiPercent } from 'react-icons/fi';
@@ -43,9 +44,8 @@ export const MovieAbout: FC<MovieAboutProps> = ({
         console.log(error);
       }
     };
-
-    result();
-  });
+    if (!inWatchList) result();
+  }, []);
 
   if (!movieData) {
     return null;
@@ -96,6 +96,7 @@ export const MovieAbout: FC<MovieAboutProps> = ({
       type: 'movie',
     };
 
+    // Add to favorites list
     const postMovie = async dataMovie => {
       try {
         await addWatchlist(dataMovie);
@@ -105,13 +106,18 @@ export const MovieAbout: FC<MovieAboutProps> = ({
       }
     };
 
+    // Remove from Favorite List
     const removeFromWatchlist = async () => {
       try {
         const allMovies = await getWatchList();
 
         const inList = allMovies.find(movie => movie.movieId === id);
 
-        const res = await deleteMovie(inList.id);
+        // eslint-disable-next-line no-underscore-dangle
+        const res = await deleteMovie(inList?._id);
+
+        console.log(res, 'response');
+
         setInWatchList(false);
 
         return res;
@@ -122,7 +128,7 @@ export const MovieAbout: FC<MovieAboutProps> = ({
     };
 
     if (!inWatchList) postMovie(data);
-    removeFromWatchlist();
+    if (inWatchList) removeFromWatchlist();
   };
 
   return (

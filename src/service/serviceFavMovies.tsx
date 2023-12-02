@@ -1,14 +1,27 @@
 import axios from 'axios';
 
-const mockApi = axios.create({
-  baseURL: 'https://655c85d525b76d9884fd75a6.mockapi.io',
-  // timeout: 1000,
-  headers: { accept: 'application/json' },
-});
+// const mockApi = axios.create({
+//   baseURL: 'https://655c85d525b76d9884fd75a6.mockapi.io',
+//   // timeout: 1000,
+//   headers: { accept: 'application/json' },
+// });
+
+// export const addWatchlist = async dataMovie => {
+//   try {
+//     await mockApi.post('/favMovies', dataMovie);
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
 
 export const addWatchlist = async dataMovie => {
+  const token = localStorage.getItem('token');
   try {
-    await mockApi.post('/favMovies', dataMovie);
+    await axios.post('http://localhost:3000/favorite', dataMovie, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
   } catch (error) {
     console.log(error);
   }
