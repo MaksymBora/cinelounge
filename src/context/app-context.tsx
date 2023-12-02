@@ -27,6 +27,8 @@ interface ContextProps {
   setShouldFetchShowsData: Dispatch<SetStateAction<boolean>>;
   darkMode: boolean;
   setDarkMode: Dispatch<SetStateAction<boolean>>;
+  subscription: string;
+  setSubscription: Dispatch<SetStateAction<string>>;
 }
 
 export const AppContext = createContext<ContextProps>({
@@ -46,4 +48,6 @@ export const AppContext = createContext<ContextProps>({
   setShouldFetchShowsData: () => {},
   darkMode: true,
   setDarkMode: () => {},
+  subscription: '',
+  setSubscription: () => {},
 } as ContextProps);

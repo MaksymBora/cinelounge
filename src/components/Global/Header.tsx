@@ -19,6 +19,7 @@ export function Header() {
   const navigate = useNavigate();
   const { darkMode, setDarkMode } = useContext(AppContext);
   const { userName } = useContext(AppContext);
+  const { subscription } = useContext(AppContext);
 
   const { pathname } = useLocation();
 
@@ -171,9 +172,16 @@ export function Header() {
             Watchlist
           </Link>
           {isLoggedIn && (
-            <p className="mr-2 text-[14px] text-black dark:text-mainTextColo">
-              {`User: ${userName}`}
-            </p>
+            <div className="flex flex-col gap-2">
+              <p className="mr-2 text-[14px] text-black dark:text-mainTextColo">
+                {`User: ${userName}`}
+              </p>
+              <p className="mr-2 text-[14px] text-black dark:text-mainTextColo">
+                {`Subscriptin: ${
+                  subscription.charAt(0).toUpperCase() + subscription.slice(1)
+                }`}
+              </p>
+            </div>
           )}
           {isLoggedIn ? (
             <button

@@ -1,17 +1,16 @@
 import axios, { AxiosError, AxiosResponse } from 'axios';
 
-const swagger = axios.create({
-  baseURL: 'https://connections-api.herokuapp.com',
+const mongoDb = axios.create({
+  baseURL: 'https://www.web4you.space',
   // timeout: 1000,
   headers: { accept: 'application/json' },
 });
 
 export const register = async credentials => {
   try {
-    const res = await swagger.post('/users/signup', credentials);
+    const res = await mongoDb.post('/users/register', credentials);
 
-    localStorage.setItem('token', res.data.token);
-    return res.data;
+    return res;
   } catch (error) {
     return console.log(error);
   }
@@ -19,33 +18,38 @@ export const register = async credentials => {
 
 export const login = async credentials => {
   try {
-    const res = await swagger.post('/users/login', credentials);
+    const res = await mongoDb.post('/users/login', credentials);
 
     localStorage.setItem('token', res.data.token);
 
-    return res.data;
+    return res;
   } catch (error) {
-    throw Error(`${error}`);
+    if (axios.isAxiosError(error)) {
+      const er = error.response;
+      return er;
+    }
+
+    return undefined;
   }
 };
 
 interface UserData {
   email: string;
   name: string;
+  subscription: string;
 }
 
 export const getCurrentUser = async (
   token: string | null
 ): Promise<AxiosResponse<UserData> | void> => {
   try {
-    if (token === null) return;
-    const res = await swagger.get('/users/current', {
+    if (token === null) return undefined;
+    const res = await mongoDb.get('/users/current', {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
 
-    // eslint-disable-next-line consistent-return
     return res;
   } catch (error: unknown) {
     if (
@@ -53,21 +57,21 @@ export const getCurrentUser = async (
       'response' in error &&
       (error as AxiosError).response?.status
     ) {
-      localStorage.clear();
-      // console.log((error as AxiosError).response?.status);
+      localStorage.removeItem('token');
     }
+    return undefined;
   }
 };
 
 export const logout = async token => {
   try {
-    const res = await swagger.post('/users/logout', null, {
+    const res = await mongoDb.post('/users/logout', null, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
 
-    if (res) localStorage.clear();
+    if (res) localStorage.removeItem('token');
   } catch (error) {
     console.log(error);
   }

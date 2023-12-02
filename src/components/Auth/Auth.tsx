@@ -3,9 +3,12 @@ import { login, register } from '@/service/serviceAuth';
 import { AppContext } from '@/context/app-context';
 
 export const Auth = () => {
-  const [isLoginForm, setIsLoginForm] = useState(false);
+  const [isLoginForm, setIsLoginForm] = useState(true);
+  const [authMessage, setAuthMessage] = useState('');
+  const [registered, setRegistered] = useState(false);
   const { setUserName } = useContext(AppContext);
   const { setIsLoggedIn } = useContext(AppContext);
+  const { setSubscription } = useContext(AppContext);
 
   const handleSubmitForm = e => {
     e.preventDefault();
@@ -19,17 +22,22 @@ export const Auth = () => {
     };
 
     if (isLoginForm) {
-      login(formData);
-
       const fetchLogin = async () => {
         try {
           const res = await login(formData);
+          const codeStatusResponse = 400;
+
+          if (res && res.status && res.status >= codeStatusResponse) {
+            setAuthMessage(res.data.message);
+            return;
+          }
 
           setIsLoggedIn(true);
 
-          setUserName(res.user.name);
+          setUserName(res?.data.user.name);
+          setSubscription(res?.data.user.subscription);
         } catch (error) {
-          console.log('Login or Password incorrect');
+          console.log(error, 'Error');
         }
       };
 
@@ -43,9 +51,9 @@ export const Auth = () => {
             console.log('User with current email already exists');
             return;
           }
-          setIsLoggedIn(true);
 
-          setUserName(res.user.name);
+          setAuthMessage(res.data.message);
+          setRegistered(true);
         } catch (error) {
           console.log(error);
         }
@@ -125,12 +133,17 @@ export const Auth = () => {
         href="#0"
         className="text-[13px] mt-6 text-black dark:text-mainTextColo hover:underline"
         onClick={() => {
-          console.log(isLoginForm);
           setIsLoginForm(prevState => !prevState);
         }}
       >
         {isLoginForm ? 'Create an account' : 'Login'}
       </a>
+      {registered && !isLoginForm && (
+        <p className="mt-4 text-sm text-green-400">{authMessage}</p>
+      )}
+      {!registered && isLoginForm && (
+        <p className="mt-4 text-sm text-red-500">{authMessage}</p>
+      )}
     </div>
   );
 };
