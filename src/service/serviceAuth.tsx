@@ -16,9 +16,29 @@ export const register = async credentials => {
   }
 };
 
+// export const login = async credentials => {
+//   try {
+//     const res = await mongoDb.post('/users/login', credentials);
+
+//     localStorage.setItem('token', res.data.token);
+
+//     return res;
+//   } catch (error) {
+//     if (axios.isAxiosError(error)) {
+//       const er = error.response;
+//       return er;
+//     }
+
+//     return undefined;
+//   }
+// };
+
 export const login = async credentials => {
   try {
-    const res = await mongoDb.post('/users/login', credentials);
+    const res = await axios.post(
+      'http://localhost:3000/users/login',
+      credentials
+    );
 
     localStorage.setItem('token', res.data.token);
 

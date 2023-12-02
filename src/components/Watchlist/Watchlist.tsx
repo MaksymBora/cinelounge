@@ -8,7 +8,7 @@ interface MovieInfo {
   poster: string;
   name: string;
   date: string;
-  id: number;
+  _id: number;
   rating: number;
   type: string;
   movieId: number;
@@ -22,7 +22,7 @@ export const WatchlistComponent = () => {
     const result = async () => {
       try {
         const res = await getWatchList();
-
+        console.log(res);
         if (res !== null) {
           setWatchlist(res);
         }
@@ -32,6 +32,8 @@ export const WatchlistComponent = () => {
     };
     result();
   }, []);
+
+  console.log(watchlist, 'watchlist');
 
   return (
     <div className="max-w-xxl my-12 mx-auto min-h-watchlist">
@@ -62,11 +64,13 @@ export const WatchlistComponent = () => {
               movieInfo={watchlistItem}
               removeFromWatchlist={(id: number) => {
                 const updatedWatchlist = watchlist.filter(
-                  item => item.id !== id
+                  // eslint-disable-next-line no-underscore-dangle
+                  item => item._id !== id
                 );
                 setWatchlist(updatedWatchlist);
               }}
-              key={`${watchlistItem.type}-${watchlistItem.id}`}
+              // eslint-disable-next-line no-underscore-dangle
+              key={`${watchlistItem._id}`}
             />
           ))}
         </div>

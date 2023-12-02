@@ -10,20 +10,21 @@ interface WatchlistCardProps {
     poster: string;
     name: string;
     date: string;
-    id: number;
+    _id: number;
     rating: number;
     movieId: number;
   };
 }
 
 export const WatchlistCard = ({
-  movieInfo: { poster, name, date, movieId, rating, id },
+  movieInfo: { poster, name, date, movieId, rating, _id },
   removeFromWatchlist,
 }: WatchlistCardProps & { removeFromWatchlist: (id: number) => void }) => {
   const hadnleDeleteFromWatchlist = async () => {
     try {
-      const res = await deleteMovie(id);
-      removeFromWatchlist(id);
+      const res = await deleteMovie(_id);
+      console.log(res);
+      removeFromWatchlist(_id);
       return res;
     } catch (error) {
       console.log(error);
