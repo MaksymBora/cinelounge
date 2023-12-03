@@ -24,3 +24,8 @@ TypeScript
 | React Router Dom           | Morgan        |
 | React Select               | Multer        |
 | themoviedb.org (Data Base) | Mongo DB      |
+
+## Project deployed on:
+
+The frontend is deployed on Netlify server with a custom domain, and the backend
+is deployed on Render server.
