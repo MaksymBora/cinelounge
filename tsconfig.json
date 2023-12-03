@@ -32,6 +32,6 @@
     }
     
   },
-  "include": ["../vite.config.ts", ".eslintrc.cjs", "src", "./tailwind.config.js", "./postcss.config.js"],
+  "include": ["./vite.config.ts", ".eslintrc.cjs", "src", "./tailwind.config.js", "./postcss.config.js"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
