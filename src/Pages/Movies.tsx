@@ -93,6 +93,7 @@ const Movies = ({ signedIn, setSignedIn }): JSX.Element => {
     setShouldFetchData,
     MoviesformData,
     signedIn,
+    setSignedIn,
   ]);
 
   const handlePagination = e => {
