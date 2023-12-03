@@ -76,7 +76,10 @@ export function App() {
     createRoutesFromElements(
       <Route element={<Layout />}>
         <Route path="/">
-          <Route index element={<Movies signedIn={signedIn} />} />
+          <Route
+            index
+            element={<Movies signedIn={signedIn} setSignedIn={setSignedIn} />}
+          />
           <Route path=":id" element={<MovieInfo />} />
           <Route path=":id/casts" element={<MovieCastAndCrew />} />
         </Route>
