@@ -16,7 +16,8 @@ export default vite.defineConfig({
       },
     ],
   },
-  base: '/cinelounge', // * <REPO> * //
+  // base: '/cinelounge', // * <REPO> * //
+  base: './', // * <REPO> * //
   test: {
     globals: true,
     environment: 'jsdom',
