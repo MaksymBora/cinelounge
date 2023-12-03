@@ -85,7 +85,7 @@ export const Auth = ({ setSignedIn }) => {
             </label>
             <input
               id="name"
-              className="h-full p-3 my-2 mx-0 w-[300px] mb-8 bg-white  dark:bg-gray-600 border outline-authBtn rounded"
+              className="h-full p-3 my-2 mx-0 w-[300px] mb-8 text-black dark:text-mainTextColo bg-white  dark:bg-gray-600 border outline-authBtn rounded"
               type="name"
               placeholder="Name"
               name="name"
@@ -101,7 +101,7 @@ export const Auth = ({ setSignedIn }) => {
         </label>
         <input
           id="email"
-          className="h-full p-3 my-2 mx-0 w-[300px] mb-8 bg-white  dark:bg-gray-600 border outline-authBtn rounded"
+          className="h-full p-3 my-2 mx-0 w-[300px] mb-8 text-black dark:text-mainTextColo bg-white  dark:bg-gray-600 border outline-authBtn rounded"
           type="text"
           placeholder="Email"
           name="email"
@@ -115,7 +115,7 @@ export const Auth = ({ setSignedIn }) => {
         </label>
         <input
           id="password"
-          className="h-full p-3 my-2 mx-0 w-[300px] mb-8 bg-white  dark:bg-gray-600 border outline-authBtn rounded"
+          className="h-full p-3 my-2 mx-0 w-[300px] mb-8 text-black dark:text-mainTextColo bg-white  dark:bg-gray-600 border outline-authBtn rounded"
           type="password"
           placeholder="Password"
           name="password"
