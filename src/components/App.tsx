@@ -113,5 +113,3 @@ export function App() {
     </FilterDataState>
   );
 }
-
-// Builded
