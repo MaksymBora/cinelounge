@@ -24,5 +24,9 @@ export default vite.defineConfig({
   },
   build: {
     outDir: './dist',
+    commonjsOptions: {
+      transformMixedEsModules: true,
+      // include: [/linked-dep/, /node_modules/],
+    },
   },
 });
