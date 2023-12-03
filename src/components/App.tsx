@@ -32,6 +32,7 @@ export function App() {
 
     return null;
   });
+  const [signedIn, setSignedIn] = useState(false); // for Toast in Auth.tsx
   const { isRefreshing, setIsRefreshing } = useContext(AppContext);
   const { setIsLoggedIn } = useContext(AppContext);
   const { setUserName } = useContext(AppContext);
@@ -75,7 +76,7 @@ export function App() {
     createRoutesFromElements(
       <Route element={<Layout />}>
         <Route path="/">
-          <Route index element={<Movies />} />
+          <Route index element={<Movies signedIn={signedIn} />} />
           <Route path=":id" element={<MovieInfo />} />
           <Route path=":id/casts" element={<MovieCastAndCrew />} />
         </Route>
@@ -95,7 +96,12 @@ export function App() {
         <Route path="search" element={<Search />} />
         <Route
           path="login"
-          element={<RestrictedRoute component={<Auth />} redirectTo="/" />}
+          element={
+            <RestrictedRoute
+              component={<Auth setSignedIn={setSignedIn} />}
+              redirectTo="/"
+            />
+          }
         />
         <Route path="watchlist" element={<Watchlist />} />
       </Route>

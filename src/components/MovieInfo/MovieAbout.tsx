@@ -5,6 +5,7 @@ import { FiPercent } from 'react-icons/fi';
 import { BsPlay, BsBookmark } from 'react-icons/bs';
 import { ClickAwayListener, Tooltip } from '@mui/material';
 import { useParams } from 'react-router-dom';
+import toast, { Toaster } from 'react-hot-toast';
 import { imageBase } from '@/service/imagePath';
 import { colorPercentage, formatRuntime } from '@/utilities/utilities';
 import { MovieGallery } from './MovieGallery';
@@ -101,6 +102,16 @@ export const MovieAbout: FC<MovieAboutProps> = ({
       try {
         await addWatchlist(dataMovie);
         setInWatchList(true);
+
+        toast.success(
+          <div>
+            Movie <b>{dataMovie.name}</b> added in Watchlist!
+          </div>,
+          {
+            duration: 4000,
+            icon: '✅',
+          }
+        );
       } catch (error) {
         console.log(error);
       }
@@ -116,9 +127,17 @@ export const MovieAbout: FC<MovieAboutProps> = ({
         // eslint-disable-next-line no-underscore-dangle
         const res = await deleteMovie(inList?._id);
 
-        console.log(res, 'response');
-
         setInWatchList(false);
+
+        toast.success(
+          <div>
+            Movie <b>{res.message.slice(5, 13)}</b> from Watchlist!
+          </div>,
+          {
+            duration: 4000,
+            icon: '🚫',
+          }
+        );
 
         return res;
       } catch (error) {
@@ -305,6 +324,7 @@ export const MovieAbout: FC<MovieAboutProps> = ({
       {viewGallery && (
         <MovieGallery setViewGallery={setViewGallery} movie={movieData} />
       )}
+      <Toaster position="bottom-left" reverseOrder />
     </section>
   );
 };
