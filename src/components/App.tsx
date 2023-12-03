@@ -101,7 +101,8 @@ export function App() {
       </Route>
     ),
     {
-      basename: '/cinelounge',
+      // basename: '/cinelounge',
+      basename: '/',
     }
   );
 
