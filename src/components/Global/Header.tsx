@@ -171,6 +171,32 @@ export function Header() {
             <BsBookmarkFill className="mr-2" />
             Watchlist
           </Link>
+
+          {/* Avatar */}
+          {isLoggedIn && (
+            <div className="relative inline-block group">
+              <img
+                className="w-14 h-14 rounded-full border-2 border-white"
+                src="https://pbs.twimg.com/profile_images/1333896976602193922/MtWztkxt_400x400.jpg"
+                alt=""
+              />
+              <div className="hidden relative group-hover:flex inset-0 items-center justify-center ">
+                <div className="absolute bottom-4 bg-black text-white bg-opacity-50 hover:bg-opacity-100 px-2 py-1 leading-none rounded-lg text-sm cursor-pointer">
+                  <label htmlFor="avatar" className="cursor-pointer">
+                    Edit
+                  </label>
+                  <input
+                    type="file"
+                    id="avatar"
+                    name="avatar"
+                    className="max-w-[30px] absolute lef-[18px] bottom-0 cursor-pointer opacity-0"
+                  />
+                </div>
+              </div>
+              <span className="w-4 h-4 rounded-full bg-green-500 border-2 border-white absolute bottom-0.5 right-0.5"></span>
+            </div>
+          )}
+
           {isLoggedIn && (
             <div className="flex flex-col gap-2">
               <p className="mr-2 text-[14px] text-black dark:text-mainTextColo">
