@@ -92,13 +92,8 @@
       "last 1 safari version"
     ]
   },
-  "jusky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
   "lint-staged": {
-    "**/*.{js, jsx, ts, tsx}": [
+    "src/**/*.{js,jsx,ts,tsx}": [
       "npx prettier --write",
       "npx eslint --fix"
     ]
