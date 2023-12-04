@@ -3,7 +3,7 @@ import { useSearchParams } from 'react-router-dom';
 import { getSearchResult } from '@/service/serviceMovies';
 import { SearchResult } from '@/components/Search/SearchResult';
 
-export const Search = () => {
+const Search = () => {
   const [searchParams] = useSearchParams();
   const [queryResult, setQueryResult] = useState([]);
 
@@ -29,3 +29,5 @@ export const Search = () => {
 
   return <SearchResult results={queryResult} />;
 };
+
+export default Search;

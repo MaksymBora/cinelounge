@@ -1,5 +1,7 @@
 import { WatchlistComponent } from '@/components/Watchlist/Watchlist';
 
-export const Watchlist = () => {
+const Watchlist = () => {
   return <WatchlistComponent />;
 };
+
+export default Watchlist;

@@ -30,8 +30,8 @@ export const WatchlistComponent = () => {
         console.log(error);
       }
     };
-    result();
-  }, []);
+    if (isLoggedIn) result();
+  }, [isLoggedIn]);
 
   return (
     <div className="max-w-xxl my-12 mx-auto min-h-watchlist">

@@ -45,7 +45,7 @@ export const ShowAbout: FC<MovieAboutProps> = ({
         console.log(error);
       }
     };
-    if (!inWatchList) result();
+    if (isLoggedIn && !inWatchList) result();
   }, []);
 
   if (!movieData) {

@@ -3,7 +3,7 @@ import { useContext, useState } from 'react';
 import { login, register } from '@/service/serviceAuth';
 import { AppContext } from '@/context/app-context';
 
-export const Auth = ({ setSignedIn }) => {
+const Auth = ({ setSignedIn }) => {
   const [isLoginForm, setIsLoginForm] = useState(true);
   const [authMessage, setAuthMessage] = useState('');
   const [registered, setRegistered] = useState(false);
@@ -150,3 +150,5 @@ export const Auth = ({ setSignedIn }) => {
     </div>
   );
 };
+
+export default Auth;

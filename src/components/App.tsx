@@ -1,27 +1,29 @@
+import { useContext, useEffect, useState } from 'react';
 import {
   Route,
   RouterProvider,
   createBrowserRouter,
   createRoutesFromElements,
 } from 'react-router-dom';
-import { useContext, useEffect, useState } from 'react';
 import { Layout } from './Global/Layout';
-import Movies from '@/Pages/Movies';
-import Shows from '@/Pages/Shows';
-import Cast from '@/Pages/Cast';
 import { getPopularCast } from '@/service/serviceMovies';
-import MovieInfo from '@/Pages/MovieInfo';
-import MovieCastAndCrew from '@/Pages/MovieCastAndCrew';
-import ShowInfo from '@/Pages/ShowInfo';
-import ShowCastAndCrew from '@/Pages/ShowCastAndCrew';
-import Actor from '@/Pages/Actor';
-import { Search } from '@/Pages/Search';
-import { Auth } from './Auth/Auth';
 import { getCurrentUser } from '@/service/serviceAuth';
 import { AppContext } from '@/context/app-context';
 import { RestrictedRoute } from '@/RestrictedRoute/RestrictedRoute';
-import { Watchlist } from '@/Pages/WatchList';
 import { FilterDataState } from '@/context/filterDataState';
+import {
+  Movies,
+  MovieInfo,
+  MovieCastAndCrew,
+  Shows,
+  ShowInfo,
+  ShowCastAndCrew,
+  Cast,
+  Actor,
+  Search,
+  Auth,
+  Watchlist,
+} from '@/Routing/routesImport';
 
 export function App() {
   const [page, setPage] = useState(1);
