@@ -125,3 +125,4 @@ export function App() {
 }
 
 // test
+const name = 'test';
