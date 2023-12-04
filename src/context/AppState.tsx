@@ -18,6 +18,7 @@ export const AppState = ({ children }: { children: React.ReactNode }) => {
     return true;
   });
   const [subscription, setSubscription] = useState('');
+  const [avatar, setAvatar] = useState('');
 
   const contextValue = useMemo(() => {
     return {
@@ -39,6 +40,8 @@ export const AppState = ({ children }: { children: React.ReactNode }) => {
       setDarkMode,
       subscription,
       setSubscription,
+      avatar,
+      setAvatar,
     };
   }, [
     isRefreshing,
@@ -59,6 +62,8 @@ export const AppState = ({ children }: { children: React.ReactNode }) => {
     setDarkMode,
     subscription,
     setSubscription,
+    avatar,
+    setAvatar,
   ]);
 
   return (

@@ -10,6 +10,7 @@ export const Auth = ({ setSignedIn }) => {
   const { setUserName } = useContext(AppContext);
   const { setIsLoggedIn } = useContext(AppContext);
   const { setSubscription } = useContext(AppContext);
+  const { setAvatar } = useContext(AppContext);
 
   const handleSubmitForm = e => {
     e.preventDefault();
@@ -37,6 +38,7 @@ export const Auth = ({ setSignedIn }) => {
           setSignedIn(true); // for Toast notifications
           setUserName(res?.data.user.name);
           setSubscription(res?.data.user.subscription);
+          setAvatar(res?.data.user.avatar);
         } catch (error) {
           console.log(error, 'Error');
         }

@@ -29,6 +29,8 @@ interface ContextProps {
   setDarkMode: Dispatch<SetStateAction<boolean>>;
   subscription: string;
   setSubscription: Dispatch<SetStateAction<string>>;
+  avatar: string;
+  setAvatar: Dispatch<SetStateAction<string>>;
 }
 
 export const AppContext = createContext<ContextProps>({
@@ -50,4 +52,6 @@ export const AppContext = createContext<ContextProps>({
   setDarkMode: () => {},
   subscription: '',
   setSubscription: () => {},
+  avatar: '',
+  setAvatar: () => {},
 } as ContextProps);

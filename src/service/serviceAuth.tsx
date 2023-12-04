@@ -37,6 +37,7 @@ interface UserData {
   email: string;
   name: string;
   subscription: string;
+  avatar: string;
 }
 
 export const getCurrentUser = async (
@@ -74,5 +75,22 @@ export const logout = async token => {
     if (res) localStorage.removeItem('token');
   } catch (error) {
     console.log(error);
+  }
+};
+
+export const updateAvatar = async formData => {
+  const savedToken = localStorage.getItem('token');
+
+  if (savedToken === null) return null;
+
+  try {
+    return await mongoDb.patch('/users/avatars', formData, {
+      headers: {
+        Authorization: `Bearer ${savedToken}`,
+      },
+    });
+  } catch (error) {
+    console.log(error);
+    return undefined;
   }
 };

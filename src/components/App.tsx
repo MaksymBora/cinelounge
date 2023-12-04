@@ -37,6 +37,7 @@ export function App() {
   const { setIsLoggedIn } = useContext(AppContext);
   const { setUserName } = useContext(AppContext);
   const { setSubscription } = useContext(AppContext);
+  const { setAvatar } = useContext(AppContext);
 
   useEffect(() => {
     if (token === null) {
@@ -52,6 +53,7 @@ export function App() {
           setIsRefreshing(false);
           setIsLoggedIn(false);
           setUserName('');
+          setAvatar('');
 
           throw new Error('User is not logged in');
         } else {
@@ -59,6 +61,7 @@ export function App() {
           setIsRefreshing(false);
           setUserName(currentUser.data.name);
           setSubscription(currentUser.data.subscription);
+          setAvatar(currentUser.data.avatar);
         }
       } catch (error) {
         console.log(error);
@@ -70,7 +73,14 @@ export function App() {
       result();
       setIsRefreshing(false);
     }
-  }, [token, setIsLoggedIn, setUserName, setIsRefreshing, setSubscription]);
+  }, [
+    token,
+    setIsLoggedIn,
+    setUserName,
+    setIsRefreshing,
+    setSubscription,
+    setAvatar,
+  ]);
 
   const browserRouter = createBrowserRouter(
     createRoutesFromElements(

@@ -8,7 +8,7 @@ import { IoMoon, IoSunny } from 'react-icons/io5';
 import { useContext, useEffect, useState } from 'react';
 import { BsBookmarkFill } from 'react-icons/bs';
 import { AppContext } from '@/context/app-context';
-import { logout } from '@/service/serviceAuth';
+import { logout, updateAvatar } from '@/service/serviceAuth';
 
 export function Header() {
   const [searchParams] = useSearchParams();
@@ -20,8 +20,13 @@ export function Header() {
   const { darkMode, setDarkMode } = useContext(AppContext);
   const { userName } = useContext(AppContext);
   const { subscription } = useContext(AppContext);
+  const { avatar, setAvatar } = useContext(AppContext);
 
   const { pathname } = useLocation();
+
+  const userAvatar = avatar
+    ? `http://localhost:3000/${avatar}`
+    : '../../assets/defaultAva.png';
 
   const handleQuery = e => {
     setQuery(e.target.value);
@@ -68,6 +73,23 @@ export function Header() {
       localStorage.setItem('theme', 'dark');
     }
   }, [darkMode, setDarkMode]);
+
+  const handleAvatarChange = e => {
+    e.preventDefault();
+    console.log(e.target.files[0]);
+    const selectedFile = e.target.files[0];
+
+    const formData = new FormData();
+    formData.append('avatar', selectedFile);
+
+    const updatedAvatar = updateAvatar(formData);
+
+    updatedAvatar
+      .then(data => {
+        setAvatar(data?.data.avatar);
+      })
+      .catch(err => console.log(err));
+  };
 
   return (
     <nav className="flex h-navHeight bg-[#f5f5f5] dark:bg-headerColor shadow-navShadow">
@@ -176,12 +198,12 @@ export function Header() {
           {isLoggedIn && (
             <div className="relative inline-block group">
               <img
-                className="w-14 h-14 rounded-full border-2 border-white"
-                src="https://pbs.twimg.com/profile_images/1333896976602193922/MtWztkxt_400x400.jpg"
-                alt=""
+                className="w-12 h-12 rounded-full border-2 border-white"
+                src={`${userAvatar}`}
+                alt="avatar"
               />
               <div className="hidden relative group-hover:flex inset-0 items-center justify-center ">
-                <div className="absolute bottom-4 bg-black text-white bg-opacity-50 hover:bg-opacity-100 px-2 py-1 leading-none rounded-lg text-sm cursor-pointer">
+                <div className="absolute bottom-3 bg-black text-white bg-opacity-50 hover:bg-opacity-100 px-2 py-1 leading-none rounded-lg text-sm cursor-pointer">
                   <label htmlFor="avatar" className="cursor-pointer">
                     Edit
                   </label>
@@ -190,6 +212,7 @@ export function Header() {
                     id="avatar"
                     name="avatar"
                     className="max-w-[30px] absolute lef-[18px] bottom-0 cursor-pointer opacity-0"
+                    onChange={handleAvatarChange}
                   />
                 </div>
               </div>
