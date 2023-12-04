@@ -123,7 +123,3 @@ export function App() {
     </FilterDataState>
   );
 }
-
-// test
-const name = 'test';
-const name = 'test';

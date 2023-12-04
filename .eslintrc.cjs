@@ -45,7 +45,7 @@ module.exports = {
     'import/no-extraneous-dependencies': 0,
     'import/prefer-default-export': 0,
     'import/extensions': 0,
-    'no-console': 'warn',
+    'no-console': 'off',
     'prefer-destructuring': 'off',
     'react/function-component-definition': [
       2,
