@@ -203,7 +203,7 @@ export function Header() {
                 {`User: ${userName}`}
               </p>
               <p className="mr-2 text-[14px] text-black dark:text-mainTextColo">
-                {`Subscriptin: ${
+                {`Subscription: ${
                   subscription.charAt(0).toUpperCase() + subscription.slice(1)
                 }`}
               </p>
