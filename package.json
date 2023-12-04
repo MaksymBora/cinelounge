@@ -91,15 +91,8 @@
       "last 1 safari version"
     ]
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
   "lint-staged": {
-    "*.tsx": [
-      "npm run lint -- --fix",
-      "git add"
-    ]
+    "*.{js, tsx}": "eslint --cashe -- fix",
+    "*./src": "prettier --write"
   }
 }
