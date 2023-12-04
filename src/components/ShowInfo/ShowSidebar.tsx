@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
 import { FC } from 'react';
 import { BsInstagram, BsFacebook, BsTwitter } from 'react-icons/bs';
 import { MdOutlineLink } from 'react-icons/md';
