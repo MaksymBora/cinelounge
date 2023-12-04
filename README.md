@@ -23,6 +23,8 @@ TypeScript
 | Rc-Slider                  | Mongoose      |
 | React Router Dom           | Morgan        |
 | React Select               | Multer        |
+| Husky                      |               |
+| React Lazy Routing         |               |
 | themoviedb.org (Data Base) | Mongo DB      |
 
 ## Description:
