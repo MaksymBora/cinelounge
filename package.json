@@ -92,7 +92,7 @@
     ]
   },
   "lint-staged": {
-    "*.{js, tsx}": "eslint --cashe -- fix npm run lint:fix",
+    "*.{js, tsx}": "npm run lint:fix",
     "*./src": "prettier --write"
   }
 }
