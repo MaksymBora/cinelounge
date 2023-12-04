@@ -2,7 +2,7 @@
 import { FC, useContext, useEffect, useState } from 'react';
 import { HiOutlineArrowsExpand } from 'react-icons/hi';
 import { FiPercent } from 'react-icons/fi';
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 import { BsPlay, BsBookmark } from 'react-icons/bs';
 import { ClickAwayListener, Tooltip } from '@mui/material';
 import { useParams } from 'react-router-dom';
@@ -325,7 +325,6 @@ export const ShowAbout: FC<MovieAboutProps> = ({
       {viewGallery && (
         <ShowGallery setViewGallery={setViewGallery} movie={movieData} />
       )}
-      <Toaster position="bottom-left" reverseOrder />
     </section>
   );
 };

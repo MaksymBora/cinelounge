@@ -5,6 +5,7 @@ import {
   createBrowserRouter,
   createRoutesFromElements,
 } from 'react-router-dom';
+import { Toaster } from 'react-hot-toast';
 import { Layout } from './Global/Layout';
 import { getPopularCast } from '@/service/serviceMovies';
 import { getCurrentUser } from '@/service/serviceAuth';
@@ -132,6 +133,7 @@ export function App() {
   ) : (
     <FilterDataState>
       <RouterProvider router={browserRouter} />
+      <Toaster position="bottom-left" reverseOrder />
     </FilterDataState>
   );
 }

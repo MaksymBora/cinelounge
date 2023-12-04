@@ -5,7 +5,7 @@ import { FiPercent } from 'react-icons/fi';
 import { BsPlay, BsBookmark } from 'react-icons/bs';
 import { ClickAwayListener, Tooltip } from '@mui/material';
 import { useParams } from 'react-router-dom';
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 import { imageBase } from '@/service/imagePath';
 import { colorPercentage, formatRuntime } from '@/utilities/utilities';
 import { MovieGallery } from './MovieGallery';
@@ -121,7 +121,7 @@ export const MovieAbout: FC<MovieAboutProps> = ({
     const removeFromWatchlist = async () => {
       try {
         const allMovies = await getWatchList();
-        console.log(allMovies);
+
         const inList = allMovies.find(movie => movie.movieId === Number(id));
 
         // eslint-disable-next-line no-underscore-dangle
@@ -324,7 +324,6 @@ export const MovieAbout: FC<MovieAboutProps> = ({
       {viewGallery && (
         <MovieGallery setViewGallery={setViewGallery} movie={movieData} />
       )}
-      <Toaster position="bottom-left" reverseOrder />
     </section>
   );
 };
