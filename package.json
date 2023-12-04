@@ -10,7 +10,7 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "test": "vitest",
-    "lint:fix": "pnpm run lint -- --fix --color"
+    "lint:fix": "npm run lint -- --fix --color"
   },
   "dependencies": {
     "@emotion/react": "^11.11.1",
@@ -92,7 +92,7 @@
     ]
   },
   "lint-staged": {
-    "*.{js, tsx}": "eslint --cashe -- fix",
+    "*.{js, tsx}": "eslint --cashe -- fix npm run lint:fix",
     "*./src": "prettier --write"
   }
 }
