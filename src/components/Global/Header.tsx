@@ -25,7 +25,7 @@ export function Header() {
   const { pathname } = useLocation();
 
   const userAvatar = avatar
-    ? `http://localhost:3000/${avatar}`
+    ? `https://www.web4you.space/${avatar}`
     : '../../assets/defaultAva.png';
 
   const handleQuery = e => {
