@@ -76,7 +76,7 @@ export function Header() {
 
   const handleAvatarChange = e => {
     e.preventDefault();
-    console.log(e.target.files[0]);
+
     const selectedFile = e.target.files[0];
 
     const formData = new FormData();
