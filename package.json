@@ -97,7 +97,6 @@
     }
   },
   "lint-staged": {
-    "*.{js, ts, tsx}": ["npm run lint:fix", "git add"],
-    "*./src": "prettier --write"
+    "*.{js, ts, tsx}": ["npm run lint:fix", "git add"]
   }
 }
